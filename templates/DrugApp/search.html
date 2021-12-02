@@ -45,7 +45,7 @@
                         style="background-color: #9696a6; background-border: #9696a6;" type="submit">Search</button>
                     </div>
                     </form>
-                    <h4 id='msg'>{{msg}}<h4>
+                    <h4 id='msg' name='msg'>{{msg}}<h4>
                 </div>
             </div>
         </div>
@@ -81,27 +81,19 @@
 
     function prescriber() {
         document.getElementById("choice").value = "Prescriber";
+        console.log(document.getElementById("choice").value);
     }
 
     function drug() {
         document.getElementById("choice").value = "Drug";
+        console.log(document.getElementById("choice").value);
     }
 
     form.addEventListener('submit', (event) => {
         let key = form.elements['key'].value;
-        if (key === '' || key === ' ') {
-            let msg = document.getElementById('id');
-            msg = 'Please enter a value';
-            event.preventDefault();
-        }
-        else {
-            let key = form.elements['key'].value;
-            let choice = form.elements['choice'].value;
-            console.log(choice);
-            form.submit();
-        }
-        
-        
+        let choice = form.elements['choice'].value;
+        console.log(choice);
+        form.submit();
     });
 </script>
 {% endblock %}

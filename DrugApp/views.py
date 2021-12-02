@@ -12,7 +12,11 @@ def searchPageView(request):
     if request.method == 'POST':
         # get the search key
         key = request.POST['key'].title()
-
+        if key == '' or key == " ":
+            context = {
+                'msg': 'Please enter a value'
+            }
+            return render(request, 'DrugApp/search.html', context)
         if request.POST['choice'] == 'Prescriber':
             data = PdPrescriber.objects.filter(
                 fname__contains=key) | PdPrescriber.objects.filter(lname__contains=key)
