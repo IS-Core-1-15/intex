@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Landing Page</title>
+{% endblock %}
+{% block banner %}
+<!-- Start Banner Hero -->
+<section class="bg-light w-100">
+    <div class="container">
+        <div class="row d-flex align-items-center py-5">
+            <div class="col-lg-6 text-start">
+                <h1 class="h2 py-5 text-primary typo-space-line">US Opioid Prescriptions</h1>
+                <p class="light-300">
+                    An anlysis of US prescribers and the drugs they prescribe. <br>
+                    Specifically with opioids.
+                </p>
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static 'img/banner-img-02.svg' %}">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Hero -->
+{% endblock %}
+{% block links %}
+<!-- Start Our Partner -->
+<section class="bg-secondary py-3">
+    <div class="container py-5">
+        <h2 class="h2 text-white text-center py-5">Explore</h2>
+        <div class="row text-center">
+            <div class="col-md-3 mb-3">
+                <div class="card partner-wap py-5">
+                    
+                    <a href="#"><h1>Learn about Opioids</h1></a>
+                    
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card partner-wap py-5">
+                    <a href="#"><h1>What can I do to help?</h1></a>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card partner-wap py-5">
+                    <a href="#"><h1>Search our data about drugs</h1></a>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card partner-wap py-5">
+                    <a href="#"><h1>Contact us for more</h1></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End Our Partner-->
+{% endblock %}
+{% block content %}
+    <!-- Start Feature Work -->
+    <section class="bg-light py-5">
+        <div class="feature-work container my-4">
+            <div class="row d-flex d-flex align-items-center">
+                <div class="col-lg-5">
+                    <h3 class="feature-work-title h4 text-muted light-300">An analysis of the U.S. Opioid Epidemic</h3>
+                    <h1 class="feature-work-heading h2 py-3 semi-bold-600">U.S. Opioid Prescriptions</h1>
+                    <p class="feature-work-body text-muted light-300">
+                        The opioid crisis is devastating communities across America. The latest statistics indicate that
+                        the total yearly overdose deaths due to opioids reached a new high of 70,237 in 2017. In October
+                        2017, President Trump declared the opioid crisis a public health emergency.
+                    </p>
+                    <p class="feature-work-footer text-muted light-300">
+                        Currently no system exists that allows government officials and prescribers to simply view the volume of prescriptions that are taking place overall. So we have created this site to help adress that problem. We have a database of all the the information about prescribers and drugs that are sorted and accessable so that others can analyze the data themselves and seek understanding.</p>
+                    
+                    <p class="feature-work-footer text-muted light-300"> 
+                        We also have taken the time to provide learning material for anyone to view so they can better understand opioids and other drugs addictions and how they can help. </p>
+                </div>
+                <div class="col-lg-6 offset-lg-1 align-left">
+                    <div class="row">
+                        <a class="col" data-type="image" data-fslightbox="gallery" href="{% static 'img/feature-work-1-large.jpg' %}">
+                            <img class="img-fluid" src="{% static 'img/feature-work-1.jpg' %}">
+                        </a>
+                        <a class="col" data-type="image" data-fslightbox="gallery" href="{% static 'img/feature-work-2-large.jpg' %}">
+                            <img class="img-fluid" src="{% static 'img/feature-work-2.jpg' %}">
+                        </a>
+                    </div>
+                    <div class="row pt-4">
+                        <a class="col" data-type="image" data-fslightbox="gallery" href="{% static 'img/feature-work-3-large.jpg' %}">
+                            <img class="img-fluid" src="{% static 'img/feature-work-3.jpg' %}">
+                        </a>
+                        <a class="col" data-type="image" data-fslightbox="gallery" href="{% static 'img/feature-work-4-large.jpg' %}">
+                            <img class="img-fluid" src="{% static 'img/feature-work-4.jpg' %}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Feature Work -->
+    {% endblock %}

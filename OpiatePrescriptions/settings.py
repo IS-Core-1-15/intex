@@ -79,9 +79,10 @@ WSGI_APPLICATION = 'OpiatePrescriptions.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'opioid', #Make sure your db is named this
+        'NAME': 'opioid',  # Make sure your db is named this
         'USER': 'postgres',
-        'PASSWORD': 'Postgres403', #getpass(), #this will ask you to enter your local DB password when you start the server or run migrations
+        # this will ask you to enter your local DB password when you start the server or run migrations
+        'PASSWORD': getpass(),
         'HOST': 'localhost'
     }
 }
@@ -125,7 +126,7 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS=[
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'OpiatePrescriptions/static')
 ]
 

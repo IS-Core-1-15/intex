@@ -36,3 +36,7 @@ def searchPageView(request):
 
 def learnPageView(request):
     return render(request, 'DrugApp/learn.html')
+
+
+def aboutPageView(request):
+    return render(request, 'DrugApp/about.html')
