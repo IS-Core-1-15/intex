@@ -42,7 +42,8 @@ class PdPrescriber(models.Model):
     state = models.ForeignKey(
         PdStatedata,
         on_delete=models.DO_NOTHING,
-        to_field='stateabbrev'
+        to_field='stateabbrev',
+        db_column='state'
     )
     credentials = models.CharField(max_length=20, blank=True, null=True)
     specialty = models.CharField(max_length=62)
@@ -309,14 +310,16 @@ class PdPrescriber(models.Model):
 class PdTriple(models.Model):
     id = models.IntegerField(primary_key=True)
     prescriberid = models.ForeignKey(
-        PdPrescriber, 
+        'PdPrescriber', 
         on_delete=models.DO_NOTHING,
-        to_field='npi'
+        to_field='npi',
+        db_column='prescriberid'
         )
     drugname = models.ForeignKey(
-        PdDrugs,
+        'PdDrugs',
         on_delete=models.DO_NOTHING,
-        to_field='drugname'
+        to_field='drugname',
+        db_column='drugname'
         )
     qty = models.IntegerField()
 
