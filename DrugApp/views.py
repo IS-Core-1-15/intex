@@ -20,18 +20,23 @@ def searchPageView(request):
         if request.POST['choice'] == 'Prescriber':
             data = PdPrescriber.objects.filter(
                 fname__contains=key) | PdPrescriber.objects.filter(lname__contains=key)
+            context = {
+                'prescriber': True,
+            }
         else:
             data = PdDrugs.objects.filter(
-                drugname__contains=key)
+                drugname__contains=key.upper())
+            context = {
+                'drug': True,
+            }
 
         if len(data) > 0:
             msg = f'We found {len(data)} results'
         else:
             msg = f'Sorry we could not find that'
-        context = {
-            'data': data,
-            'msg': msg,
-        }
+
+        context['data'] = data
+        context['msg'] = msg
 
         return render(request, 'DrugApp/search.html', context)
     else:
@@ -43,4 +48,7 @@ def learnPageView(request):
 
 
 def aboutPageView(request):
+    return render(request, 'DrugApp/about.html')
+
+def detailPageView(request):
     return render(request, 'DrugApp/about.html')
