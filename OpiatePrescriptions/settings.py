@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'opioid', #Make sure your db is named this
         'USER': 'postgres',
-        'PASSWORD': getpass(), #this will ask you to enter your local DB password when you start the server or run migrations
+        'PASSWORD': 'Postgres403',#getpass(), #this will ask you to enter your local DB password when you start the server or run migrations
         'HOST': 'localhost'
     }
 }
