@@ -3,14 +3,23 @@ from .models import *
 
 # Create your views here.
 def indexPageView(request):
-    return render(request, 'DrugApp/search.html')
+    return render(request, 'DrugApp/index.html')
 
 def search(request):
-    key = request.POST['key']
-    print(key)
-    q = f"select fname, lname from pd_prescriber where fname like '%{key}%';"
-    prescibers = PdPrescriber.objects.raw(q)
-    context = {
-        'data': prescibers,
-    }
-    return render(request, 'DrugApp/search.html', context)
+    print(request.method)
+    if request.method == 'POST':
+        # get the search key
+        key = request.POST['key'].title()
+
+        prescribers = PdPrescriber.objects.filter(fname__contains=key) | PdPrescriber.objects.filter(lname__contains=key)
+        if len(prescribers) > 0:
+            msg = f'We found {len(prescribers)} results'
+        else:
+            msg = f'Sorry we could not find that'
+        context = {
+            'data': prescribers,
+            'msg': msg,
+        }
+        return render(request, 'DrugApp/search.html', context)
+    else:
+        return render(request, 'DrugApp/search.html')
