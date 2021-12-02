@@ -26,10 +26,10 @@
             <div class="col-md-12">
                 <ul class="nav d-flex justify-content-center">
                     <li class="nav-item mx-lg-4">
-                        <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300 active" href="#">Prescribers</a>
+                        <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300 active" onclick="prescriber()">Prescribers</a>
                     </li>
                     <li class="filter-btn nav-item mx-lg-4">
-                        <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#">Drug</a>
+                        <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" onclick="drug()">Drug</a>
                     </li>
                     {% comment %} <li class="nav-item mx-lg-4">
                         <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#" data-filter=".branding">Branding</a>
@@ -39,6 +39,7 @@
                     <form action="{% url 'search' %}" method="post" id='searchForm'>
                     {% csrf_token %}
                     <div class="input-group py-3">
+                        <input type="hidden" id="choice" name="choice">
                         <input name="key" type="text" class="form-control form-control-lg rounded-pill rounded-end" id="key" placeholder="Search a name...">
                         <button class="btn btn-secondary text-white btn-lg rounded-pill rounded-start px-lg-4" 
                         style="background-color: #9696a6; background-border: #9696a6;" type="submit">Search</button>
@@ -62,7 +63,7 @@
                     <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                         <div class="service-work-content text-left text-light">
                             <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">{{info.fname}}</span>
-                            <p class="card-text">{{info.fname}} {{info.lname}}</p>
+                            <p class="card-text">{{info.fname}} {{info.lname}} {{info.drugname}}</p>
                         </div>
                     </div>
                 </a>
@@ -76,13 +77,30 @@
 {% block content %}
 <script type="text/javascript">
     const form  = document.getElementById('searchForm');
+    document.getElementById("choice").value = "Prescriber";
+
+    function prescriber() {
+        document.getElementById("choice").value = "Prescriber";
+    }
+
+    function drug() {
+        document.getElementById("choice").value = "Drug";
+    }
 
     form.addEventListener('submit', (event) => {
-        let key = form.elements['key'].value
+        let key = form.elements['key'].value;
         if (key === '' || key === ' ') {
             let msg = document.getElementById('id');
+            msg = 'Please enter a value';
             event.preventDefault();
         }
+        else {
+            let key = form.elements['key'].value;
+            let choice = form.elements['choice'].value;
+            console.log(choice);
+            form.submit();
+        }
+        
         
     });
 </script>
