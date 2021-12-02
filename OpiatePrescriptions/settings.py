@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'OpiatePrescriptions.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'crud_movie',
+        'NAME': 'opioid', #Make sure your db is named this
         'USER': 'postgres',
         'PASSWORD': getpass(), #this will ask you to enter your local DB password when you start the server or run migrations
         'HOST': 'localhost'
