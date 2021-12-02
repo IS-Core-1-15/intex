@@ -9,21 +9,35 @@ def indexPageView(request):
 
 
 def searchPageView(request):
-    print(request.method)
     if request.method == 'POST':
         # get the search key
         key = request.POST['key'].title()
+        if key == '' or key == " ":
+            context = {
+                'msg': 'Please enter a value'
+            }
+            return render(request, 'DrugApp/search.html', context)
+        if request.POST['choice'] == 'Prescriber':
+            data = PdPrescriber.objects.filter(
+                fname__contains=key) | PdPrescriber.objects.filter(lname__contains=key)
+            context = {
+                'prescriber': True,
+            }
+        else:
+            data = PdDrugs.objects.filter(
+                drugname__contains=key.upper())
+            context = {
+                'drug': True,
+            }
 
-        prescribers = PdPrescriber.objects.filter(
-            fname__contains=key) | PdPrescriber.objects.filter(lname__contains=key)
-        if len(prescribers) > 0:
-            msg = f'We found {len(prescribers)} results'
+        if len(data) > 0:
+            msg = f'We found {len(data)} results'
         else:
             msg = f'Sorry we could not find that'
-        context = {
-            'data': prescribers,
-            'msg': msg,
-        }
+
+        context['data'] = data
+        context['msg'] = msg
+
         return render(request, 'DrugApp/search.html', context)
     else:
         return render(request, 'DrugApp/search.html')
@@ -34,4 +48,7 @@ def learnPageView(request):
 
 
 def aboutPageView(request):
+    return render(request, 'DrugApp/about.html')
+
+def detailPageView(request):
     return render(request, 'DrugApp/about.html')

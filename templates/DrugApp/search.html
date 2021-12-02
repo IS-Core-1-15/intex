@@ -26,10 +26,10 @@
             <div class="col-md-12">
                 <ul class="nav d-flex justify-content-center">
                     <li class="nav-item mx-lg-4">
-                        <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300 active" href="#">Prescribers</a>
+                        <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300 active" onclick="prescriber()">Prescribers</a>
                     </li>
                     <li class="filter-btn nav-item mx-lg-4">
-                        <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#">Drug</a>
+                        <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" onclick="drug()">Drug</a>
                     </li>
                     {% comment %} <li class="nav-item mx-lg-4">
                         <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#" data-filter=".branding">Branding</a>
@@ -39,12 +39,13 @@
                     <form action="{% url 'search' %}" method="post" id='searchForm'>
                     {% csrf_token %}
                     <div class="input-group py-3">
+                        <input type="hidden" id="choice" name="choice">
                         <input name="key" type="text" class="form-control form-control-lg rounded-pill rounded-end" id="key" placeholder="Search a name...">
                         <button class="btn btn-secondary text-white btn-lg rounded-pill rounded-start px-lg-4" 
                         style="background-color: #9696a6; background-border: #9696a6;" type="submit">Search</button>
                     </div>
                     </form>
-                    <h4 id='msg'>{{msg}}<h4>
+                    <h4 id='msg' name='msg'>{{msg}}<h4>
                 </div>
             </div>
         </div>
@@ -55,19 +56,33 @@
     <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
         {% comment %} TODO: Put this in a for loop with the data {% endcomment %}
         <!-- Start Recent Work -->
-        {% for info in data %}
+        {% if prescriber %}
+            {% for info in data %}
+                <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
+                    <a href="{% url 'detail' id=info.npi %}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                        <img class="service card-img" src="{% static 'img/user_img.png' %}" alt="Card image">
+                        <div class="service-work-vertical card-img-overlay d-flex align-items-end">
+                            <div class="service-work-content text-left text-light">
+                                <p class="card-text">{{info.fname}} {{info.lname}}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div><!-- End Recent Work -->
+            {% endfor %}
+        {% else %}
+            {% for info in data %}
             <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
-                <a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
-                    <img class="service card-img" src="./assets/img/services-01.jpg" alt="Card image">
+                <a href="{% url 'detail' id=info.drugid %}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                    <img class="service card-img" src="{% static 'img/drug_img.jpeg' %}" alt="Card image">
                     <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                         <div class="service-work-content text-left text-light">
-                            <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">{{info.fname}}</span>
-                            <p class="card-text">{{info.fname}} {{info.lname}}</p>
+                            <p class="card-text">{{info.drugname}}</p>
                         </div>
                     </div>
                 </a>
             </div><!-- End Recent Work -->
-        {% endfor %}
+            {% endfor %}
+        {% endif %}
 
     </div>
 </section>
@@ -76,14 +91,23 @@
 {% block content %}
 <script type="text/javascript">
     const form  = document.getElementById('searchForm');
+    document.getElementById("choice").value = "Prescriber";
+
+    function prescriber() {
+        document.getElementById("choice").value = "Prescriber";
+        console.log(document.getElementById("choice").value);
+    }
+
+    function drug() {
+        document.getElementById("choice").value = "Drug";
+        console.log(document.getElementById("choice").value);
+    }
 
     form.addEventListener('submit', (event) => {
-        let key = form.elements['key'].value
-        if (key === '' || key === ' ') {
-            let msg = document.getElementById('id');
-            event.preventDefault();
-        }
-        
+        let key = form.elements['key'].value;
+        let choice = form.elements['choice'].value;
+        console.log(choice);
+        form.submit();
     });
 </script>
 {% endblock %}
