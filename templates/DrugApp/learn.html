@@ -4,51 +4,48 @@
 <title>Landing Page</title>
 {% endblock %}
 {% block banner %}
-<!-- Start Banner Hero -->
-<section class="bg-light w-100">
-    <div class="container">
-        <div class="row d-flex align-items-center py-5">
-            <div class="col-lg-6 text-start">
-                <h1 class="h2 py-5 text-primary typo-space-line">US Opioid Prescriptions</h1>
-                <p class="light-300">
-                    An anlysis of US prescribers and the drugs they prescribe. <br>
-                    Specifically with opioids.
-                </p>
-            </div>
-            <div class="col-lg-6">
-                <img src="{% static 'img/banner-img-02.svg' %}">
-            </div>
+<div id="work_single_banner" class="bg-light w-100">
+    <div class="container-fluid text-light d-flex justify-content-center align-items-center border-0 rounded-0 p-0 py-5">
+        <div class="banner-content col-lg-8 m-lg-auto text-center py-5 px-3">
+            <h1 class="banner-heading h2 pb-5 typo-space-line-center">US Opioid Epidemic
+            </h1>
+            <h3 class="h4 pb-2 light-300">Give me the run down</h3>
+            <p class="banner-footer light-300">
+                The opioid crisis is devastating communities across America. The latest statistics indicate that the total yearly overdose deaths due to opioids reached a new high of 70,237 in 2017. In October 2017, President Trump declared the opioid crisis a public health emergency.
+                <br>
+                Helping people who are having troubles with opioid dependency is a tall task, and many of us don't know where to even begin. Our part is providing this centralized system of data for anyone to draw from to help guide next steps and know where to focus efforts. We know we aren't medical experts, but we can help you get connected to a few sources to help you get started. Check out the links below!
+            </p>
         </div>
     </div>
-</section>
+</div>
 <!-- End Banner Hero -->
 {% endblock %}
 {% block links %}
 <!-- Start Our Partner -->
 <section class="bg-secondary py-3">
     <div class="container py-5">
-        <h2 class="h2 text-white text-center py-5">Explore</h2>
+        <h2 class="h2 text-white text-center py-5">Explore Other Resources</h2>
         <div class="row text-center">
             <div class="col-md-3 mb-3">
                 <div class="card partner-wap py-5">
                     
-                    <a href="#"><h1>Learn about Opioids</h1></a>
+                    <a href="https://familydoctor.org/condition/opioid-addiction/" target="_blank" rel="noopener noreferrer"><h1>Learn about Opioid Addiction</h1></a>
                     
                 </div>
             </div>
             <div class="col-md-3 mb-3">
                 <div class="card partner-wap py-5">
-                    <a href="#"><h1>What can I do to help?</h1></a>
+                    <a href="https://www.hopkinsmedicine.org/opioids/signs-of-opioid-abuse.html" target="_blank" rel="noopener noreferrer"><h1>What can I do to help?</h1></a>
                 </div>
             </div>
             <div class="col-md-3 mb-3">
                 <div class="card partner-wap py-5">
-                    <a href="#"><h1>Search our data about drugs</h1></a>
+                    <a href="https://www.cdc.gov/drugoverdose/featured-topics/treatment-recovery.html" target="_blank" rel="noopener noreferrer"><h1>Treatment and Recovery</h1></a>
                 </div>
             </div>
             <div class="col-md-3 mb-3">
                 <div class="card partner-wap py-5">
-                    <a href="#"><h1>Contact us for more</h1></a>
+                    <a href="{% url 'search' %}"><h1>Search Our Database</h1></a>
                 </div>
             </div>
         </div>
@@ -70,10 +67,11 @@
                         2017, President Trump declared the opioid crisis a public health emergency.
                     </p>
                     <p class="feature-work-footer text-muted light-300">
-                        Currently no system exists that allows government officials and prescribers to simply view the volume of prescriptions that are taking place overall. So we have created this site to help adress that problem. We have a database of all the the information about prescribers and drugs that are sorted and accessable so that others can analyze the data themselves and seek understanding.</p>
+                        Currently no system exists that allows government officials and prescribers to simply view the volume of prescriptions that are taking place overall. So we have created this site to help adress that problem. We have a database of information about prescribers and drugs. The data are sorted and accessable so that all parties can freely analyze the data themselves and seek understanding. Our hope is that through this understanding we can all work to make the world a better place!</p>
                     
                     <p class="feature-work-footer text-muted light-300"> 
-                        We also have taken the time to provide learning material for anyone to view so they can better understand opioids and other drugs addictions and how they can help. </p>
+                        We also have taken the time to provide links to other learning material to help everyone better understand addiction, recovery, and how they can best help those around them.
+                    </p>
                 </div>
                 <div class="col-lg-6 offset-lg-1 align-left">
                     <div class="row">
