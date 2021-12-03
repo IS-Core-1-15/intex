@@ -36,7 +36,7 @@ def searchPageView(request):
         if len(data) > 0:
             msg = f'We found {len(data)} results'
         else:
-            msg = f'Sorry we could not find that'
+            msg = f'Sorry we could not find anything with the value'
 
         context['data'] = data
         context['msg'] = msg
@@ -74,5 +74,11 @@ def personDetailPageView(request, id):
     return render(request, 'DrugApp/details/p_detail.html', context)
 
 def drugDetailPageView(request, id):
-
-    return render(request, 'DrugApp/details/d_detail.html')
+    drug = PdDrugs.objects.get(drugid=id)
+    ten = PdTriple.objects.filter(drugname=drug.drugname).order_by('-qty')[:10]
+    
+    context = {
+        'drug': drug,
+        'persons': ten
+    }
+    return render(request, 'DrugApp/details/d_detail.html', context)
