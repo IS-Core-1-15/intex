@@ -91,3 +91,13 @@ def addPrescriberPageView(request):
             'states': states
         }
     return render(request, 'DrugApp/contact.html', context)
+
+def deletePrescriberPageView(request, id):
+    person = PdPrescriber.objects.get(npi=id)
+    if len(person) < 1 or len(person) > 1:
+        context = {
+            'msg': 'Sorry there was an error handling your request'
+        }
+        return render(request, 'DrugApp/error.html', context)
+    person.delete()
+    return render(request, 'DrugApp/search.html')

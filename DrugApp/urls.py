@@ -7,6 +7,7 @@ urlpatterns = [
     path("about/", aboutPageView, name='about'),
     path("detail/person/<int:id>", personDetailPageView, name='detailPerson'),
     path("detail/drug/<int:id>", drugDetailPageView, name='detailDrug'),
-    path("addPrescriber", addPrescriberPageView, name='addPrescriber'),
+    path("addPrescriber/", addPrescriberPageView, name='addPrescriber'),
+    path("deletePrescriber/<int:id>", deletePrescriberPageView, name='deletePrescriber'),
     path("", indexPageView, name="index"),
 ]

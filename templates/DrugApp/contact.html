@@ -85,41 +85,39 @@
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating">
                         <input type="text" class="form-control form-control-lg light-300" id="fname" name="fname" placeholder="First Name">
-                        <label for="fname light-300">First Name</label>
+                        <label for="fname">First Name</label>
                     </div>
                 </div><!-- End Input Name -->
 
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating">
                         <input type="text" class="form-control form-control-lg light-300" id="lname" name="lname" placeholder="Last Name">
-                        <label for="lname light-300">Last Name</label>
+                        <label for="lname">Last Name</label>
                     </div>
                 </div><!-- End Input Last Name -->
 
                 <div class="col-lg-6 mb-4">
-                    <div class="form-floating">
-                        <select name="gender" id="gender" class="form-control form-control-lg light-300">
-                            <option value="M">Male</option>
-                            <option value="F">Female</option>
-                        </select>
-                    </div>
-                </div><!-- End Input gender -->
-
-
-                <div class="col-lg-6 mb-4">
-                    <div class="form-floating">
-                        <select name="state" id="state" class="form-control form-control-lg light-300">
-                            {% for state in states%}
-                            <option value="{{state.stateabbrev}}">{{state.state}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div><!-- End Input State -->
-
-                <div class="col-12">
                     <div class="form-floating mb-4">
-                        <input type="text" class="form-control form-control-lg light-300" id="credentials" name="credentials" placeholder="Credentials">
-                        <label for="credentials">Credentials</label>
+                        <input type="text" class="form-control form-control-lg light-300" id="credentials1" name="credentials1" placeholder="Credential">
+                        <label for="credentials1">Credentials One</label>
+                    </div>
+                </div><!-- End Input Subject -->
+                <div class="col-lg-6 mb-4">
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control form-control-lg light-300" id="credentials2" name="credentials2" placeholder="Credential">
+                        <label for="credentials2">Credentials Two</label>
+                    </div>
+                </div><!-- End Input Subject -->
+                <div class="col-lg-6 mb-4">
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control form-control-lg light-300" id="credentials3" name="credentials3" placeholder="Credential">
+                        <label for="credentials3">Credentials Three</label>
+                    </div>
+                </div><!-- End Input Subject -->
+                <div class="col-lg-6 mb-4">
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control form-control-lg light-300" id="credentials4" name="credentials4" placeholder="Credential">
+                        <label for="credentials4">Credentials Four</label>
                     </div>
                 </div><!-- End Input Subject -->
 
@@ -131,11 +129,36 @@
                 </div><!-- End Input specialty -->
 
                 <div class="col-lg-6 mb-4">
-                    <div class="form-floating">
-                        <label for="isopioid">Is Opioid Prescriber</label>
-                        <input type="checkbox" class="" id="isopioid" name="isopioid" value="True">
+                    <div class="">
+                        <select name="gender" id="gender" class="form-control form-control-lg light-300">
+                            <option value="hide">-- Gender --</option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                        </select>
                     </div>
-                </div><!-- End Input isopioid prescriber -->
+                </div><!-- End Input gender -->
+
+
+                <div class="col-lg-6 mb-4">
+                    <div class="">
+                        <select name="state" id="state" class="form-control form-control-lg light-300">
+                            <option value="hide">-- State --</option>
+                            {% for state in states%}
+                            <option value="{{state.stateabbrev}}">{{state.state}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div><!-- End Input State -->
+
+                <div class="col-lg-6 mb-4">
+                    <div class="">
+                        <select name="isopioidprescriber" id="isopioidprescriber" class="form-control form-control-lg light-300">
+                            <option value="hide">-- Is Opioid Prescriber --</option>
+                            <option value="TRUE">TRUE</option>
+                            <option value="FALSE">FALSE</option>
+                        </select>
+                    </div>
+                </div><!-- End Input gender -->
                 <button type="submit" class="btn rounded-pill btn-secondary text-light px-4 light-300">Add Prescriber</button>
 
             </form>

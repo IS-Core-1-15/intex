@@ -43,13 +43,16 @@ class PdPrescriber(models.Model):
     gender = models.CharField(max_length=1, choices=[('M', 'Male'), ('F', 'Female')])
     state = models.ForeignKey(
         PdStatedata,
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         to_field='stateabbrev',
         db_column='state'
     )
-    credentials = models.CharField(max_length=20, blank=True, null=True)
+    credentials1 = models.CharField(max_length=10, blank=True, null=True)
+    credentials2 = models.CharField(max_length=10, blank=True, null=True)
+    credentials3 = models.CharField(max_length=10, blank=True, null=True)
+    credentials4 = models.CharField(max_length=10, blank=True, null=True)
     specialty = models.CharField(max_length=62)
-    isopioidprescriber = models.CharField(max_length=5)
+    isopioidprescriber = models.CharField(max_length=5, choices=[('TRUE', 'TRUE'), ('FALSE', 'FALSE')])
     totalprescriptions = models.IntegerField()
     drugs = models.ManyToManyField(PdDrugs, through='PdTriple')
     class Meta:
@@ -63,13 +66,13 @@ class PdTriple(models.Model):
     id = models.IntegerField(primary_key=True)
     prescriberid = models.ForeignKey(
         'PdPrescriber', 
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         to_field='npi',
         db_column='prescriberid'
         )
     drugname = models.ForeignKey(
         'PdDrugs',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         to_field='drugname',
         db_column='drugname'
         )
