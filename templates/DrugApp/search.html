@@ -59,7 +59,7 @@
         {% if prescriber %}
             {% for info in data %}
                 <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
-                    <a href="{% url 'detail' id=info.npi %}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                    <a href="{% url 'detailPerson' id=info.npi %}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
                         <img class="service card-img" src="{% static 'img/user_img.png' %}" alt="Card image">
                         <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                             <div class="service-work-content text-left text-light">
@@ -72,7 +72,7 @@
         {% else %}
             {% for info in data %}
             <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
-                <a href="{% url 'detail' id=info.drugid %}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                <a href="{% url 'detailDrug' id=info.drugid %}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
                     <img class="service card-img" src="{% static 'img/drug_img.jpeg' %}" alt="Card image">
                     <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                         <div class="service-work-content text-left text-light">
