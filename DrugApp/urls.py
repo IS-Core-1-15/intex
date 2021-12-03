@@ -13,5 +13,6 @@ urlpatterns = [
     path('addDrug/<int:id>', addDrugPageView, name='addDrug'),
     path("success/", successPageView, name='success'),
     path("editPrescriber/<int:id>", editPrescriberPageView, name='editPrescriber'),
+    path("analytics/", analyticsPageView, name='analytics'),
     path("", indexPageView, name="index"),
 ]
