@@ -1,6 +1,6 @@
 from django.db.models import Avg, Sum
 from django.db.models.aggregates import Max
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import *
 import math
 
@@ -105,7 +105,7 @@ def deletePrescriberPageView(request, id):
         }
         return render(request, 'DrugApp/error.html', context)
     person.delete()
-    return render(request, 'DrugApp/search.html')
+    return redirect('success')
 
 
 def successPageView(request):
