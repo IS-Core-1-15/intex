@@ -1,0 +1,83 @@
+{% extends 'DrugApp/detail.html' %}
+{% load static %}
+{% block banner %}
+   <!-- Start Banner Hero -->
+   <section class="bg-light">
+    <div class="container py-4">
+        <div class="row align-items-center justify-content-between">
+            <div class="contact-header col-lg-4">
+                <h1 class="h2 pb-3 text-primary">{{info.fname}} {{info.lname}}</h1>
+                <h3 class="h4 regular-400">
+                    {% if info.credentials %}
+                        {{info.credentials}}
+                    {% else %}
+                        Credentials not specified
+                    {% endif %}
+                </h3>
+                <p class="light-300">
+                    Gender: {{info.gender}}<br>
+                    Location: {{info.state}}<br>
+                    Specialty: {{info.specialty}}<br>
+                </p>
+            </div>
+            <div class="contact-img col-lg-5 align-items-end col-md-4">
+                <img src="{% static 'img/banner-img-01.svg' %}">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Hero -->
+{% endblock %}
+
+{% block stats %}
+    <!-- Start Progress -->
+    <section class="bg-white py-5">
+        <div class="container my-4">
+
+            <h1 class="creative-heading h2 pb-3">Drugs</h1>
+
+            <div class="creative-content row py-3">
+                <div class="col-md-5">
+                    <p class="text-muted col-lg-8 light-300">
+                        List of drugs offered by {{info.fname}}
+                    </p>
+                </div>
+                <div class="creative-progress col-md-7">
+
+                    <div class="row mt-4 mt-sm-2">
+                        <div class="col-6">
+                            <h4 class="h5">{{drug_info.drugname}}</h4>
+                        </div>
+                        <div class="col-6 text-right">{{info.fname}}'s total: {{drug_info.qty}}</div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+
+                    <div class="row mt-4 mt-sm-2">
+                        <div class="col-6">
+                            <h4 class="h5">Design</h4>
+                        </div>
+                        <div class="col-6 text-right">90%</div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+
+
+                    <div class="row mt-4 mt-sm-2">
+                        <div class="col-6">
+                            <h4 class="h5">Marketing</h4>
+                        </div>
+                        <div class="col-6 text-right">74%</div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 74%" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Progress -->
+{% endblock %}

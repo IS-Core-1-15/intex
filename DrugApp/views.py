@@ -50,5 +50,16 @@ def learnPageView(request):
 def aboutPageView(request):
     return render(request, 'DrugApp/about.html')
 
-def detailPageView(request):
-    return render(request, 'DrugApp/about.html')
+def personDetailPageView(request, id):
+    triple = PdTriple.objects.get(prescriberid=id)
+
+    context = {
+        'info': triple.prescriberid,
+        'drug_info': triple,
+    }
+
+    return render(request, 'DrugApp/details/p_detail.html', context)
+
+def drugDetailPageView(request, id):
+
+    return render(request, 'DrugApp/details/d_detail.html')
