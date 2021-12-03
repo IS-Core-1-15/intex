@@ -70,7 +70,7 @@ def personDetailPageView(request, id):
         drug.percent = math.floor((drug.qty / drug.sum) * 100)
 
     context = {
-        'info': person,
+        'person': person,
         'drugs': drugs,
     }
 
@@ -122,7 +122,7 @@ def addDrugPageView(request, id):
     if request.method == 'GET':
         drugs = PdDrugs.objects.all().exclude(drugname__in=excludes)
         context = {
-            'info': person,
+            'person': person,
             'drugs': drugs,
         }
         return render(request, 'DrugApp/addDrug.html', context)
@@ -139,7 +139,7 @@ def editDrugPageView(request, drugid, personid):
 
     if request.method == "GET":
         context = {
-            'info': person,
+            'person': person,
             'drug': drug,
             'triple': triple,
         }
