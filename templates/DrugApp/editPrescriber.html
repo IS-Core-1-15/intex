@@ -1,3 +1,135 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}
+<title>Opioids - Update Prescriber</title>
+{% endblock %}
+
+{% block banner %}
+<!-- Start Banner Hero -->
+<section class="bg-light">
+    <div class="container py-4">
+        <div class="row align-items-center justify-content-between">
+            <div class="contact-header col-lg-4">
+                <h1 class="h2 pb-3 text-primary">Update Exisiting Prescriber Information</h1>
+                <h3 class="h4 regular-400">Please verify any information you input</h3>
+            </div>
+            <div class="contact-img col-lg-5 align-items-end col-md-4">
+                <img src="{% static 'img/banner-img-01.svg' %}">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Hero -->
+{% endblock %}
+
+{% block content %}
+<!-- Start Contact -->
+<section class="container py-5">
+
+    <h1 class="col-12 col-xl-8 h2 text-left text-primary pt-3">Update Exisiting Prescriber Information</h1>
+    <h2 class="col-12 col-xl-8 h4 text-left regular-400">Please verify information before submitting the form!</h2>
+    <p class="col-12 col-xl-8 text-left text-muted pb-5 light-300">
+        Thanks for adding to our growing database! You are helping the world to be a better place for future generations.
+    </p>
+
+    <div class="row pb-4">
+        <!-- Start Contact Form -->
+        <div class="col-lg-8 ">
+            <form class="contact-form row" method="POST" action="{% url 'editPrescriber' id=person.npi %}" role="form">
+            {% csrf_token %}
+                        <input type="hidden" class="form-control form-control-lg light-300" id="npi" name="npi" placeholder="NPI" value={{person.npi}}>
+                <!-- End Input Name -->
+
+                <div class="col-lg-6 mb-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control form-control-lg light-300" id="fname" name="fname" placeholder="First Name" value={{person.fname}}>
+                        <label for="fname">First Name</label>
+                    </div>
+                </div><!-- End Input Name -->
+
+                <div class="col-lg-6 mb-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control form-control-lg light-300" id="lname" name="lname" placeholder="Last Name" value={{person.lname}}>
+                        <label for="lname">Last Name</label>
+                    </div>
+                </div><!-- End Input Last Name -->
+
+                <div class="col-lg-6 mb-4">
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control form-control-lg light-300" id="credentials1" name="credentials1" placeholder="Credential" value={{person.credentials1}}>
+                        <label for="credentials1">Credentials One</label>
+                    </div>
+                </div><!-- End Input Subject -->
+                <div class="col-lg-6 mb-4">
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control form-control-lg light-300" id="credentials2" name="credentials2" placeholder="Credential" value={{person.credentials2}}>
+                        <label for="credentials2">Credentials Two</label>
+                    </div>
+                </div><!-- End Input Subject -->
+                <div class="col-lg-6 mb-4">
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control form-control-lg light-300" id="credentials3" name="credentials3" placeholder="Credential" value={{person.credentials3}}>
+                        <label for="credentials3">Credentials Three</label>
+                    </div>
+                </div><!-- End Input Subject -->
+                <div class="col-lg-6 mb-4">
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control form-control-lg light-300" id="credentials4" name="credentials4" placeholder="Credential" value={{person.credentials4}}>
+                        <label for="credentials4">Credentials Four</label>
+                    </div>
+                </div><!-- End Input Subject -->
+
+                <div class="col-lg-6 mb-4">
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control form-control-lg light-300" id="specialty" name="specialty" placeholder="Specialty" value={{person.specialty}}>
+                        <label for="specialty">Specialty</label>
+                    </div>
+                </div><!-- End Input specialty -->
+
+                <div class="col-lg-6 mb-4">
+                    <div class="form-floating mb-4">
+                        <input type="number" class="form-control form-control-lg light-300" id="totalprescriptions" name="totalprescriptions" placeholder="Total Prescriptions" value={{person.totalprescriptions}}>
+                        <label for="totalprescriptions">Total Prescriptions</label>
+                    </div>
+                </div><!-- End Input specialty -->
+
+                <div class="col-lg-6 mb-4">
+                    <div class="">
+                        <select name="gender" id="gender" class="form-control form-control-lg light-300">
+                            <option value={{person.gender}}>{{person.displaygender}}</option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                        </select>
+                    </div>
+                </div><!-- End Input gender -->
+
+
+                <div class="col-lg-6 mb-4">
+                    <div class="">
+                        <select name="state" id="state" class="form-control form-control-lg light-300">
+                            <option value={{person.state.stateabbrev}}>{{person.state}}</option>
+                            {% for state in states%}
+                            <option value="{{state.stateabbrev}}">{{state.state}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div><!-- End Input State -->
+
+                <div class="col-lg-6 mb-4">
+                    <div class="">
+                        <select name="isopioidprescriber" id="isopioidprescriber" class="form-control form-control-lg light-300">
+                            <option value={{person.isopioidprescriber}}>{{person.isopioidprescriber}}</option>
+                            <option value="TRUE">TRUE</option>
+                            <option value="FALSE">FALSE</option>
+                        </select>
+                    </div>
+                </div><!-- End Input gender -->
+                <button type="submit" class="btn rounded-pill btn-secondary text-light px-4 light-300">Submit Updates</button>
+            </form>
+        </div>
+        <!-- End Contact Form --> 
+    </div>
+</section>
+<!-- End Contact -->
+{% endblock %}

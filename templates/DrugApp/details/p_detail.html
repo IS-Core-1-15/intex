@@ -25,6 +25,7 @@
                     Location: {{info.state}}<br>
                     Specialty: {{info.specialty}}<br>
                 </p>
+                <a href={% url 'editPrescriber' id=info.npi %} class="btn rounded-pill btn-secondary text-light px-4 light-300">Edit</a>
                 <a href={% url 'deletePrescriber' id=info.npi %} class="btn rounded-pill btn-secondary text-light px-4 light-300">Delete</a>
             </div>
             <div class="contact-img col-lg-5 align-items-end col-md-4">

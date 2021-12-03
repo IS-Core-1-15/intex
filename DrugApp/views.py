@@ -130,3 +130,33 @@ def addDrugPageView(request, id):
 
 def successPageView(request):
     return render(request, 'DrugApp/success.html')
+
+
+def editPrescriberPageView(request, id):
+    person = PdPrescriber.objects.get(npi=id)
+    if request.method == "GET":
+        if person.gender == "M":
+            person.displaygender = "Male"
+        else:
+            person.displaygender = "Female"
+        states = PdStatedata.objects.all()
+        context = {
+            "states": states,
+            "person": person
+        }
+        return render(request, 'DrugApp/editPrescriber.html', context)
+    elif request.method == "POST":
+        person.fname = request.POST["fname"]
+        person.lname = request.POST["lname"]
+        person.credentials1 = request.POST["credentials1"]
+        person.credentials2 = request.POST["credentials2"]
+        person.credentials3 = request.POST["credentials3"]
+        person.credentials4 = request.POST["credentials4"]
+        person.specialty = request.POST["specialty"]
+        person.totalprescriptions = request.POST["totalprescriptions"]
+        person.gender = request.POST["gender"]
+        state = PdStatedata.objects.get(stateabbrev=request.POST["state"])
+        person.state = state
+        person.isopioidprescriber = request.POST["isopioidprescriber"]
+        person.save()
+        return redirect('detailPerson', id=person.npi)
