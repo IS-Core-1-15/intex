@@ -50,21 +50,23 @@
                     </p>
                 </div>
                 <div class="creative-progress col-md-7">
-
                     {% for drug in drugs%}
                     <div class="row mt-4 mt-sm-2">
                         <div class="col-6">
                             <h4 class="h5">{{drug.drugname}}</h4>
                         </div>
-                        <div class="col-6 text-right"><button type="submit" class="btn rounded-pill btn-secondary text-light px-4 light-300">Add Prescriber</button></div>
+                        <div class="col-6 text-right" style='padding-bottom:5px;'><a href="#" class="btn btn-sm rounded-pill btn-secondary text-light px-4 light-300">Edit</a></div>
                     </div>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" style="width: {{drug.percent}}%" aria-valuenow="{{drug.percent}}" aria-valuemin="0" aria-valuemax="{{drug.sum}}"></div>
                     </div>
-                    {{info.fname}}'s total: {{drug.qty}} ({{drug.percent}}%) | Average quantity: {{drug.avg}} 
+                    {{info.fname}}'s quantity: {{drug.qty}} ({{drug.percent}}%) | Average quantity: {{drug.avg}} 
                     {% endfor %}
-
+                    <div>
+                        <a href="#" class="btn rounded-pill btn-secondary text-light px-4 light-300">Add Drug for Prescriber</a>
+                    </div>
                 </div>
+
             </div>
         </div>
     </section>
