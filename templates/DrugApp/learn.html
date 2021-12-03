@@ -25,8 +25,8 @@
 <section class="container overflow-hidden py-5">
     <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
         <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
-            <a href="https://familydoctor.org/condition/opioid-addiction/" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
-                <img class="service card-img" src="{% static 'img/drug_img.jpeg' %}" alt="Card image">
+            <a href="https://familydoctor.org/condition/opioid-addiction/" target="_blank" rel="noopener noreferrer" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                <img class="service card-img" src="{% static 'img/familydoctor.png' %}" alt="Card image">
                 <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                     <div class="service-work-content text-left text-light">
                         <p class="card-text">Learn about Opioid Addiction</p>
@@ -36,8 +36,8 @@
         </div>
 
         <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
-            <a href="https://www.hopkinsmedicine.org/opioids/signs-of-opioid-abuse.html" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
-                <img class="service card-img" src="{% static 'img/drug_img.jpeg' %}" alt="Card image">
+            <a href="https://www.hopkinsmedicine.org/opioids/signs-of-opioid-abuse.html" target="_blank" rel="noopener noreferrer" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                <img class="service card-img" src="{% static 'img/johnhopkins.jpeg' %}" alt="Card image">
                 <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                     <div class="service-work-content text-left text-light">
                         <p class="card-text">What can I do to help?</p>
@@ -47,8 +47,8 @@
         </div>
 
         <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
-            <a href="https://www.cdc.gov/drugoverdose/featured-topics/treatment-recovery.html" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
-                <img class="service card-img" src="{% static 'img/drug_img.jpeg' %}" alt="Card image">
+            <a href="https://www.cdc.gov/drugoverdose/featured-topics/treatment-recovery.html" target="_blank" rel="noopener noreferrer" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                <img class="service card-img" src="{% static 'img/cdclogo.png' %}" alt="Card image">
                 <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                     <div class="service-work-content text-left text-light">
                         <p class="card-text">Treatment and Recovery</p>
@@ -59,7 +59,7 @@
 
         <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
             <a href="{% url 'search' %}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
-                <img class="service card-img" src="{% static 'img/drug_img.jpeg' %}" alt="Card image">
+                <img class="service card-img" src="{% static 'img/database.jpeg' %}" alt="Card image">
                 <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                     <div class="service-work-content text-left text-light">
                         <p class="card-text">Search Our Database</p>
@@ -70,47 +70,19 @@
     </div>
 </section>
 <!--End Our Partner-->
+
+<div class="row pt-5">
+    <div class="worksingle-content col-lg-8 m-auto text-left justify-content-center">
+        <h2 class="worksingle-heading h3 pb-3 light-300 typo-space-line">An analysis of the U.S. Opioid Epidemic</h2>
+        <h1 class="feature-work-heading h2 py-3 semi-bold-600">U.S. Opioid Prescriptions</h1>
+        <p class="worksingle-footer py-3 text-muted light-300">
+            The opioid crisis is devastating communities across America. The latest statistics indicate that the total yearly overdose deaths due to opioids reached a new high of 70,237 in 2017. In October 2017, President Trump declared the opioid crisis a public health emergency.
+            <br><br>
+            Currently no system exists that allows government officials and prescribers to simply view the volume of prescriptions that are taking place overall. So we have created this site to help adress that problem. We have a database of information about prescribers and drugs. The data are sorted and accessable so that all parties can freely analyze the data themselves and seek understanding. Our hope is that through this understanding we can all work to make the world a better place!
+            <br><br>
+            We also have taken the time to provide links to other learning material to help everyone better understand addiction, recovery, and how they can best help those around them.
+        </p>
+    </div>
+</div>
+
 {% endblock %}
-{% block content %}
-    <!-- Start Feature Work -->
-    <section class="bg-light py-5">
-        <div class="feature-work container my-4">
-            <div class="row d-flex d-flex align-items-center">
-                <div class="col-lg-5">
-                    <h3 class="feature-work-title h4 text-muted light-300">An analysis of the U.S. Opioid Epidemic</h3>
-                    <h1 class="feature-work-heading h2 py-3 semi-bold-600">U.S. Opioid Prescriptions</h1>
-                    <p class="feature-work-body text-muted light-300">
-                        The opioid crisis is devastating communities across America. The latest statistics indicate that
-                        the total yearly overdose deaths due to opioids reached a new high of 70,237 in 2017. In October
-                        2017, President Trump declared the opioid crisis a public health emergency.
-                    </p>
-                    <p class="feature-work-footer text-muted light-300">
-                        Currently no system exists that allows government officials and prescribers to simply view the volume of prescriptions that are taking place overall. So we have created this site to help adress that problem. We have a database of information about prescribers and drugs. The data are sorted and accessable so that all parties can freely analyze the data themselves and seek understanding. Our hope is that through this understanding we can all work to make the world a better place!</p>
-                    
-                    <p class="feature-work-footer text-muted light-300"> 
-                        We also have taken the time to provide links to other learning material to help everyone better understand addiction, recovery, and how they can best help those around them.
-                    </p>
-                </div>
-                <div class="col-lg-6 offset-lg-1 align-left">
-                    <div class="row">
-                        <a class="col" data-type="image" data-fslightbox="gallery" href="{% static 'img/feature-work-1-large.jpg' %}">
-                            <img class="img-fluid" src="{% static 'img/feature-work-1.jpg' %}">
-                        </a>
-                        <a class="col" data-type="image" data-fslightbox="gallery" href="{% static 'img/feature-work-2-large.jpg' %}">
-                            <img class="img-fluid" src="{% static 'img/feature-work-2.jpg' %}">
-                        </a>
-                    </div>
-                    <div class="row pt-4">
-                        <a class="col" data-type="image" data-fslightbox="gallery" href="{% static 'img/feature-work-3-large.jpg' %}">
-                            <img class="img-fluid" src="{% static 'img/feature-work-3.jpg' %}">
-                        </a>
-                        <a class="col" data-type="image" data-fslightbox="gallery" href="{% static 'img/feature-work-4-large.jpg' %}">
-                            <img class="img-fluid" src="{% static 'img/feature-work-4.jpg' %}">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Feature Work -->
-    {% endblock %}
