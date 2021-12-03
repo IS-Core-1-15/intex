@@ -1,2 +1,79 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block title %}
+<title>Opioids - Analytics</title>
+{% endblock %}
+
+{% block banner %}
+<!-- Start Banner Hero -->
+<section class="bg-light w-100">
+    <div class="container">
+        <div class="row d-flex align-items-center py-5">
+            <div class="col-lg-6 text-start">
+                <h1 class="h2 py-5 text-primary typo-space-line">US Opioid Prescriptions Analytics</h1>
+                <p class="light-300">
+                    We are providing some of our own analysis and statistics to help inspire others to do some of their own learning and exploring with our data. We strongly believe that many of the answers to how we can help others can be found by a careful analysis of the data that we can collect. Help us to help others, lets make the world a safer place for future generations!
+                </p>
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static 'img/analyticsdefault.jpeg' %}">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Hero -->
+{% endblock %}
+{% block content %}
+    <!-- Start Feature Work -->
+    <section class="bg-light py-5">
+        <div class="feature-work container my-4">
+            <div class="row d-flex d-flex align-items-center">
+                <div class="col-lg-5">
+                    <h1 class="feature-work-heading h2 py-3 semi-bold-600">An analysis of the U.S. Opioid Epidemic
+                    </h1>
+
+                    <h3 class="feature-work-title h4 text-muted light-300">Who is currently prescribing high levels of opioids (compared to other non-opioid drugs)?</h3>
+                    <p class="feature-work-body text-muted light-300">
+                        Raw SQL RIGHT HERE BABY
+                    </p>
+
+                    <h3 class="feature-work-title h4 text-muted light-300">What opioid drug has been prescribed the most?</h3>
+                    <p class="feature-work-body text-muted light-300">
+                        Raw SQL RIGHT HERE BABY
+                    </p>
+                    
+                    <h3 class="feature-work-title h4 text-muted light-300">Which state has the highest percentage of opioid related deaths compared to total population?</h3>
+                    <p class="feature-work-body text-muted light-300">
+                        Raw SQL RIGHT HERE BABY
+                    </p>
+
+                    <h3 class="feature-work-title h4 text-muted light-300">What state has the most opioid related deaths?</h3>
+                    <p class="feature-work-body text-muted light-300">
+                        Raw SQL RIGHT HERE BABY
+                    </p>
+
+                </div>
+                <div class="col-lg-6 offset-lg-1 align-left">
+                    <div class="row">
+                        <a class="col" data-type="image" data-fslightbox="gallery" href="{% static 'img/feature-work-1-large.jpg' %}">
+                            <img class="img-fluid" src="{% static 'img/randomopioid1.png' %}">
+                        </a>
+                        <a class="col" data-type="image" data-fslightbox="gallery" href="{% static 'img/feature-work-2-large.jpg' %}">
+                            <img class="img-fluid" src="{% static 'img/randomopioid2.jpeg' %}">
+                        </a>
+                    </div>
+                    <div class="row pt-4">
+                        <a class="col" data-type="image" data-fslightbox="gallery" href="{% static 'img/feature-work-3-large.jpg' %}">
+                            <img class="img-fluid" src="{% static 'img/randomopioid3.jpeg' %}">
+                        </a>
+                        <a class="col" data-type="image" data-fslightbox="gallery" href="{% static 'img/feature-work-4-large.jpg' %}">
+                            <img class="img-fluid" src="{% static 'img/randomopioid4.png' %}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Feature Work -->
+    {% endblock %}

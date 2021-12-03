@@ -164,4 +164,4 @@ def editPrescriberPageView(request, id):
 
 
 def analyticsPageView(request):
-    return render('DrugApp/analytics.html')
+    return render(request, 'DrugApp/analytics.html')
