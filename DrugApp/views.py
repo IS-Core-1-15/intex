@@ -1,6 +1,7 @@
 from django.db.models import Avg, Sum
 from django.db.models.aggregates import Max
-from django.shortcuts import render
+import random
+from django.shortcuts import redirect, render
 from .models import *
 import math
 
@@ -55,6 +56,21 @@ def aboutPageView(request):
 
 def personDetailPageView(request, id):
     person = PdPrescriber.objects.get(npi=id)
+    # creds = f''
+    # print(person.credentials2 == None)
+    # print(type(person.credentials2))
+    # if person.credentials1 != None:
+    #     creds += f'{person.credentials1}'
+    # if person.credentials2 != None:
+    #     creds += f', {person.credentials2}'
+    # if person.credentials3 != None:
+    #     creds += f', {person.credentials3}'
+    # if person.credentials4 != None:
+    #     creds += f', {person.credentials4}'
+
+    # creds = f'{person.credentials1}, {person.credentials2}, {person.credentials3}, {person.credentials4}'
+    # person.credentials = creds
+
     drugs = person.drugs.all()
 
     for drug in drugs:
@@ -84,19 +100,28 @@ def drugDetailPageView(request, id):
     return render(request, 'DrugApp/details/d_detail.html', context)
 
 def addPrescriberPageView(request):
+    print(request.method)
     if request.method == 'GET':
         states = PdStatedata.objects.all()
 
         context = {
             'states': states
         }
-    return render(request, 'DrugApp/contact.html', context)
+        return render(request, 'DrugApp/addPrescriber.html', context)
+    elif request.method == 'POST':
+        person = PdPrescriber.create(request.POST)
+        person.save()
+        print(person)
+ 
+        return redirect('detailPerson', id=person.npi)
+    else:
+        return render(request, 'DrugApp/error', {'msg': 'There was an error'})
 
 def deletePrescriberPageView(request, id):
     person = PdPrescriber.objects.get(npi=id)
     if len(person) < 1 or len(person) > 1:
         context = {
-            'msg': 'Sorry there was an error handling your request'
+            'msg': 'Sorry there was an error handling your request',
         }
         return render(request, 'DrugApp/error.html', context)
     person.delete()

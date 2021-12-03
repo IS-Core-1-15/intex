@@ -8,10 +8,10 @@
             <div class="contact-header col-lg-4">
                 <h1 class="h2 pb-3 text-primary">{{info.fname}} {{info.lname}}</h1>
                 <h3 class="h4 regular-400">
-                    {% if info.credentials %}
-                        {{info.credentials}}
-                    {% else %}
-                        Credentials not specified
+                    {% if info.credentials1 %}
+                        {{info.credentials1}}
+                    {% elif info.credentials2 %}
+                        {{info.credentials1}}, {{info.credentials1}}
                     {% endif %}
                 </h3>
                 <p class="light-300">

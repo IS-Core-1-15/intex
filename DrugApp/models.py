@@ -58,6 +58,26 @@ class PdPrescriber(models.Model):
     class Meta:
         # managed = False
         db_table = 'pd_prescriber'
+    
+    @classmethod
+    def create(self, form):
+        state = PdStatedata.objects.get(stateabbrev=form['state'])
+        person = self(
+            npi = form['npi'],
+            fname = form['fname'],
+            lname = form['lname'],
+            gender = form['gender'],
+            state = state,
+            credentials1 = form['credentials1'],
+            credentials2 = form['credentials2'],
+            credentials3 = form['credentials3'],
+            credentials4 = form['credentials4'],
+            specialty = form['specialty'],
+            isopioidprescriber = form['isopioidprescriber'],
+            totalprescriptions = form['totalprescriptions']
+        )
+        
+        return person
 
     def __str__(self):
         return f'{self.fname} {self.lname}'

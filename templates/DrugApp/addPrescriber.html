@@ -80,7 +80,14 @@
 
         <!-- Start Contact Form -->
         <div class="col-lg-8 ">
-            <form class="contact-form row" method="post" action="addPrescriber" role="form">
+            <form class="contact-form row" method="POST" action="{% url 'addPrescriber' %}" role="form">
+            {% csrf_token %}
+                <div class="col-lg-6 mb-4">
+                    <div class="form-floating">
+                        <input type="number" class="form-control form-control-lg light-300" id="npi" name="npi" placeholder="NPI">
+                        <label for="fname">NPI</label>
+                    </div>
+                </div><!-- End Input Name -->
 
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating">
@@ -129,6 +136,13 @@
                 </div><!-- End Input specialty -->
 
                 <div class="col-lg-6 mb-4">
+                    <div class="form-floating mb-4">
+                        <input type="number" class="form-control form-control-lg light-300" id="totalprescriptions" name="totalprescriptions" placeholder="Total Prescriptions">
+                        <label for="totalprescriptions">Total Prescriptions</label>
+                    </div>
+                </div><!-- End Input specialty -->
+
+                <div class="col-lg-6 mb-4">
                     <div class="">
                         <select name="gender" id="gender" class="form-control form-control-lg light-300">
                             <option value="hide">-- Gender --</option>
@@ -160,7 +174,6 @@
                     </div>
                 </div><!-- End Input gender -->
                 <button type="submit" class="btn rounded-pill btn-secondary text-light px-4 light-300">Add Prescriber</button>
-
             </form>
         </div>
         <!-- End Contact Form --> 
