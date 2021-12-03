@@ -9,24 +9,24 @@
     <div class="container py-4">
         <div class="row align-items-center justify-content-between">
             <div class="contact-header col-lg-4">
-                <h1 class="h2 pb-3 text-primary">{{info.fname}} {{info.lname}}</h1>
+                <h1 class="h2 pb-3 text-primary">{{person.fname}} {{person.lname}}</h1>
                 <h3 class="h4 regular-400">
-                    {% if info.credentials4 %}
-                        {{info.credentials1}}, {{info.credentials1}}, {{info.credentials3}}, {{info.credentials4}}
-                    {% elif info.credentials3 %}
-                        {{info.credentials1}}, {{info.credentials1}}, {{info.credentials3}}
-                    {% elif info.credentials2 %}
-                        {{info.credentials1}}, {{info.credentials1}}
-                    {% elif info.credentials1 %}
-                        {{info.credentials1}}
+                    {% if person.credentials4 %}
+                        {{person.credentials1}}, {{person.credentials1}}, {{person.credentials3}}, {{person.credentials4}}
+                    {% elif person.credentials3 %}
+                        {{person.credentials1}}, {{person.credentials1}}, {{person.credentials3}}
+                    {% elif person.credentials2 %}
+                        {{person.credentials1}}, {{person.credentials1}}
+                    {% elif person.credentials1 %}
+                        {{person.credentials1}}
                     {% endif %}
                 </h3>
                 <p class="light-300">
-                    Gender: {{info.gender}}<br>
-                    Location: {{info.state}}<br>
-                    Specialty: {{info.specialty}}<br>
+                    Gender: {{person.gender}}<br>
+                    Location: {{person.state}}<br>
+                    Specialty: {{person.specialty}}<br>
                 </p>
-                {% comment %} <a href={% url 'deletePrescriber' id=info.npi %} class="btn rounded-pill btn-secondary text-light px-4 light-300">Delete</a> {% endcomment %}
+                {% comment %} <a href={% url 'deletePrescriber' id=person.npi %} class="btn rounded-pill btn-secondary text-light px-4 light-300">Delete</a> {% endcomment %}
             </div>
             <div class="contact-img col-lg-5 align-items-end col-md-4">
                 <img src="{% static 'img/banner-img-01.svg' %}">
@@ -42,11 +42,11 @@
     <section class="bg-white py-5">
         <div class="container my-4">
 
-            <h1 class="creative-heading h2 pb-3">Add a drug offered by {{info.fname}}</h1>
+            <h1 class="creative-heading h2 pb-3">Add a drug offered by {{person.fname}}</h1>
 
             <div class="creative-content row py-3">
                 <div class="col-md-5">
-                    <form class="contact-form row" method="POST" action="{% url 'addDrug' id=info.npi %}" role="form">
+                    <form class="contact-form row" method="POST" action="{% url 'addDrug' id=person.npi %}" role="form">
                     {% csrf_token %}
                     <div class="col-lg-6 mb-4">
                         <div class="">
