@@ -36,64 +36,60 @@
     <div class="row pb-4">
         <!-- Start Contact Form -->
         <div class="col-lg-8 ">
-            <form class="contact-form row" method="POST" action="{% url 'addPrescriber' %}" role="form">
+            <form class="contact-form row" method="POST" action="{% url 'editPrescriber' id=person.npi %}" role="form">
             {% csrf_token %}
-                <div class="col-lg-6 mb-4">
-                    <div class="form-floating">
-                        <input type="number" class="form-control form-control-lg light-300" id="npi" name="npi" placeholder="NPI">
-                        <label for="fname">NPI</label>
-                    </div>
-                </div><!-- End Input Name -->
+                        <input type="hidden" class="form-control form-control-lg light-300" id="npi" name="npi" placeholder="NPI" value={{person.npi}}>
+                <!-- End Input Name -->
 
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating">
-                        <input type="text" class="form-control form-control-lg light-300" id="fname" name="fname" placeholder="First Name">
+                        <input type="text" class="form-control form-control-lg light-300" id="fname" name="fname" placeholder="First Name" value={{person.fname}}>
                         <label for="fname">First Name</label>
                     </div>
                 </div><!-- End Input Name -->
 
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating">
-                        <input type="text" class="form-control form-control-lg light-300" id="lname" name="lname" placeholder="Last Name">
+                        <input type="text" class="form-control form-control-lg light-300" id="lname" name="lname" placeholder="Last Name" value={{person.lname}}>
                         <label for="lname">Last Name</label>
                     </div>
                 </div><!-- End Input Last Name -->
 
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating mb-4">
-                        <input type="text" class="form-control form-control-lg light-300" id="credentials1" name="credentials1" placeholder="Credential">
+                        <input type="text" class="form-control form-control-lg light-300" id="credentials1" name="credentials1" placeholder="Credential" value={{person.credentials1}}>
                         <label for="credentials1">Credentials One</label>
                     </div>
                 </div><!-- End Input Subject -->
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating mb-4">
-                        <input type="text" class="form-control form-control-lg light-300" id="credentials2" name="credentials2" placeholder="Credential">
+                        <input type="text" class="form-control form-control-lg light-300" id="credentials2" name="credentials2" placeholder="Credential" value={{person.credentials2}}>
                         <label for="credentials2">Credentials Two</label>
                     </div>
                 </div><!-- End Input Subject -->
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating mb-4">
-                        <input type="text" class="form-control form-control-lg light-300" id="credentials3" name="credentials3" placeholder="Credential">
+                        <input type="text" class="form-control form-control-lg light-300" id="credentials3" name="credentials3" placeholder="Credential" value={{person.credentials3}}>
                         <label for="credentials3">Credentials Three</label>
                     </div>
                 </div><!-- End Input Subject -->
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating mb-4">
-                        <input type="text" class="form-control form-control-lg light-300" id="credentials4" name="credentials4" placeholder="Credential">
+                        <input type="text" class="form-control form-control-lg light-300" id="credentials4" name="credentials4" placeholder="Credential" value={{person.credentials4}}>
                         <label for="credentials4">Credentials Four</label>
                     </div>
                 </div><!-- End Input Subject -->
 
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating mb-4">
-                        <input type="text" class="form-control form-control-lg light-300" id="specialty" name="specialty" placeholder="Specialty">
+                        <input type="text" class="form-control form-control-lg light-300" id="specialty" name="specialty" placeholder="Specialty" value={{person.specialty}}>
                         <label for="specialty">Specialty</label>
                     </div>
                 </div><!-- End Input specialty -->
 
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating mb-4">
-                        <input type="number" class="form-control form-control-lg light-300" id="totalprescriptions" name="totalprescriptions" placeholder="Total Prescriptions">
+                        <input type="number" class="form-control form-control-lg light-300" id="totalprescriptions" name="totalprescriptions" placeholder="Total Prescriptions" value={{person.totalprescriptions}}>
                         <label for="totalprescriptions">Total Prescriptions</label>
                     </div>
                 </div><!-- End Input specialty -->
@@ -101,7 +97,7 @@
                 <div class="col-lg-6 mb-4">
                     <div class="">
                         <select name="gender" id="gender" class="form-control form-control-lg light-300">
-                            <option value="hide">-- Gender --</option>
+                            <option value={{person.gender}}>{{person.displaygender}}</option>
                             <option value="M">Male</option>
                             <option value="F">Female</option>
                         </select>
@@ -112,7 +108,7 @@
                 <div class="col-lg-6 mb-4">
                     <div class="">
                         <select name="state" id="state" class="form-control form-control-lg light-300">
-                            <option value="hide">-- State --</option>
+                            <option value={{person.state.stateabbrev}}>{{person.state}}</option>
                             {% for state in states%}
                             <option value="{{state.stateabbrev}}">{{state.state}}</option>
                             {% endfor %}
@@ -123,7 +119,7 @@
                 <div class="col-lg-6 mb-4">
                     <div class="">
                         <select name="isopioidprescriber" id="isopioidprescriber" class="form-control form-control-lg light-300">
-                            <option value="hide">-- Is Opioid Prescriber --</option>
+                            <option value={{person.isopioidprescriber}}>{{person.isopioidprescriber}}</option>
                             <option value="TRUE">TRUE</option>
                             <option value="FALSE">FALSE</option>
                         </select>

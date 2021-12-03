@@ -11,6 +11,6 @@ urlpatterns = [
     path("deletePrescriber/<int:id>",
          deletePrescriberPageView, name='deletePrescriber'),
     path("success/", successPageView, name='success'),
-    path("editPrescriber/", editPrescriberPageView, name='editPrescriber'),
+    path("editPrescriber/<int:id>", editPrescriberPageView, name='editPrescriber'),
     path("", indexPageView, name="index"),
 ]
