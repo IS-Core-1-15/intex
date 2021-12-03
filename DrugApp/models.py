@@ -47,6 +47,11 @@ class PdPrescriber(models.Model):
         to_field='stateabbrev',
         db_column='state'
     )
+    credentials = models.CharField(max_length=20, blank=True, null=True)
+    specialty = models.CharField(max_length=62)
+    isopioidprescriber = models.CharField(max_length=5)
+    totalprescriptions = models.IntegerField()
+    drugs = models.ManyToManyField(PdDrugs, through='PdTriple')
     class Meta:
         # managed = False
         db_table = 'pd_prescriber'

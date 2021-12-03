@@ -1,8 +1,4 @@
-# credentials = models.CharField(max_length=20, blank=True, null=True)
-#     specialty = models.CharField(max_length=62)
-#     isopioidprescriber = models.CharField(max_length=5)
-#     totalprescriptions = models.IntegerField()
-#     drugs = models.ManyToManyField(PdDrugs, through='PdTriple')
+
 #     abilify = models.IntegerField()
 #     acetaminophencodeine = models.IntegerField()
 #     acyclovir = models.IntegerField()
