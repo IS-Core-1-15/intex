@@ -8,6 +8,8 @@ urlpatterns = [
     path("detail/person/<int:id>", personDetailPageView, name='detailPerson'),
     path("detail/drug/<int:id>", drugDetailPageView, name='detailDrug'),
     path("addPrescriber/", addPrescriberPageView, name='addPrescriber'),
-    path("deletePrescriber/<int:id>", deletePrescriberPageView, name='deletePrescriber'),
+    path("deletePrescriber/<int:id>",
+         deletePrescriberPageView, name='deletePrescriber'),
+    path("success/", successPageView, name='success'),
     path("", indexPageView, name="index"),
 ]

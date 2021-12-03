@@ -53,6 +53,7 @@ def learnPageView(request):
 def aboutPageView(request):
     return render(request, 'DrugApp/about.html')
 
+
 def personDetailPageView(request, id):
     person = PdPrescriber.objects.get(npi=id)
     drugs = person.drugs.all()
@@ -62,7 +63,8 @@ def personDetailPageView(request, id):
         mymax = PdTriple.objects.filter(prescriberid=id).aggregate(Sum('qty'))
         drug.sum = mymax['qty__sum']
         drug.qty = drugQty.qty
-        avg = PdTriple.objects.filter(drugname=drug.drugname).aggregate(Avg('qty'))
+        avg = PdTriple.objects.filter(
+            drugname=drug.drugname).aggregate(Avg('qty'))
         drug.avg = round(avg['qty__avg'], 2)
         drug.percent = math.floor((drug.qty / drug.sum) * 100)
 
@@ -73,15 +75,17 @@ def personDetailPageView(request, id):
 
     return render(request, 'DrugApp/details/p_detail.html', context)
 
+
 def drugDetailPageView(request, id):
     drug = PdDrugs.objects.get(drugid=id)
     ten = PdTriple.objects.filter(drugname=drug.drugname).order_by('-qty')[:10]
-    
+
     context = {
         'drug': drug,
         'persons': ten
     }
     return render(request, 'DrugApp/details/d_detail.html', context)
+
 
 def addPrescriberPageView(request):
     if request.method == 'GET':
@@ -92,6 +96,7 @@ def addPrescriberPageView(request):
         }
     return render(request, 'DrugApp/contact.html', context)
 
+
 def deletePrescriberPageView(request, id):
     person = PdPrescriber.objects.get(npi=id)
     if len(person) < 1 or len(person) > 1:
@@ -101,3 +106,7 @@ def deletePrescriberPageView(request, id):
         return render(request, 'DrugApp/error.html', context)
     person.delete()
     return render(request, 'DrugApp/search.html')
+
+
+def successPageView(request):
+    return render(request, 'DrugApp/success.html')
