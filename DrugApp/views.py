@@ -1,5 +1,8 @@
+from django.db.models import Avg, Sum
+from django.db.models.aggregates import Max
 from django.shortcuts import render
 from .models import *
+import math
 
 # Create your views here.
 
@@ -51,11 +54,21 @@ def aboutPageView(request):
     return render(request, 'DrugApp/about.html')
 
 def personDetailPageView(request, id):
-    triple = PdTriple.objects.get(prescriberid=id)
+    person = PdPrescriber.objects.get(npi=id)
+    drugs = person.drugs.all()
+
+    for drug in drugs:
+        drugQty = PdTriple.objects.get(prescriberid=id, drugname=drug.drugname)
+        mymax = PdTriple.objects.filter(prescriberid=id).aggregate(Sum('qty'))
+        drug.sum = mymax['qty__sum']
+        drug.qty = drugQty.qty
+        avg = PdTriple.objects.filter(drugname=drug.drugname).aggregate(Avg('qty'))
+        drug.avg = round(avg['qty__avg'], 2)
+        drug.percent = math.floor((drug.qty / drug.sum) * 100)
 
     context = {
-        'info': triple.prescriberid,
-        'drug_info': triple,
+        'info': person,
+        'drugs': drugs,
     }
 
     return render(request, 'DrugApp/details/p_detail.html', context)
