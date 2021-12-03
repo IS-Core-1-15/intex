@@ -56,6 +56,7 @@ def aboutPageView(request):
 
 
 def personDetailPageView(request, id):
+    print(id)
     person = PdPrescriber.objects.get(npi=id)
     drugs = person.drugs.all()
 
