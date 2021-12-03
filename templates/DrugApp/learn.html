@@ -22,32 +22,50 @@
 {% endblock %}
 {% block links %}
 <!-- Start Our Partner -->
-<section class="bg-secondary py-3">
-    <div class="container py-5">
-        <h2 class="h2 text-white text-center py-5">Explore Other Resources</h2>
-        <div class="row text-center">
-            <div class="col-md-3 mb-3">
-                <div class="card partner-wap py-5">
-                    
-                    <a href="https://familydoctor.org/condition/opioid-addiction/" target="_blank" rel="noopener noreferrer"><h1>Learn about Opioid Addiction</h1></a>
-                    
+<section class="container overflow-hidden py-5">
+    <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
+        <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
+            <a href="https://familydoctor.org/condition/opioid-addiction/" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                <img class="service card-img" src="{% static 'img/drug_img.jpeg' %}" alt="Card image">
+                <div class="service-work-vertical card-img-overlay d-flex align-items-end">
+                    <div class="service-work-content text-left text-light">
+                        <p class="card-text">Learn about Opioid Addiction</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card partner-wap py-5">
-                    <a href="https://www.hopkinsmedicine.org/opioids/signs-of-opioid-abuse.html" target="_blank" rel="noopener noreferrer"><h1>What can I do to help?</h1></a>
+            </a>
+        </div>
+
+        <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
+            <a href="https://www.hopkinsmedicine.org/opioids/signs-of-opioid-abuse.html" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                <img class="service card-img" src="{% static 'img/drug_img.jpeg' %}" alt="Card image">
+                <div class="service-work-vertical card-img-overlay d-flex align-items-end">
+                    <div class="service-work-content text-left text-light">
+                        <p class="card-text">What can I do to help?</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card partner-wap py-5">
-                    <a href="https://www.cdc.gov/drugoverdose/featured-topics/treatment-recovery.html" target="_blank" rel="noopener noreferrer"><h1>Treatment and Recovery</h1></a>
+            </a>
+        </div>
+
+        <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
+            <a href="https://www.cdc.gov/drugoverdose/featured-topics/treatment-recovery.html" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                <img class="service card-img" src="{% static 'img/drug_img.jpeg' %}" alt="Card image">
+                <div class="service-work-vertical card-img-overlay d-flex align-items-end">
+                    <div class="service-work-content text-left text-light">
+                        <p class="card-text">Treatment and Recovery</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card partner-wap py-5">
-                    <a href="{% url 'search' %}"><h1>Search Our Database</h1></a>
+            </a>
+        </div>
+
+        <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
+            <a href="{% url 'search' %}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                <img class="service card-img" src="{% static 'img/drug_img.jpeg' %}" alt="Card image">
+                <div class="service-work-vertical card-img-overlay d-flex align-items-end">
+                    <div class="service-work-content text-left text-light">
+                        <p class="card-text">Search Our Database</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </section>
