@@ -56,21 +56,6 @@ def aboutPageView(request):
 
 def personDetailPageView(request, id):
     person = PdPrescriber.objects.get(npi=id)
-    # creds = f''
-    # print(person.credentials2 == None)
-    # print(type(person.credentials2))
-    # if person.credentials1 != None:
-    #     creds += f'{person.credentials1}'
-    # if person.credentials2 != None:
-    #     creds += f', {person.credentials2}'
-    # if person.credentials3 != None:
-    #     creds += f', {person.credentials3}'
-    # if person.credentials4 != None:
-    #     creds += f', {person.credentials4}'
-
-    # creds = f'{person.credentials1}, {person.credentials2}, {person.credentials3}, {person.credentials4}'
-    # person.credentials = creds
-
     drugs = person.drugs.all()
 
     for drug in drugs:
@@ -123,11 +108,11 @@ def addPrescriberPageView(request):
 
 def deletePrescriberPageView(request, id):
     person = PdPrescriber.objects.get(npi=id)
-    if len(person) < 1 or len(person) > 1:
-        context = {
-            'msg': 'Sorry there was an error handling your request',
-        }
-        return render(request, 'DrugApp/error.html', context)
+    # if len(person) < 1 or len(person) > 1:
+    #     context = {
+    #         'msg': 'Sorry there was an error handling your request',
+    #     }
+    #     return render(request, 'DrugApp/error.html', context)
     person.delete()
     return redirect('success')
 
