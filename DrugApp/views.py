@@ -132,9 +132,11 @@ def addDrugPageView(request, id):
         triple.save()
         return redirect('detailPerson', id=id)
 
+
 def editDrugPageView(request, drugid, personid):
     drug = PdDrugs.objects.get(drugid=drugid)
-    triple = PdTriple.objects.get(prescriberid=personid, drugname=drug.drugname)        
+    triple = PdTriple.objects.get(
+        prescriberid=personid, drugname=drug.drugname)
     person = triple.prescriberid
 
     if request.method == "GET":
@@ -149,9 +151,11 @@ def editDrugPageView(request, drugid, personid):
         triple.save()
         return redirect('detailPerson', id=person.npi)
 
+
 def deleteDrugPageView(request, drugid, personid):
     drug = PdDrugs.objects.get(drugid=drugid)
-    triple = PdTriple.objects.get(drugname=drug.drugname, prescriberid=personid)
+    triple = PdTriple.objects.get(
+        drugname=drug.drugname, prescriberid=personid)
     triple.delete()
     return redirect('detailPerson', id=personid)
 
@@ -191,4 +195,8 @@ def editPrescriberPageView(request, id):
 
 
 def analyticsPageView(request):
+    # if request.method == "GET":
+    #     sql1 = PdTriple.objects.raw("SELECT t1.Prescriber, CONCAT(t1.OpioidPortionOfPrescriptions, '%') FROM round((((COALESCE(SUM(CASE WHEN d.isopioid = 'True' THEN qty ELSE 0 END), 0)):: numeric)/((COALESCE(SUM FROM pd_triple t JOIN pd_drugs d ON t.drugname = d.drugname JOIN pd_prescriber p ON p.npi = t.prescriberid GROUP BY CONCAT(p.lname, ', ', p.fname)) t1 WHERE t1.OpioidPortionOfPrescriptions > 0 ORDER BY t1.OpioidPortionOfPrescriptions DESC;")
+
+    #     return render(request, 'DrugApp/analytics.html', sql1)
     return render(request, 'DrugApp/analytics.html')

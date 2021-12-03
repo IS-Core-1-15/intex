@@ -8,3 +8,7 @@ a {
     color: #fcfcfc;
     text-decoration: none;
 }
+
+.mylink:hover {
+    color: white, !important;
+}
