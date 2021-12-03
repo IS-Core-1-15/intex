@@ -127,6 +127,23 @@ def addDrugPageView(request, id):
         triple.save()
         return redirect('detailPerson', id=id)
 
+def editDrugPageView(request, drugid, personid):
+    drug = PdDrugs.objects.get(drugid=drugid)
+    triple = PdTriple.objects.get(prescriberid=personid, drugname=drug.drugname)        
+    person = triple.prescriberid
+
+    if request.method == "GET":
+        context = {
+            'info': person,
+            'drug': drug,
+            'triple': triple,
+        }
+        return render(request, 'DrugApp/editDrug.html', context)
+    elif request.method == "POST":
+        triple.qty = request.POST['qty']
+        triple.save()
+        return redirect('detailPerson', id=person.npi)
+
 
 def successPageView(request):
     return render(request, 'DrugApp/success.html')

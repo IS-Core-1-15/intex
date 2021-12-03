@@ -58,7 +58,7 @@
                         <div class="col-6">
                             <h4 class="h5">{{drug.drugname}}</h4>
                         </div>
-                        <div class="col-6 text-right" style='padding-bottom:5px;'><a href="#" class="btn btn-sm rounded-pill btn-secondary text-light px-4 light-300">Edit</a></div>
+                        <div class="col-6 text-right" style='padding-bottom:5px;'><a href="{% url 'editDrug' drugid=drug.drugid personid=info.npi %}" class="btn btn-sm rounded-pill btn-secondary text-light px-4 light-300">Edit</a></div>
                     </div>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" style="width: {{drug.percent}}%" aria-valuenow="{{drug.percent}}" aria-valuemin="0" aria-valuemax="{{drug.sum}}"></div>
