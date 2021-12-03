@@ -82,3 +82,12 @@ def drugDetailPageView(request, id):
         'persons': ten
     }
     return render(request, 'DrugApp/details/d_detail.html', context)
+
+def addPrescriberPageView(request):
+    if request.method == 'GET':
+        states = PdStatedata.objects.all()
+
+        context = {
+            'states': states
+        }
+    return render(request, 'DrugApp/contact.html', context)
