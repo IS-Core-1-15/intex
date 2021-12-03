@@ -70,7 +70,7 @@ def personDetailPageView(request, id):
         drug.percent = math.floor((drug.qty / drug.sum) * 100)
 
     context = {
-        'info': person,
+        'person': person,
         'drugs': drugs,
     }
 
@@ -96,7 +96,7 @@ def addPrescriberPageView(request):
         context = {
             'states': states
         }
-        return render(request, 'DrugApp/addPrescriber.html', context)
+        return render(request, 'DrugApp/prescriber/addPrescriber.html', context)
     elif request.method == 'POST':
         person = PdPrescriber.create(request.POST)
         person.save()
@@ -114,19 +114,46 @@ def deletePrescriberPageView(request, id):
 
 def addDrugPageView(request, id):
     person = PdPrescriber.objects.get(npi=id)
+    triple = PdTriple.objects.filter(prescriberid=id)
+    excludes = []
+    for t in triple:
+        excludes.append(t.drugname)
 
     if request.method == 'GET':
-        drugs = PdDrugs.objects.all()
+        drugs = PdDrugs.objects.all().exclude(drugname__in=excludes)
         context = {
-            'info': person,
+            'person': person,
             'drugs': drugs,
         }
-        return render(request, 'DrugApp/addDrug.html', context)
+        return render(request, 'DrugApp/drug/addDrug.html', context)
     elif request.method == 'POST':
         tripleID = random.randint(0, 999999)
         triple = PdTriple.create(tripleID, person, request.POST)
         triple.save()
         return redirect('detailPerson', id=id)
+
+def editDrugPageView(request, drugid, personid):
+    drug = PdDrugs.objects.get(drugid=drugid)
+    triple = PdTriple.objects.get(prescriberid=personid, drugname=drug.drugname)        
+    person = triple.prescriberid
+
+    if request.method == "GET":
+        context = {
+            'person': person,
+            'drug': drug,
+            'triple': triple,
+        }
+        return render(request, 'DrugApp/drug/editDrug.html', context)
+    elif request.method == "POST":
+        triple.qty = request.POST['qty']
+        triple.save()
+        return redirect('detailPerson', id=person.npi)
+
+def deleteDrugPageView(request, drugid, personid):
+    drug = PdDrugs.objects.get(drugid=drugid)
+    triple = PdTriple.objects.get(drugname=drug.drugname, prescriberid=personid)
+    triple.delete()
+    return redirect('detailPerson', id=personid)
 
 
 def successPageView(request):
@@ -145,7 +172,7 @@ def editPrescriberPageView(request, id):
             "states": states,
             "person": person
         }
-        return render(request, 'DrugApp/editPrescriber.html', context)
+        return render(request, 'DrugApp/prescriber/editPrescriber.html', context)
     elif request.method == "POST":
         person.fname = request.POST["fname"]
         person.lname = request.POST["lname"]
