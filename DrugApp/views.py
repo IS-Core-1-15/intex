@@ -96,7 +96,7 @@ def addPrescriberPageView(request):
         context = {
             'states': states
         }
-        return render(request, 'DrugApp/addPrescriber.html', context)
+        return render(request, 'DrugApp/prescriber/addPrescriber.html', context)
     elif request.method == 'POST':
         person = PdPrescriber.create(request.POST)
         person.save()
@@ -125,7 +125,7 @@ def addDrugPageView(request, id):
             'person': person,
             'drugs': drugs,
         }
-        return render(request, 'DrugApp/addDrug.html', context)
+        return render(request, 'DrugApp/drug/addDrug.html', context)
     elif request.method == 'POST':
         tripleID = random.randint(0, 999999)
         triple = PdTriple.create(tripleID, person, request.POST)
@@ -143,7 +143,7 @@ def editDrugPageView(request, drugid, personid):
             'drug': drug,
             'triple': triple,
         }
-        return render(request, 'DrugApp/editDrug.html', context)
+        return render(request, 'DrugApp/drug/editDrug.html', context)
     elif request.method == "POST":
         triple.qty = request.POST['qty']
         triple.save()
@@ -172,7 +172,7 @@ def editPrescriberPageView(request, id):
             "states": states,
             "person": person
         }
-        return render(request, 'DrugApp/editPrescriber.html', context)
+        return render(request, 'DrugApp/prescriber/editPrescriber.html', context)
     elif request.method == "POST":
         person.fname = request.POST["fname"]
         person.lname = request.POST["lname"]
