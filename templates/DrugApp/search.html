@@ -10,7 +10,7 @@
             <div class="row">
                 <h2 class="h2 text-center col-12 py-5 semi-bold-600">Search</h2>
                 <div class="service-header col-2 col-lg-3 text-end light-300">
-                    <i class='bx bx-gift h3 mt-1'></i> <!-- TODO: Fix this icon-->
+                    <i class="material-icons" style="font-size:36px">search</i>
                 </div>
                 <div class="service-heading col-10 col-lg-9 text-start float-end light-300">
                     <h2 class="h3 pb-4 typo-space-line">Find a prescriber or a drug</h2>
@@ -46,6 +46,7 @@
                     </div>
                     </form>
                     <h4 id='msg' name='msg'>{{msg}}<h4>
+                    <a href="#" class="btn rounded-pill btn-outline-light px-4 me-4 light-300">Add a Prescriber</a>
                 </div>
             </div>
         </div>
@@ -53,6 +54,7 @@
 {% endblock %}
 {% block links %}
 <section class="container overflow-hidden py-5">
+    
     <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
         {% comment %} TODO: Put this in a for loop with the data {% endcomment %}
         <!-- Start Recent Work -->
@@ -83,7 +85,6 @@
             </div><!-- End Recent Work -->
             {% endfor %}
         {% endif %}
-
     </div>
 </section>
 <!-- End Service --> 
