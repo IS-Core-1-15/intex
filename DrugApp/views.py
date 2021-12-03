@@ -119,3 +119,7 @@ def deletePrescriberPageView(request, id):
 
 def successPageView(request):
     return render(request, 'DrugApp/success.html')
+
+
+def editPrescriberPageView(request):
+    return render(request, 'DrugApp/editPrescriber.html')
