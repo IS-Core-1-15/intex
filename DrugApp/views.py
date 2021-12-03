@@ -114,9 +114,13 @@ def deletePrescriberPageView(request, id):
 
 def addDrugPageView(request, id):
     person = PdPrescriber.objects.get(npi=id)
+    triple = PdTriple.objects.filter(prescriberid=id)
+    excludes = []
+    for t in triple:
+        excludes.append(t.drugname)
 
     if request.method == 'GET':
-        drugs = PdDrugs.objects.all()
+        drugs = PdDrugs.objects.all().exclude(drugname__in=excludes)
         context = {
             'info': person,
             'drugs': drugs,
@@ -144,6 +148,12 @@ def editDrugPageView(request, drugid, personid):
         triple.qty = request.POST['qty']
         triple.save()
         return redirect('detailPerson', id=person.npi)
+
+def deleteDrugPageView(request, drugid, personid):
+    drug = PdDrugs.objects.get(drugid=drugid)
+    triple = PdTriple.objects.get(drugname=drug.drugname, prescriberid=personid)
+    triple.delete()
+    return redirect('detailPerson', id=personid)
 
 
 def successPageView(request):

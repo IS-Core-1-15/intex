@@ -40,8 +40,8 @@
         <div class="container my-4">
 
             <h1 class="creative-heading h2 pb-3">{{drug.drugname}}</h1>
-            <a href="#" class="btn rounded-pill btn-secondary text-light px-4 light-300">Delete Drug for Prescriber</a>
-            
+            <a href="{% url 'deleteDrug' drugid=drug.drugid personid=info.npi %}" class="btn rounded-pill btn-secondary text-light px-4 light-300">Delete Drug for Prescriber</a>
+
             <div class="creative-content row py-3">
                 <div class="col-md-5">
                     <form class="contact-form row" method="POST" action="{% url 'editDrug' drugid=drug.drugid personid=info.npi %}" role="form">
