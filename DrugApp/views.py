@@ -107,9 +107,10 @@ def addPrescriberPageView(request):
 
 def deletePrescriberPageView(request, id):
     person = PdPrescriber.objects.get(npi=id)
-    #TODO: add in a validator
+    # TODO: add in a validator
     person.delete()
     return redirect('success')
+
 
 def addDrugPageView(request, id):
     person = PdPrescriber.objects.get(npi=id)
@@ -177,3 +178,7 @@ def editPrescriberPageView(request, id):
         person.isopioidprescriber = request.POST["isopioidprescriber"]
         person.save()
         return redirect('detailPerson', id=person.npi)
+
+
+def analyticsPageView(request):
+    return render('DrugApp/analytics.html')
