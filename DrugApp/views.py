@@ -115,7 +115,7 @@ def addPrescriberPageView(request):
         person = PdPrescriber.create(request.POST)
         person.save()
         print(person)
- 
+
         return redirect('detailPerson', id=person.npi)
     else:
         return render(request, 'DrugApp/error', {'msg': 'There was an error'})
