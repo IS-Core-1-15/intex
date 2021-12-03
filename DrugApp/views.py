@@ -1,5 +1,6 @@
 from django.db.models import Avg, Sum
 from django.db.models.aggregates import Max
+import random
 from django.shortcuts import redirect, render
 from .models import *
 import math
@@ -99,8 +100,6 @@ def addPrescriberPageView(request):
     elif request.method == 'POST':
         person = PdPrescriber.create(request.POST)
         person.save()
-        print(person)
-
         return redirect('detailPerson', id=person.npi)
     else:
         return render(request, 'DrugApp/error', {'msg': 'There was an error'})
@@ -108,13 +107,25 @@ def addPrescriberPageView(request):
 
 def deletePrescriberPageView(request, id):
     person = PdPrescriber.objects.get(npi=id)
-    # if len(person) < 1 or len(person) > 1:
-    #     context = {
-    #         'msg': 'Sorry there was an error handling your request',
-    #     }
-    #     return render(request, 'DrugApp/error.html', context)
+    #TODO: add in a validator
     person.delete()
     return redirect('success')
+
+def addDrugPageView(request, id):
+    person = PdPrescriber.objects.get(npi=id)
+
+    if request.method == 'GET':
+        drugs = PdDrugs.objects.all()
+        context = {
+            'info': person,
+            'drugs': drugs,
+        }
+        return render(request, 'DrugApp/addDrug.html', context)
+    elif request.method == 'POST':
+        tripleID = random.randint(0, 999999)
+        triple = PdTriple.create(tripleID, person, request.POST)
+        triple.save()
+        return redirect('detailPerson', id=id)
 
 
 def successPageView(request):

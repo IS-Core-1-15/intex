@@ -102,5 +102,16 @@ class PdTriple(models.Model):
         # managed = False
         db_table = 'pd_triple'
 
+    @classmethod
+    def create(self, tid, person, form):
+        drug = PdDrugs.objects.get(drugname=form['drugname'])
+        triple = self(
+            id = tid,
+            prescriberid = person,
+            drugname = drug,
+            qty = form['qty']
+        )
+        return triple
+
     def __str__(self):
         return f'{self.prescriberid}: {self.drugname}'

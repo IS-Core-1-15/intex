@@ -16,8 +16,6 @@
                         {{info.credentials1}}, {{info.credentials1}}
                     {% elif info.credentials1 %}
                         {{info.credentials1}}
-                    {% else %}
-                        No Credentials
                     {% endif %}
                 </h3>
                 <p class="light-300">
@@ -25,7 +23,7 @@
                     Location: {{info.state}}<br>
                     Specialty: {{info.specialty}}<br>
                 </p>
-                <a href={% url 'deletePrescriber' id=info.npi %} class="btn rounded-pill btn-secondary text-light px-4 light-300">Delete</a>
+                {% comment %} <a href={% url 'deletePrescriber' id=info.npi %} class="btn rounded-pill btn-secondary text-light px-4 light-300">Delete</a> {% endcomment %}
             </div>
             <div class="contact-img col-lg-5 align-items-end col-md-4">
                 <img src="{% static 'img/banner-img-01.svg' %}">
@@ -41,34 +39,34 @@
     <section class="bg-white py-5">
         <div class="container my-4">
 
-            <h1 class="creative-heading h2 pb-3">Drugs</h1>
+            <h1 class="creative-heading h2 pb-3">Add a drug offered by {{info.fname}}</h1>
 
             <div class="creative-content row py-3">
                 <div class="col-md-5">
-                    <p class="text-muted col-lg-8 light-300">
-                        List of drugs offered by {{info.fname}}
-                        <br><br>
-                        **All bars represent the percent of {{info.fname}}'s prescriptions of that drug compared to the total prescriptions given by {{info.fname}}
-                    </p>
-                </div>
-                <div class="creative-progress col-md-7">
-                    {% for drug in drugs%}
-                    <div class="row mt-4 mt-sm-2">
-                        <div class="col-6">
-                            <h4 class="h5">{{drug.drugname}}</h4>
+                    <form class="contact-form row" method="POST" action="{% url 'addDrug' id=info.npi %}" role="form">
+                    {% csrf_token %}
+                    <div class="col-lg-6 mb-4">
+                        <div class="">
+                            <select name="drugname" id="drugname" class="form-control form-control-lg light-300">
+                                <option value="hide">-- Drug --</option>
+                                {% for drug in drugs%}
+                                <option value="{{drug.drugname}}">{{drug.drugname}}
+                                </option>
+                                {% endfor %}
+                            </select>
                         </div>
-                        <div class="col-6 text-right" style='padding-bottom:5px;'><a href="#" class="btn btn-sm rounded-pill btn-secondary text-light px-4 light-300">Edit</a></div>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: {{drug.percent}}%" aria-valuenow="{{drug.percent}}" aria-valuemin="0" aria-valuemax="{{drug.sum}}"></div>
-                    </div>
-                    {{info.fname}}'s quantity: {{drug.qty}} ({{drug.percent}}%) | Average quantity: {{drug.avg}} 
-                    {% endfor %}
-                    <div>
-                        <a href="{% url 'addDrug' id=info.npi %}" class="btn rounded-pill btn-secondary text-light px-4 light-300">Add Drug for Prescriber</a>
-                    </div>
-                </div>
+                    </div><!-- End Input State -->
 
+                    <div class="col-lg-6 mb-4">
+                        <div class="form-floating mb-4">
+                            <input type="number" class="form-control form-control-lg light-300" id="qty" name="qty" placeholder="Quantity">
+                            <label for="qty">Total Quantity</label>
+                        </div>
+                    </div><!-- End Input specialty -->
+
+                    <button type="submit" class="btn rounded-pill btn-secondary text-light px-4 light-300">Save and Return</button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
