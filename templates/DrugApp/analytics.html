@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block banner %}
-<!-- Start Banner Hero -->
+<!-- Introductory information about the analytics page -->
 <section class="bg-light w-100">
     <div class="container">
         <div class="row d-flex align-items-center py-5">
@@ -22,37 +22,47 @@
         </div>
     </div>
 </section>
-<!-- End Banner Hero -->
+<!-- End of intro information -->
 {% endblock %}
+
 {% block content %}
-    <!-- Start Feature Work -->
+    <!-- These are where we are passing in SQL to pull up a few statistics from the database -->
     <div class="row pt-5">
         <div class="worksingle-content col-lg-8 m-auto text-left justify-content-center">
             <h2 class="worksingle-heading h3 pb-3 light-300 typo-space-line">An analysis of the U.S. Opioid Epidemic</h2>
             <p class="worksingle-footer py-3 text-muted light-300">
 
+                <!-- Question-->
                 <h3 class="feature-work-title h4 text-muted light-300">Who is currently prescribing high levels of opioids (compared to other non-opioid drugs)?</h3>
+                <!-- Dynamic count of who currently prescribes-->
                 <p class="feature-work-body text-muted light-300">
                     There are currently {{q1.count}} prescribers who only prescribe opioids.
                     Here are a list of 10:
                 </p>
+                <!-- This will display the list of 10 that we said we wanted-->
                     {% for name in q1.names %}
                         <p class="feature-work-body text-muted light-300">{{name.0}}</p>
                     {% endfor %}
 
+                <!-- Question-->
                 <h3 class="feature-work-title h4 text-muted light-300">What opioid drug has been prescribed the most?</h3>
+                <!-- Answer, displays the highest prescribed drug-->
                 {% for result in q2 %}
                     <p class="feature-work-body text-muted light-300">{{result.0}}</p>
                 {% endfor %}
                 
+                <!-- Question-->
                 <h3 class="feature-work-title h4 text-muted light-300">Which state has the highest percentage of opioid related deaths compared to total population?</h3>
+                <!-- Answer, displays the highest percentage result, will show multiple if the percentage is identical for the top percentage-->
                 <p class="feature-work-body text-muted light-300">
                     {% for result in q3 %}
                         <p class="feature-work-body text-muted light-300">{{result.0}}: {{result.1}}%</p>
                     {% endfor %}
                 </p>
 
+                <!-- Question-->
                 <h3 class="feature-work-title h4 text-muted light-300">What state has the most opioid related deaths?</h3>
+                <!-- Simple display of the state with the highest count for deaths-->
                 <p class="feature-work-body text-muted light-300">
                     {% for state in q4 %}
                         <p class="feature-work-body text-muted light-300">{{state.state}} with {{state.deaths}} deaths</p>

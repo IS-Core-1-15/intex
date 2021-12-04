@@ -3,8 +3,9 @@
 {% block title %}
 <title>Main Page</title>
 {% endblock %}
+
 {% block banner %}
-<!-- Start Banner Hero -->
+<!-- First bit of information for the page -->
 <section class="bg-light w-100">
     <div class="container">
         <div class="row d-flex align-items-center py-5">
@@ -21,10 +22,11 @@
         </div>
     </div>
 </section>
-<!-- End Banner Hero -->
+<!-- End of the first block of information -->
 {% endblock %}
+
 {% block links %}
-<!-- Start Our Partner -->
+<!-- Links to outside sources of information that the user can select -->
 <section class="bg-secondary py-3">
     <div class="container py-5">
         <h2 class="h2 text-white text-center py-5">Explore Other Resources</h2>
@@ -54,10 +56,11 @@
         </div>
     </div>
 </section>
-<!--End Our Partner-->
+<!-- End of external links section -->
 {% endblock %}
+
 {% block content %}
-    <!-- Start Feature Work -->
+    <!-- Overall information about opioids and a few images -->
     <section class="bg-light py-5">
         <div class="feature-work container my-4">
             <div class="row d-flex d-flex align-items-center">
@@ -72,6 +75,8 @@
                     <p class="feature-work-footer text-muted light-300">
                         Currently no system exists that allows government officials and prescribers to simply view the volume of prescriptions that are taking place overall. So we have created this site to help adress that problem. We have a database of information about prescribers and drugs. The data are sorted and accessable so that all parties can freely analyze the data themselves and seek understanding. Our hope is that through this understanding we can all work to make the world a better place!</p>
                 </div>
+
+                <!-- img refs here -->
                 <div class="col-lg-6 offset-lg-1 align-left">
                     <div class="row">
                         <a class="col" data-type="image" data-fslightbox="gallery" href="{% static 'img/randomopioid1.png' %}">
@@ -90,8 +95,9 @@
                         </a>
                     </div>
                 </div>
+                <!-- End img refs -->
             </div>
         </div>
     </section>
-    <!-- End Feature Work -->
+    <!-- End of information section -->
     {% endblock %}

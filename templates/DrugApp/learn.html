@@ -3,7 +3,10 @@
 {% block title %}
 <title>Learn More</title>
 {% endblock %}
+
+
 {% block banner %}
+<!-- Big chunck of information, this is all quoted from an external site and displayed here-->
 <div id="work_single_banner" class="bg-light w-100">
     <div class="container-fluid text-light d-flex justify-content-center align-items-center border-0 rounded-0 p-0 py-5">
         <div class="banner-content col-lg-8 m-lg-auto text-center py-5 px-3">
@@ -17,22 +20,28 @@
                 <br><br>
                 While opioids are effective at relieving pain, they can lead to physical dependence and addiction. Dependence means you need opioids to function well. Addiction is when you continue to use opioids even though they cause harmful effects. Opioids are believed to change brain chemistry in a way that makes you need more and more of them to get the same effect. Over time, taking increasingly larger doses leads to dependence.
                 <br><br>
+                <!-- Link to the page that all of this is from, should probably fix the hover display on it-->
                 This information was quoted from <a href="https://www.healthline.com/health/opioid-withdrawal/mental-health-connection" class="mylink">Healthline</a>, go check out their site for more about opioids and mental health. 
             </p>
         </div>
     </div>
 </div>
-<!-- End Banner Hero -->
+<!-- End of information block -->
 {% endblock %}
+
 {% block links %}
-<!-- Start Our Partner -->
+<!-- Links with images to external sites to learn more -->
 <section class="container overflow-hidden py-5">
     <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
+        
         <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
+            <!-- Link-->
             <a href="https://familydoctor.org/condition/opioid-addiction/" target="_blank" rel="noopener noreferrer" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                <!-- img -->
                 <img class="service card-img" src="{% static 'img/familydoctor.png' %}" alt="Card image">
                 <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                     <div class="service-work-content text-left text-light">
+                        <!-- Displayed Text-->
                         <p class="card-text">Learn about Opioid Addiction</p>
                     </div>
                 </div>
@@ -40,10 +49,13 @@
         </div>
 
         <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
+            <!-- Link -->
             <a href="https://www.hopkinsmedicine.org/opioids/signs-of-opioid-abuse.html" target="_blank" rel="noopener noreferrer" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                <!-- img -->
                 <img class="service card-img" src="{% static 'img/johnhopkins.jpeg' %}" alt="Card image">
                 <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                     <div class="service-work-content text-left text-light">
+                        <!-- Displayed text-->
                         <p class="card-text">What can I do to help?</p>
                     </div>
                 </div>
@@ -51,10 +63,13 @@
         </div>
 
         <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
+            <!-- Link -->
             <a href="https://www.cdc.gov/drugoverdose/featured-topics/treatment-recovery.html" target="_blank" rel="noopener noreferrer" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                <!-- img -->
                 <img class="service card-img" src="{% static 'img/cdclogo.png' %}" alt="Card image">
                 <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                     <div class="service-work-content text-left text-light">
+                        <!-- Displayed text -->
                         <p class="card-text">Treatment and Recovery</p>
                     </div>
                 </div>
@@ -62,10 +77,13 @@
         </div>
 
         <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
+            <!-- link -->
             <a href="{% url 'search' %}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                <!-- img -->
                 <img class="service card-img" src="{% static 'img/database.jpeg' %}" alt="Card image">
                 <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                     <div class="service-work-content text-left text-light">
+                        <!-- Displayed text -->
                         <p class="card-text">Search Our Database</p>
                     </div>
                 </div>
@@ -73,8 +91,9 @@
         </div>
     </div>
 </section>
-<!--End Our Partner-->
+<!--End of the links section -->
 
+<!-- information block -->
 <div class="row pt-5">
     <div class="worksingle-content col-lg-8 m-auto text-left justify-content-center">
         <h2 class="worksingle-heading h3 pb-3 light-300 typo-space-line">An analysis of the U.S. Opioid Epidemic</h2>
@@ -88,5 +107,6 @@
         </p>
     </div>
 </div>
+<!-- End of information block -->
 
 {% endblock %}
