@@ -201,3 +201,13 @@ def analyticsPageView(request):
 
     #     return render(request, 'DrugApp/analytics.html', sql1)
     return render(request, 'DrugApp/analytics.html')
+
+
+def advsearchPageView(request):
+    if request.method == 'GET':
+        states = PdStatedata.objects.all()
+        context = {
+            'states': states
+        }
+        return render(request, 'DrugApp/advsearch.html', context)
+    return render(request, 'DrugApp/advsearch.html')

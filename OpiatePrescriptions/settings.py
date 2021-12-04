@@ -1,3 +1,5 @@
+# Group 1-15
+# Kalvin Wettstein, Spencer Jackson, Stephen Williams, Zachary Heaton
 """
 Django settings for OpiatePrescriptions project.
 
