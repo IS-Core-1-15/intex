@@ -131,7 +131,7 @@ def personDetailPageView(request, id):
         person = PdPrescriber.objects.get(npi=id)
         drugs = person.drugs.all()
     except:
-        return redirect('error', type=500)
+        return redirect('error', type=404)
 
     # try hitting the prediction endpoint
     try:
@@ -220,7 +220,7 @@ def drugDetailPageView(request, id):
             context['rec'] = rec_ten
         except:
             # error logging
-            pass
+            context['msg'] = 'Sorry, the recommender prescibers functionality is not available right now'
 
     return render(request, 'DrugApp/details/d_detail.html', context)
 
@@ -487,7 +487,7 @@ def editPrescriberPageView(request, id):
             person.credentials3 = request.POST["credentials3"]
             person.credentials4 = request.POST["credentials4"]
             person.specialty = request.POST["specialty"]
-            person.totalprescriptions = request.POST["totalprescriptions"]
+            person.totalprescriptions = person.totalprescriptions
             person.gender = request.POST["gender"]
             state = PdStatedata.objects.get(stateabbrev=request.POST["state"])
             person.state = state
@@ -673,5 +673,5 @@ def e(request, type):
         'title': title,
         'msg': msg ,
     }
-    
+
     return render(request, 'DrugApp/404.html', context)

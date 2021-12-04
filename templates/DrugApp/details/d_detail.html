@@ -67,6 +67,10 @@
             {% else %}
             <!-- img -->
             <div class="col-lg-6 offset-lg-0 col-md-8 offset-md-2">
+                {% if msg %}
+                <p>{{msg}}</p>
+                <img class="rounded float-right" src="{% static 'img/work.svg' %}">
+                {% else %}
                 <img class="rounded float-right" src="{% static 'img/work.svg' %}">
                 <form action="{% url 'detailDrug' id=drug.drugid %}" method='post'>
                     {% csrf_token %}
@@ -74,7 +78,7 @@
                     <button type='submit' class="btn rounded-pill btn-secondary text-light px-4 light-300">
                         Show Recommended Prescribers</button>
                 </form>
-                
+                {% endif %}
             </div>
             
             
