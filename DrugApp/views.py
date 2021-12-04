@@ -227,4 +227,12 @@ def advsearchPageView(request):
             'states': states
         }
         return render(request, 'DrugApp/advsearch.html', context)
-    return render(request, 'DrugApp/advsearch.html')
+    elif request.method == 'POST':
+        result = PdPrescriber.objects.all()
+        if request.POST['key']:
+            print(request.POST['key'])
+            result = result.filter(fname=request.POST['key']) | result.filter(lname__contains=request.POST['key'])
+        if request.POST['specialty']:
+            result = result.filter(specialty=request.POST['specialty'])
+        
+        return render(request, 'DrugApp/advsearch.html', context)
