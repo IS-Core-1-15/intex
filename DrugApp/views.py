@@ -6,6 +6,7 @@ from .models import *
 import math
 from .staticQueries.intex_questions import *
 from .api.intexPredictorAPI import predictPrescript
+from .api.intexRecommenderAPI import recommendPrescriber
 
 # Create your views here.
 
@@ -93,11 +94,25 @@ def personDetailPageView(request, id):
 def drugDetailPageView(request, id):
     drug = PdDrugs.objects.get(drugid=id)
     ten = PdTriple.objects.filter(drugname=drug.drugname).order_by('-qty')[:10]
-
     context = {
-        'drug': drug,
-        'persons': ten
+    'drug': drug,
+    'persons': ten,
     }
+    
+    if request.method == 'POST':
+        rec = recommendPrescriber(
+            drug.drugname, 
+            drug.drugid, 
+            drug.isopioid, 
+            ten[0].prescriberid.npi, 
+            ten[0].qty,
+            ten[0].prescriberid.totalprescriptions,
+            ten[0].prescriberid.specialty,
+            ten[0].prescriberid.state.population)
+        rec_ten = PdPrescriber.objects.filter(npi__in=rec)
+
+        context['rec'] = rec_ten
+        
     return render(request, 'DrugApp/details/d_detail.html', context)
 
 
