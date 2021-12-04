@@ -56,18 +56,10 @@
                 <!-- These are non-functional for now, to be used in a future product-->
                 <div class="navbar align-self-center d-flex">
                     
-                    <!-- Not sure why I can't get these popups to work, take a look later-->
+                    <!-- Not sure why I can't get this popups to work properly, probably just gonna leave the broken buttons instead-->
                     {% comment %} <div class="popup" onclick="myFunction()">
-                        <span class="popuptext" id="myPopup">Testing</span>
-                        <a class="nav-link" href="#"><i class='bx bx-bell bx-sm bx-tada-hover text-primary'></i></a>
-                    </div>
-                    <div class="popup" onclick="myFunction()">
-                        <span class="popuptext" id="myPopup">Testing</span>
-                        <a class="nav-link" href="#"><i class='bx bx-cog bx-sm text-primary'></i></a>
-                    </div>
-                    <div class="popup" onclick="myFunction()">
-                        <span class="popuptext" id="myPopup">Testing</span>
-                        <a class="nav-link" href="#"><i class='bx bx-user-circle bx-sm text-primary'></i></a>
+                        <a><i class='bx bx-cog bx-sm text-primary'></i></a>
+                        <span class="popuptext" id="myPopup">This button doesn't link to anything in this beta version of our site!</span>
                     </div> {% endcomment %}
 
                     <!-- Temporary dead buttons-->
@@ -243,6 +235,12 @@
     <!-- Custom -->
     <script src="{% static 'js/custom.js' %%}"></script>
 
+    <script type="text/javascript">
+        function myFunction() {
+            var popup = document.getElementById("myPopup");
+            popup.classList.toggle("show");
+        }
+    </script>
 </body>
 
 </html>
