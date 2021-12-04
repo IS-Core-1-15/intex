@@ -10,85 +10,91 @@ input {
 {% endblock %}
 {% block banner %}
 <!-- Start Service -->
-    <section class="service-wrapper py-3">
-        <div class="container-fluid pb-3">
-            <div class="row">
-                <h2 class="h2 text-center col-12 py-5 semi-bold-600">Search</h2>
-                <div class="service-header col-2 col-lg-3 text-end light-300">
-                    <i class="material-icons" style="font-size:36px">search</i>
-                </div>
-                <div class="service-heading col-10 col-lg-9 text-start float-end light-300">
-                    <h2 class="h3 pb-4 typo-space-line">Find a prescriber or a drug</h2>
-                </div>
+<section class="service-wrapper py-3">
+    <div class="container-fluid pb-3">
+        <div class="row">
+            <h2 class="h2 text-center col-12 py-5 semi-bold-600">Search</h2>
+            <div class="service-header col-2 col-lg-3 text-end light-300">
+                <i class="material-icons" style="font-size:36px">search</i>
             </div>
-            <p class="service-footer col-10 offset-2 col-lg-9 offset-lg-3 text-start pb-3 text-muted px-2">
-                Choose below to search for a prescriber or a drug to get a list matching the search key. <br>
-                Select all to get a list of all prescribers or all drugs
-            </p>
+            <div class="service-heading col-10 col-lg-9 text-start float-end light-300">
+                <h2 class="h3 pb-4 typo-space-line">Find a prescriber or a drug</h2>
+            </div>
         </div>
+        <p class="service-footer col-10 offset-2 col-lg-9 offset-lg-3 text-start pb-3 text-muted px-2">
+            Choose below to search for a prescriber or a drug to get a list matching the search key. <br>
+            Select all to get a list of all prescribers or all drugs
+        </p>
+    </div>
 
-        <div class="service-tag py-5 bg-secondary">
-            <div class="col-md-12">
-                <ul class="nav d-flex justify-content-center">
-                    <li class="nav-item mx-lg-4">
-                        <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300 active" onclick="prescriber()">Prescribers</a>
-                    </li>
-                    <li class="filter-btn nav-item mx-lg-4">
-                        <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" onclick="drug()">Drug</a>
-                    </li>
-                    {% comment %} <li class="nav-item mx-lg-4">
-                        <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#" data-filter=".branding">Branding</a>
-                    </li> {% endcomment %}
-                </ul>
-                <div class="col-lg-6 mx-auto my-4 p-3">
-                    <form action="{% url 'search' %}" method="post" id='searchForm'>
-                    {% csrf_token %}
-                    <div class="input-group py-3">
-                        <input type="hidden" id="choice" name="choice">
-                        <input name="key" type="text" class="form-control form-control-lg rounded-pill rounded-end" id="key" placeholder="Search a name...">
-                        <button class="btn btn-secondary text-white btn-lg rounded-pill rounded-start px-lg-4" 
-                        style="background-color: #9696a6; background-border: #9696a6;" type="submit">Search</button>
-                    </div>   
-                    <div class="row pb-4">
-                    <div class="col-lg-6 mb-4">
-                        <div class="form-floating mb-4">
-                            <input type="text" class="form-control form-control-lg light-300" id="specialty" name="specialty" placeholder="Specialty">
-                            <label for="specialty">Specialty</label>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="form-floating mb-4">
-                            <input type="text" class="form-control form-control-lg light-300" id="credentials" name="credentials" placeholder="Credential (e.g. 'MD')">
-                            <label for="credentials1">Credential (e.g. MD)</label>
-                        </div>
-                    </div><!-- End Input Subject -->
-                    <div class="col-lg-6 mb-4">
-                        <div class="">
-                            <select name="gender" id="gender" class="form-control form-control-lg light-300">
-                                <option value="hide">-- Gender --</option>
-                                <option value="M">Male</option>
-                                <option value="F">Female</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="">
-                            <select name="state" id="state" class="form-control form-control-lg light-300">
-                                <option value="hide">-- State --</option>
-                                {% for state in states%}
-                                <option value="{{state.stateabbrev}}">{{state.state}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    </div>
+    <div class="service-tag py-5 bg-secondary">
+        <div class="col-md-12">
+            <ul class="nav d-flex justify-content-center">
+                <li class="nav-item mx-lg-4">
+                    <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300 active" onclick="prescriber()">Prescribers</a>
+                </li>
+                <li class="filter-btn nav-item mx-lg-4">
+                    <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" onclick="drug()">Drug</a>
+                </li>
+                {% comment %} <li class="nav-item mx-lg-4">
+                    <a class="filter-btn nav-link btn-outline-primary rounded-pill text-light px-4 light-300" href="#" data-filter=".branding">Branding</a>
+                </li> {% endcomment %}
+            </ul>
 
+            <!-- BEGIN SEARCH FORM-->
+            <div class="col-lg-6 mx-auto my-4 p-3" id='SearchDiv'>
+                <div id='prescriberDiv' style=''>
+                    <form action="{% url 'advsearch' %}" method="post" id='prescriberForm'>
+                        {% csrf_token %}
+                        <div class="input-group py-3">
+                            <input type="hidden" id="choice" name="choice" value='Prescriber'>
+                            <input name="key" type="text" class="form-control form-control-lg rounded-pill rounded-end" id="key" placeholder="Search a name...">
+                            <button class="btn btn-secondary text-white btn-lg rounded-pill rounded-start px-lg-4" 
+                            style="background-color: #9696a6; background-border: #9696a6;" type="submit" onclick='prescriberSubmit()'>Search</button>
+                        </div>   
+                
+                        <div class="row pb-4">
+                        <div class="col-lg-6 mb-4">
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control form-control-lg light-300" id="specialty" name="specialty" placeholder="Specialty">
+                                <label for="specialty">Specialty</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control form-control-lg light-300" id="credentials" name="credentials" placeholder="Credential (e.g. 'MD')">
+                                <label for="credentials">Credential (e.g. MD)</label>
+                            </div>
+                        </div><!-- End Input Subject -->
+                
+                        <div class="col-lg-6 mb-4">
+                            <div class="">
+                                <select name="gender" id="gender" class="form-control form-control-lg light-300">
+                                    <option value="hide">-- Gender --</option>
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                
+                        <div class="col-lg-6 mb-4">
+                            <div class="">
+                                <select name="state" id="state" class="form-control form-control-lg light-300">
+                                    <option value="hide">-- State --</option>
+                                    {% for state in states%}
+                                    <option value="{{state.stateabbrev}}">{{state.state}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
                     </form>
                     <h4 id='msg' name='msg'>{{msg}}<h4>
-                    </div>
                 </div>
-            </div>
+                
+            </div> <!-- END SEARCH DIV -->
         </div>
-    </section> 
+    </div>
+</section> 
 {% endblock %}
 {% block links %}
 <section class="container overflow-hidden py-5">
@@ -109,7 +115,7 @@ input {
                     </a>
                 </div><!-- End Recent Work -->
             {% endfor %}
-        {% else %}
+        {% elif drug %}
             {% for info in data %}
             <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
                 <a href="{% url 'detailDrug' id=info.drugid %}" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
@@ -128,25 +134,121 @@ input {
 <!-- End Service --> 
 {% endblock %}
 {% block content %}
+<div id='prescriberDiv' style='display:none;'>
+    <form action="{% url 'advsearch' %}" method="post" id='prescriberForm'>
+        {% csrf_token %}
+        <div class="input-group py-3">
+            <input type="hidden" id="choice" name="choice" value='Prescriber'>
+            <input name="key" type="text" class="form-control form-control-lg rounded-pill rounded-end" id="key" placeholder="Search a name...">
+            <button class="btn btn-secondary text-white btn-lg rounded-pill rounded-start px-lg-4" 
+            style="background-color: #9696a6; background-border: #9696a6;" type="submit" onclick='prescriberSubmit()'>Search</button>
+        </div>   
+
+        <div class="row pb-4">
+            <div class="col-lg-6 mb-4">
+                <div class="form-floating mb-4">
+                    <input type="text" class="form-control form-control-lg light-300" id="specialty" name="specialty" placeholder="Specialty">
+                    <label for="specialty">Specialty</label>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="form-floating mb-4">
+                    <input type="text" class="form-control form-control-lg light-300" id="credentials" name="credentials" placeholder="Credential (e.g. 'MD')">
+                    <label for="credentials">Credential (e.g. MD)</label>
+                </div>
+            </div><!-- End Input Subject -->
+
+            <div class="col-lg-6 mb-4">
+                <div class="">
+                    <select name="gender" id="gender" class="form-control form-control-lg light-300">
+                        <option value="hide">-- Gender --</option>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-4">
+                <div class="">
+                    <select name="state" id="state" class="form-control form-control-lg light-300">
+                        <option value="hide">-- State --</option>
+                        {% for state in states%}
+                        <option value="{{state.stateabbrev}}">{{state.state}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+    <h4 id='msg' name='msg'>{{msg}}<h4>
+</div>
+<div id='drugDiv' style='display:none;'>
+    <form action="{% url 'advsearch' %}" method="post" id='drugForm'>
+        {% csrf_token %}
+        <div class="input-group py-3">
+            <input type="hidden" id="choice" name="choice" value='Drug'>
+            <input name="key" type="text" class="form-control form-control-lg rounded-pill rounded-end" id="key" placeholder="Search a name...">
+            <button class="btn btn-secondary text-white btn-lg rounded-pill rounded-start px-lg-4" 
+            style="background-color: #9696a6; background-border: #9696a6;" type="submit" onclick='drugSubmit()'>Search</button>
+        </div> 
+
+        <div class="col-lg-6 mb-4">
+            <div class="">
+                <select name="isopioid" id="isopioid" class="form-control form-control-lg light-300">
+                    <option value="hide">-- Is Opioid --</option>
+                    <option value="TRUE">True</option>
+                    <option value="FALSE">False</option>
+                </select>
+            </div>
+        </div>
+
+    </form>
+    <h4 id='msg' name='msg'>{{msg}}<h4>
+</div>
 <script type="text/javascript">
-    const form  = document.getElementById('searchForm');
-    document.getElementById("choice").value = "Prescriber";
+    {% comment %} let form  = document.getElementById('prescriberForm'); {% endcomment %}
+    {% comment %} document.getElementById("choice").value = "Prescriber"; {% endcomment %}
 
     function prescriber() {
-        document.getElementById("choice").value = "Prescriber";
-        console.log(document.getElementById("choice").value);
+        const main = document.getElementById('SearchDiv');
+        const child = document.getElementById('drugDiv');
+        main.removeChild(child);
+        const presc = document.getElementById('prescriberDiv');
+        const clone = presc.cloneNode(true);
+        clone.style['display'] = 'unset'
+        main.appendChild(clone)
     }
 
     function drug() {
-        document.getElementById("choice").value = "Drug";
-        console.log(document.getElementById("choice").value);
+        const main = document.getElementById('SearchDiv');
+        const child = document.getElementById('prescriberDiv');
+        main.removeChild(child);
+        const drug = document.getElementById('drugDiv');
+        const clone = drug.cloneNode(true);
+        clone.style['display'] = 'unset'
+        main.appendChild(clone)
+
     }
 
-    form.addEventListener('submit', (event) => {
+    function drugSubmit() {
+        const form = document.getElementById('drugForm')
+        console.log(choice);
+        form.submit();
+    }
+
+    function prescriberSubmit() {
+        const form = document.getElementById('prescriberForm')
+        console.log(choice);
+        form.submit();
+    }
+
+    {% comment %} prescriber() {% endcomment %}
+
+    {% comment %} form.addEventListener('submit', (event) => {
         let key = form.elements['key'].value;
         let choice = form.elements['choice'].value;
         console.log(choice);
         form.submit();
-    });
+    }); {% endcomment %}
 </script>
 {% endblock %}
