@@ -33,22 +33,30 @@
 
                 <h3 class="feature-work-title h4 text-muted light-300">Who is currently prescribing high levels of opioids (compared to other non-opioid drugs)?</h3>
                 <p class="feature-work-body text-muted light-300">
-                    Raw SQL RIGHT HERE BABY
+                    There are currently {{q1.count}} prescribers who only prescribe opioids.
+                    Here are a list of 10:
                 </p>
+                    {% for name in q1.names %}
+                        <p class="feature-work-body text-muted light-300">{{name.0}}</p>
+                    {% endfor %}
 
                 <h3 class="feature-work-title h4 text-muted light-300">What opioid drug has been prescribed the most?</h3>
-                <p class="feature-work-body text-muted light-300">
-                    Raw SQL RIGHT HERE BABY
-                </p>
+                {% for result in q2 %}
+                    <p class="feature-work-body text-muted light-300">{{result.0}}</p>
+                {% endfor %}
                 
                 <h3 class="feature-work-title h4 text-muted light-300">Which state has the highest percentage of opioid related deaths compared to total population?</h3>
                 <p class="feature-work-body text-muted light-300">
-                    Raw SQL RIGHT HERE BABY
+                    {% for result in q3 %}
+                        <p class="feature-work-body text-muted light-300">{{result.0}}: {{result.1}}%</p>
+                    {% endfor %}
                 </p>
 
                 <h3 class="feature-work-title h4 text-muted light-300">What state has the most opioid related deaths?</h3>
                 <p class="feature-work-body text-muted light-300">
-                    Raw SQL RIGHT HERE BABY
+                    {% for state in q4 %}
+                        <p class="feature-work-body text-muted light-300">{{state.state}} with {{state.deaths}} deaths</p>
+                    {% endfor %}
                 </p>
             </p>
         </div>

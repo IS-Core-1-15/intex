@@ -4,6 +4,7 @@ import random
 from django.shortcuts import redirect, render
 from .models import *
 import math
+from .staticQueries.intex_questions import *
 
 # Create your views here.
 
@@ -196,11 +197,27 @@ def editPrescriberPageView(request, id):
 
 
 def analyticsPageView(request):
-    # if request.method == "GET":
-    #     sql1 = PdTriple.objects.raw("SELECT t1.Prescriber, CONCAT(t1.OpioidPortionOfPrescriptions, '%') FROM round((((COALESCE(SUM(CASE WHEN d.isopioid = 'True' THEN qty ELSE 0 END), 0)):: numeric)/((COALESCE(SUM FROM pd_triple t JOIN pd_drugs d ON t.drugname = d.drugname JOIN pd_prescriber p ON p.npi = t.prescriberid GROUP BY CONCAT(p.lname, ', ', p.fname)) t1 WHERE t1.OpioidPortionOfPrescriptions > 0 ORDER BY t1.OpioidPortionOfPrescriptions DESC;")
+    q1 = query1()
+    q2 = query2()
+    q3 = query3()
+    # q4: What state has the most opioid related deaths?
+    states = PdStatedata.objects.all().order_by('-deaths')
+    max = states[0].deaths
+    q4 = []
+    for i in range(0, len(states)):
+        if states[i].deaths < max:
+            i = len(states)
+        elif states[i].deaths == max:
+            q4.append(states[i])
 
-    #     return render(request, 'DrugApp/analytics.html', sql1)
-    return render(request, 'DrugApp/analytics.html')
+    context = {
+        'q1': q1,
+        'q2': q2,
+        'q3': q3,
+        'q4': q4,
+    }
+
+    return render(request, 'DrugApp/analytics.html', context)
 
 
 def advsearchPageView(request):
