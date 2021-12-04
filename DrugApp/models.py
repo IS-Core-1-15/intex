@@ -74,7 +74,7 @@ class PdPrescriber(models.Model):
             credentials4 = form['credentials4'],
             specialty = form['specialty'],
             isopioidprescriber = form['isopioidprescriber'],
-            totalprescriptions = form['totalprescriptions']
+            totalprescriptions = 0
         )
         
         return person
