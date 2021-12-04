@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block banner %}
-   <!-- Start Banner Hero -->
+   <!-- displays this prescribers basic information at the top of the page -->
    <section class="bg-light">
     <div class="container py-4">
         <div class="row align-items-center justify-content-between">
@@ -27,28 +27,29 @@
                     Location: {{person.state}}<br>
                     Specialty: {{person.specialty}}<br>
                 </p>
-                {% comment %} <a href={% url 'deletePrescriber' id=person.npi %} class="btn rounded-pill btn-secondary text-light px-4 light-300">Delete</a> {% endcomment %}
             </div>
+            <!-- default img -->
             <div class="contact-img col-lg-5 align-items-end col-md-4">
                 <img src="{% static 'img/banner-img-01.svg' %}">
             </div>
         </div>
     </div>
 </section>
-<!-- End Banner Hero -->
+<!-- end of prescriber info block -->
 {% endblock %}
 
 {% block stats %}
-    <!-- Start Progress -->
+    <!-- add a new drug for the selected prescriber -->
     <section class="bg-white py-5">
         <div class="container my-4">
-
+            <!-- displays text and dynamicly passes name -->
             <h1 class="creative-heading h2 pb-3">Add a drug offered by {{person.fname}}</h1>
-
             <div class="creative-content row py-3">
                 <div class="col-md-5">
+                    <!-- form for submiting the POST to add the drug -->
                     <form class="contact-form row" method="POST" action="{% url 'addDrug' id=person.npi %}" role="form">
                     {% csrf_token %}
+                    <!-- new drug name section -->
                     <div class="col-lg-6 mb-4">
                         <div class="">
                             <select name="drugname" id="drugname" class="form-control form-control-lg light-300">
@@ -59,20 +60,24 @@
                                 {% endfor %}
                             </select>
                         </div>
-                    </div><!-- End Input State -->
+                    </div>
+                    <!-- end of drug name section -->
 
+                    <!-- input quantity for selected drug -->
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating mb-4">
                             <input type="number" class="form-control form-control-lg light-300" id="qty" name="qty" placeholder="Quantity">
                             <label for="qty">Total Quantity</label>
                         </div>
-                    </div><!-- End Input specialty -->
+                    </div>
+                    <!-- end of quantity input section -->
 
+                    <!-- button to submit and save the info to the database -->
                     <button type="submit" class="btn rounded-pill btn-secondary text-light px-4 light-300">Save and Return</button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
-    <!-- End Progress -->
+    <!-- end of add new drug to the prescriber -->
 {% endblock %}

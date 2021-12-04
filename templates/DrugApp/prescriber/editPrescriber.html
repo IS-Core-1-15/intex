@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block banner %}
-<!-- Start Banner Hero -->
+<!-- intro block -->
 <section class="bg-light">
     <div class="container py-4">
         <div class="row align-items-center justify-content-between">
@@ -20,13 +20,13 @@
         </div>
     </div>
 </section>
-<!-- End Banner Hero -->
+<!-- end intro block -->
 {% endblock %}
 
 {% block content %}
-<!-- Start Contact -->
+<!-- changes for prescriber information block -->
 <section class="container py-5">
-
+    <!-- intro for this section -->
     <h1 class="col-12 col-xl-8 h2 text-left text-primary pt-3">Update Exisiting Prescriber Information</h1>
     <h2 class="col-12 col-xl-8 h4 text-left regular-400">Please verify information before submitting the form!</h2>
     <p class="col-12 col-xl-8 text-left text-muted pb-5 light-300">
@@ -34,66 +34,88 @@
     </p>
 
     <div class="row pb-4">
-        <!-- Start Contact Form -->
+        <!-- form for prescriber information to be updated -->
         <div class="col-lg-8 ">
             <form class="contact-form row" method="POST" action="{% url 'editPrescriber' id=person.npi %}" role="form">
             {% csrf_token %}
-                        <input type="hidden" class="form-control form-control-lg light-300" id="npi" name="npi" placeholder="NPI" value={{person.npi}}>
-                <!-- End Input Name -->
+                <!-- dynamically autofilled with existing info -->
+                <!-- user is not allowed to change the NPI for the prescriber-->
+                <input type="hidden" class="form-control form-control-lg light-300" id="npi" name="npi" placeholder="NPI" value={{person.npi}}>
 
+                <!-- new first name -->
+                <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating">
                         <input type="text" class="form-control form-control-lg light-300" id="fname" name="fname" placeholder="First Name" value={{person.fname}}>
                         <label for="fname">First Name</label>
                     </div>
-                </div><!-- End Input Name -->
+                </div>
 
+                <!-- new last name -->
+                <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating">
                         <input type="text" class="form-control form-control-lg light-300" id="lname" name="lname" placeholder="Last Name" value={{person.lname}}>
                         <label for="lname">Last Name</label>
                     </div>
-                </div><!-- End Input Last Name -->
+                </div>
 
+                <!-- new credentials 1 -->
+                <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating mb-4">
                         <input type="text" class="form-control form-control-lg light-300" id="credentials1" name="credentials1" placeholder="Credential" value={{person.credentials1}}>
                         <label for="credentials1">Credentials One</label>
                     </div>
-                </div><!-- End Input Subject -->
+                </div>
+
+                <!-- new credentials 2 -->
+                <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating mb-4">
                         <input type="text" class="form-control form-control-lg light-300" id="credentials2" name="credentials2" placeholder="Credential" value={{person.credentials2}}>
                         <label for="credentials2">Credentials Two</label>
                     </div>
-                </div><!-- End Input Subject -->
+                </div>
+
+                <!-- new credentials 3 -->
+                <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating mb-4">
                         <input type="text" class="form-control form-control-lg light-300" id="credentials3" name="credentials3" placeholder="Credential" value={{person.credentials3}}>
                         <label for="credentials3">Credentials Three</label>
                     </div>
-                </div><!-- End Input Subject -->
+                </div>
+
+                <!-- new credentials 4 -->
+                <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating mb-4">
                         <input type="text" class="form-control form-control-lg light-300" id="credentials4" name="credentials4" placeholder="Credential" value={{person.credentials4}}>
                         <label for="credentials4">Credentials Four</label>
                     </div>
-                </div><!-- End Input Subject -->
+                </div>
 
+                <!-- new specialty -->
+                <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating mb-4">
                         <input type="text" class="form-control form-control-lg light-300" id="specialty" name="specialty" placeholder="Specialty" value={{person.specialty}}>
                         <label for="specialty">Specialty</label>
                     </div>
-                </div><!-- End Input specialty -->
+                </div>
 
+                <!-- new total prescriptions -->
+                <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating mb-4">
                         <input type="number" class="form-control form-control-lg light-300" id="totalprescriptions" name="totalprescriptions" placeholder="Total Prescriptions" value={{person.totalprescriptions}}>
                         <label for="totalprescriptions">Total Prescriptions</label>
                     </div>
-                </div><!-- End Input specialty -->
+                </div>
 
+                <!-- new gender -->
+                <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="">
                         <select name="gender" id="gender" class="form-control form-control-lg light-300">
@@ -102,9 +124,10 @@
                             <option value="F">Female</option>
                         </select>
                     </div>
-                </div><!-- End Input gender -->
+                </div>
 
-
+                <!-- new state -->
+                <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="">
                         <select name="state" id="state" class="form-control form-control-lg light-300">
@@ -114,8 +137,10 @@
                             {% endfor %}
                         </select>
                     </div>
-                </div><!-- End Input State -->
+                </div>
 
+                <!-- new is opioid prescriber -->
+                <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="">
                         <select name="isopioidprescriber" id="isopioidprescriber" class="form-control form-control-lg light-300">
@@ -124,12 +149,12 @@
                             <option value="FALSE">FALSE</option>
                         </select>
                     </div>
-                </div><!-- End Input gender -->
+                </div>
+                <!-- submit button for POST changes to the database -->
                 <button type="submit" class="btn rounded-pill btn-secondary text-light px-4 light-300">Submit Updates</button>
             </form>
         </div>
-        <!-- End Contact Form --> 
     </div>
 </section>
-<!-- End Contact -->
+<!-- end of update form and intro block -->
 {% endblock %}

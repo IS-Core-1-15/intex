@@ -80,6 +80,8 @@
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" style="width: {{drug.percent}}%" aria-valuenow="{{drug.percent}}" aria-valuemin="0" aria-valuemax="{{drug.sum}}"></div>
                     </div>
+                    
+                    <!-- displays the quantity that this prescriber has given out for each drug-->
                     {{person.fname}}'s quantity: {{drug.qty}} ({{drug.percent}}%) | Average quantity: {{drug.avg}} 
                     {% endfor %}
                     <div>
@@ -90,5 +92,5 @@
             </div>
         </div>
     </section>
-    <!-- End Progress -->
+    <!-- end of drug display for this prescriber -->
 {% endblock %}
