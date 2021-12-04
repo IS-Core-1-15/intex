@@ -3,8 +3,9 @@
 {% block title %}
 <title>Edit Drug</title>
 {% endblock %}
+
 {% block banner %}
-   <!-- Start Banner Hero -->
+   <!-- basic prescriber information -->
    <section class="bg-light">
     <div class="container py-4">
         <div class="row align-items-center justify-content-between">
@@ -26,41 +27,46 @@
                     Location: {{person.state}}<br>
                     Specialty: {{person.specialty}}<br>
                 </p>
-                {% comment %} <a href={% url 'deletePrescriber' id=person.npi %} class="btn rounded-pill btn-secondary text-light px-4 light-300">Delete</a> {% endcomment %}
             </div>
+            <!-- default img -->
             <div class="contact-img col-lg-5 align-items-end col-md-4">
                 <img src="{% static 'img/banner-img-01.svg' %}">
             </div>
         </div>
     </div>
 </section>
-<!-- End Banner Hero -->
+<!-- end of basic info section -->
 {% endblock %}
 
 {% block stats %}
-    <!-- Start Progress -->
+    <!-- edit quantity or delete this drug from the prescriber -->
     <section class="bg-white py-5">
         <div class="container my-4">
 
+            <!-- delete drug button -->
             <h1 class="creative-heading h2 pb-3">{{drug.drugname}}</h1>
             <a href="{% url 'deleteDrug' drugid=drug.drugid personid=person.npi %}" class="btn rounded-pill btn-secondary text-light px-4 light-300">Delete Drug for Prescriber</a>
 
+            <!-- input the new quantity for this drug -->
             <div class="creative-content row py-3">
                 <div class="col-md-5">
                     <form class="contact-form row" method="POST" action="{% url 'editDrug' drugid=drug.drugid personid=person.npi %}" role="form">
                     {% csrf_token %}
                     <div class="col-12">
                         <div class="form-floating mb-4">
+                            <!-- this will also dynamicly autofill with current qty-->
                             <input type="number" class="form-control form-control-lg light-300" id="qty" name="qty" placeholder='Qty' value={{triple.qty}}>
                             <label for="qty">Qty</label>
                         </div>
-                    </div><!-- End Input specialty -->
+                    </div>
+                    <!-- end of input quantity section -->
 
+                    <!-- submit form button to update database -->
                     <button type="submit" class="btn rounded-pill btn-secondary text-light px-4 light-300">Update Quantity</button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
-    <!-- End Progress -->
+    <!-- end of edit drug qty section -->
 {% endblock %}
