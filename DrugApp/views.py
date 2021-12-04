@@ -5,6 +5,7 @@ from django.shortcuts import redirect, render
 from .models import *
 import math
 from .staticQueries.intex_questions import *
+from .api.intexPredictorAPI import predictPrescript
 
 # Create your views here.
 
@@ -57,9 +58,17 @@ def aboutPageView(request):
 
 
 def personDetailPageView(request, id):
-    print(id)
     person = PdPrescriber.objects.get(npi=id)
     drugs = person.drugs.all()
+    try:
+        prediction = predictPrescript(
+            person.fname, 
+            person.specialty, 
+            person.totalprescriptions,
+            person.state.state,
+            )
+    except:
+        prediction = False
 
     for drug in drugs:
         drugQty = PdTriple.objects.get(prescriberid=id, drugname=drug.drugname)
@@ -75,6 +84,8 @@ def personDetailPageView(request, id):
         'person': person,
         'drugs': drugs,
     }
+    if prediction:
+        context['prediction'] = prediction
 
     return render(request, 'DrugApp/details/p_detail.html', context)
 

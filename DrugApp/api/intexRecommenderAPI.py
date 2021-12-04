@@ -37,7 +37,7 @@ def recommendPrescriber(drugName, drugID, isOpioid, prescriberID, qty, totalPres
     'Authorization': 'Bearer NaPkDaH48HMj3VIH59Lkc1pEfp12sxQt'
     }
 
-    response = requests.request("POST", url, headers=headers, data=payload)
+    response = requests.request("POST", url, headers=headers, data=payload, timeout=5)
 
     data = json.loads(response.text)
 
