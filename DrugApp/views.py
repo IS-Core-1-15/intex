@@ -221,18 +221,66 @@ def analyticsPageView(request):
 
 
 def advsearchPageView(request):
+    states = PdStatedata.objects.all()
+
     if request.method == 'GET':
-        states = PdStatedata.objects.all()
         context = {
             'states': states
         }
         return render(request, 'DrugApp/advsearch.html', context)
     elif request.method == 'POST':
-        result = PdPrescriber.objects.all()
-        if request.POST['key']:
-            print(request.POST['key'])
-            result = result.filter(fname=request.POST['key']) | result.filter(lname__contains=request.POST['key'])
-        if request.POST['specialty']:
-            result = result.filter(specialty=request.POST['specialty'])
+        form = request.POST
+        print(form['choice'])
+        if form['choice'] == 'Prescriber':
+            result = PdPrescriber.objects.all()
+            if form['key']:
+                result = result.filter(
+                    fname__contains=form['key'].title()
+                    ) | result.filter(
+                        lname__contains=form['key'].title()
+                    )
+
+            if form['specialty']:
+                result = result.filter(specialty=form['specialty'])
+
+            if form['credentials']:
+                result = result.filter(
+                    credentials1=form['credentials']
+                    ) | result.filter(
+                    credentials2=form['credentials']
+                    ) | result.filter(
+                    credentials3=form['credentials']
+                    ) | result.filter(
+                    credentials4=form['credentials']
+                    )
+            
+            if form['gender'] != 'hide':
+                result = result.filter(gender=form['gender'])
+
+            if form['state'] != 'hide':
+                result = result.filter(state=form['state'])
+            
+            context = {
+                'prescriber': True
+            }
+
+        elif form['choice'] == 'Drug':
+            result = PdDrugs.objects.all()
+            
+            if form['key']:
+                result = result.filter(
+                    drugname__contains=form['key'].upper())
+
+            if form['isopioid'] != 'hide':
+                result = result.filter(isopioid=form['isopioid'].title())
+
+            context = {
+                'drug': True,
+            }
+        
+        
+        context['data'] = result
+        context['msg'] = f'We found {len(result)} results'
+        context['states'] = states
         
         return render(request, 'DrugApp/advsearch.html', context)
