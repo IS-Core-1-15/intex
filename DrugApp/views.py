@@ -587,30 +587,33 @@ def advsearchPageView(request):
                 except:
                     return redirect('error', type=500)
 
-            # if specialty
-            if form['specialty']:
-                result = result.filter(specialty=form['specialty'])
+            try:
+                # if specialty
+                if form['specialty']:
+                    result = result.filter(specialty=form['specialty'])
 
-            # if credentials
-            if form['credentials']:
-                # a bunch of ORs strung together
-                result = result.filter(
-                    credentials1=form['credentials']
-                    ) | result.filter(
-                    credentials2=form['credentials']
-                    ) | result.filter(
-                    credentials3=form['credentials']
-                    ) | result.filter(
-                    credentials4=form['credentials']
-                    )
-            
-            # gender
-            if form['gender'] != 'hide':
-                result = result.filter(gender=form['gender'])
+                # if credentials
+                if form['credentials']:
+                    # a bunch of ORs strung together
+                    result = result.filter(
+                        credentials1=form['credentials']
+                        ) | result.filter(
+                        credentials2=form['credentials']
+                        ) | result.filter(
+                        credentials3=form['credentials']
+                        ) | result.filter(
+                        credentials4=form['credentials']
+                        )
+                
+                # gender
+                if form['gender'] != 'hide':
+                    result = result.filter(gender=form['gender'])
 
-            # state
-            if form['state'] != 'hide':
-                result = result.filter(state=form['state'])
+                # state
+                if form['state'] != 'hide':
+                    result = result.filter(state=form['state'])
+            except:
+                return redirect('error', type=500)
             
             context = {
                 'prescriber': True
@@ -624,31 +627,51 @@ def advsearchPageView(request):
             except:
                 return redirect('error', type=500)
             
-            if form['key']:
-                result = result.filter(
-                    drugname__contains=form['key'].upper())
+            try:
+                # if drug name
+                if form['key']:
+                    result = result.filter(
+                        drugname__contains=form['key'].upper())
 
-            if form['isopioid'] != 'hide':
-                result = result.filter(isopioid=form['isopioid'].title())
+                # if isopioid
+                if form['isopioid'] != 'hide':
+                    result = result.filter(isopioid=form['isopioid'].title())
+            except:
+                return redirect('error', type=500)
 
             context = {
                 'drug': True,
             }
         
-        
+        # set the rest of the context
         context['data'] = result
         context['msg'] = f'We found {len(result)} results'
         context['states'] = states
         
         return render(request, 'DrugApp/advsearch.html', context)
 
+
 def e(request, type):
+    """
+    Name : e
+    Description : return the error page
+    Paramaters: 
+        type : the type of error (currently 500 or 404)
+    """
+
+    # set words for page based on type
     if type == 404:
         title = 'Page not found'
         msg = 'Uh-oh, it seems the page you\'re looking for doesn\'t exist'
+
+    elif type == 500:
+        title = 'Internal server error'
+        msg = 'So sorry, but we were not able to process your request'
+
     context = {
         'error_code': type,
         'title': title,
         'msg': msg ,
     }
+    
     return render(request, 'DrugApp/404.html', context)
