@@ -132,6 +132,8 @@ def addDrugPageView(request, id):
         tripleID = random.randint(0, 999999)
         triple = PdTriple.create(tripleID, person, request.POST)
         triple.save()
+        person.totalprescriptions = person.totalprescriptions + int(request.POST['qty'])
+        person.save()
         return redirect('detailPerson', id=id)
 
 
@@ -139,7 +141,7 @@ def editDrugPageView(request, drugid, personid):
     drug = PdDrugs.objects.get(drugid=drugid)
     triple = PdTriple.objects.get(
         prescriberid=personid, drugname=drug.drugname)
-    person = triple.prescriberid
+    person = PdPrescriber.objects.get(npi=personid)
 
     if request.method == "GET":
         context = {
@@ -149,7 +151,11 @@ def editDrugPageView(request, drugid, personid):
         }
         return render(request, 'DrugApp/drug/editDrug.html', context)
     elif request.method == "POST":
-        triple.qty = request.POST['qty']
+        qty = int(request.POST['qty'])
+        dif = qty - triple.qty
+        triple.qty = qty
+        person.totalprescriptions = person.totalprescriptions + dif
+        person.save()
         triple.save()
         return redirect('detailPerson', id=person.npi)
 
@@ -158,6 +164,9 @@ def deleteDrugPageView(request, drugid, personid):
     drug = PdDrugs.objects.get(drugid=drugid)
     triple = PdTriple.objects.get(
         drugname=drug.drugname, prescriberid=personid)
+    person = triple.prescriberid
+    person.totalprescriptions = person.totalprescriptions - triple.qty
+    person.save()
     triple.delete()
     return redirect('detailPerson', id=personid)
 
