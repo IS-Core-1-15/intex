@@ -19,5 +19,6 @@ urlpatterns = [
     path("editPrescriber/<int:id>", editPrescriberPageView, name='editPrescriber'),
     path("analytics/", analyticsPageView, name='analytics'),
     path("advsearch/", advsearchPageView, name='advsearch'),
+    path('error/<int:type>', e, name='error'),
     path("", indexPageView, name="index"),
 ]
