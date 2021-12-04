@@ -28,7 +28,10 @@
                     Gender: {{person.gender}}<br>
                     Location: {{person.state}}<br>
                     Specialty: {{person.specialty}}<br>
-                    Total: {{person.totalprescriptions}}
+                    Total: {{person.totalprescriptions}}<br>
+                    {% if prediciton %}
+                        Prediction: {{prediction}}<br>
+                    {% endif %}
                 </p>
 
                 <!-- These buttons allow the user to edit or delete this prescriber -->
