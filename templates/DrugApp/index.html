@@ -1,9 +1,103 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
-
-<h2>This is Spencer testing the index page.</h2>
-<br>
-<p><b>OK</b>, Seems good to go!</p>
-
+{% block title %}
+<title>Main Page</title>
 {% endblock %}
+
+{% block banner %}
+<!-- First bit of information for the page -->
+<section class="bg-light w-100">
+    <div class="container">
+        <div class="row d-flex align-items-center py-5">
+            <div class="col-lg-6 text-start">
+                <h1 class="h2 py-5 text-primary typo-space-line">US Opioid Prescriptions</h1>
+                <p class="light-300">
+                    An anlysis of US prescribers and the drugs they prescribe. <br>
+                    Specifically with opioids.
+                </p>
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static 'img/mainpageopioids.jpeg' %}">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End of the first block of information -->
+{% endblock %}
+
+{% block links %}
+<!-- Links to outside sources of information that the user can select -->
+<section class="bg-secondary py-3">
+    <div class="container py-5">
+        <h2 class="h2 text-white text-center py-5">Explore Other Resources</h2>
+        <div class="row text-center">
+            <div class="col-md-3 mb-3">
+                <div class="card partner-wap py-5">
+                    
+                    <a href="https://familydoctor.org/condition/opioid-addiction/" target="_blank" rel="noopener noreferrer"><h1>Learn about Opioid Addiction</h1></a>
+                    
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card partner-wap py-5">
+                    <a href="https://www.hopkinsmedicine.org/opioids/signs-of-opioid-abuse.html" target="_blank" rel="noopener noreferrer"><h1>What can I do to help?</h1></a>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card partner-wap py-5">
+                    <a href="https://www.cdc.gov/drugoverdose/featured-topics/treatment-recovery.html" target="_blank" rel="noopener noreferrer"><h1>Treatment and Recovery</h1></a>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card partner-wap py-5">
+                    <a href="{% url 'search' %}"><h1>Search Our Database</h1></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End of external links section -->
+{% endblock %}
+
+{% block content %}
+    <!-- Overall information about opioids and a few images -->
+    <section class="bg-light py-5">
+        <div class="feature-work container my-4">
+            <div class="row d-flex d-flex align-items-center">
+                <div class="col-lg-5">
+                    <h3 class="feature-work-title h4 text-muted light-300">An analysis of the U.S. Opioid Epidemic</h3>
+                    <h1 class="feature-work-heading h2 py-3 semi-bold-600">U.S. Opioid Prescriptions</h1>
+                    <p class="feature-work-body text-muted light-300">
+                        The opioid crisis is devastating communities across America. The latest statistics indicate that
+                        the total yearly overdose deaths due to opioids reached a new high of 70,237 in 2017. In October
+                        2017, President Trump declared the opioid crisis a public health emergency.
+                    </p>
+                    <p class="feature-work-footer text-muted light-300">
+                        Currently no system exists that allows government officials and prescribers to simply view the volume of prescriptions that are taking place overall. So we have created this site to help adress that problem. We have a database of information about prescribers and drugs. The data are sorted and accessable so that all parties can freely analyze the data themselves and seek understanding. Our hope is that through this understanding we can all work to make the world a better place!</p>
+                </div>
+
+                <!-- img refs here -->
+                <div class="col-lg-6 offset-lg-1 align-left">
+                    <div class="row">
+                        <a class="col" data-type="image" data-fslightbox="gallery" href="{% static 'img/randomopioid1.png' %}">
+                            <img class="img-fluid" src="{% static 'img/randomopioid1.png' %}">
+                        </a>
+                        <a class="col" data-type="image" data-fslightbox="gallery" href="{% static 'img/randomopioid2.jpeg' %}">
+                            <img class="img-fluid" src="{% static 'img/randomopioid2.jpeg' %}">
+                        </a>
+                    </div>
+                    <div class="row pt-4">
+                        <a class="col" data-type="image" data-fslightbox="gallery" href="{% static 'img/randomopioid3.jpeg' %}">
+                            <img class="img-fluid" src="{% static 'img/randomopioid3.jpeg' %}">
+                        </a>
+                        <a class="col" data-type="image" data-fslightbox="gallery" href="{% static 'img/randomopioid4.png' %}">
+                            <img class="img-fluid" src="{% static 'img/randomopioid4.png' %}">
+                        </a>
+                    </div>
+                </div>
+                <!-- End img refs -->
+            </div>
+        </div>
+    </section>
+    <!-- End of information section -->
+    {% endblock %}

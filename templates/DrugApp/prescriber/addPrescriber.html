@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Add Prescriber</title>
+{% endblock %}
+
+{% block banner %}
+<!-- into block to the add new prescriber page -->
+<section class="bg-light">
+    <div class="container py-4">
+        <div class="row align-items-center justify-content-between">
+            <div class="contact-header col-lg-4">
+                <h1 class="h2 pb-3 text-primary">Add a new Prescriber</h1>
+                <h3 class="h4 regular-400">Please verify any information you input</h3>
+            </div>
+            <div class="contact-img col-lg-5 align-items-end col-md-4">
+                <img src="{% static 'img/banner-img-01.svg' %}">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end of intro block -->
+{% endblock %}
+
+{% block content %}
+<!-- new prescriber information -->
+<section class="container py-5">
+    <!-- intro box -->
+    <h1 class="col-12 col-xl-8 h2 text-left text-primary pt-3">Add a new Prescriber</h1>
+    <h2 class="col-12 col-xl-8 h4 text-left regular-400">Please verify information before submitting the form!</h2>
+    <p class="col-12 col-xl-8 text-left text-muted pb-5 light-300">
+        Thanks for adding to our growing database! You are helping the world to be a better place for future generations.
+    </p>
+
+    <div class="row pb-4">
+        <!-- form to submit all the of input information -->
+        <div class="col-lg-8 ">
+            <form class="contact-form row" method="POST" action="{% url 'addPrescriber' %}" role="form">
+            {% csrf_token %}
+
+                <!-- NPI input -->
+                <div class="col-lg-6 mb-4">
+                    <div class="form-floating">
+                        <input type="number" class="form-control form-control-lg light-300" id="npi" name="npi" placeholder="NPI">
+                        <label for="fname">NPI</label>
+                    </div>
+                </div>
+
+                <!-- first name input -->
+                <div class="col-lg-6 mb-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control form-control-lg light-300" id="fname" name="fname" placeholder="First Name">
+                        <label for="fname">First Name</label>
+                    </div>
+                </div>
+
+                <!-- last name input -->
+                <div class="col-lg-6 mb-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control form-control-lg light-300" id="lname" name="lname" placeholder="Last Name">
+                        <label for="lname">Last Name</label>
+                    </div>
+                </div>
+
+                <!-- specialty input -->
+                <div class="col-lg-6 mb-4">
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control form-control-lg light-300" id="specialty" name="specialty" placeholder="Specialty">
+                        <label for="specialty">Specialty</label>
+                    </div>
+                </div>
+
+                <!-- gender input -->
+                <div class="col-lg-6 mb-4">
+                    <div class="">
+                        <select name="gender" id="gender" class="form-control form-control-lg light-300">
+                            <option value="hide">-- Gender --</option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- state input -->
+                <div class="col-lg-6 mb-4">
+                    <div class="">
+                        <select name="state" id="state" class="form-control form-control-lg light-300">
+                            <option value="hide">-- State --</option>
+                            {% for state in states%}
+                            <option value="{{state.stateabbrev}}">{{state.state}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Opioid prescriber input -->
+                <div class="col-lg-6 mb-4">
+                    <div class="">
+                        <select name="isopioidprescriber" id="isopioidprescriber" class="form-control form-control-lg light-300">
+                            <option value="hide">-- Is Opioid Prescriber --</option>
+                            <option value="TRUE">TRUE</option>
+                            <option value="FALSE">FALSE</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- submit all the information for the new prescriber and add to database -->
+                <button type="submit" class="btn rounded-pill btn-secondary text-light px-4 light-300">Add Prescriber</button>
+            </form>
+        </div>
+    </div>
+</section>
+<!-- end of adding new prescriber form and intro -->
+{% endblock %}

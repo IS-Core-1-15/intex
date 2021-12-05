@@ -1,0 +1,83 @@
+{% extends 'DrugApp/detail.html' %}
+{% load static %}
+{% block title %}
+<title>Add Drug</title>
+{% endblock %}
+
+{% block banner %}
+   <!-- displays this prescribers basic information at the top of the page -->
+   <section class="bg-light">
+    <div class="container py-4">
+        <div class="row align-items-center justify-content-between">
+            <div class="contact-header col-lg-4">
+                <h1 class="h2 pb-3 text-primary">{{person.fname}} {{person.lname}}</h1>
+                <h3 class="h4 regular-400">
+                    {% if person.credentials4 %}
+                        {{person.credentials1}}, {{person.credentials1}}, {{person.credentials3}}, {{person.credentials4}}
+                    {% elif person.credentials3 %}
+                        {{person.credentials1}}, {{person.credentials1}}, {{person.credentials3}}
+                    {% elif person.credentials2 %}
+                        {{person.credentials1}}, {{person.credentials1}}
+                    {% elif person.credentials1 %}
+                        {{person.credentials1}}
+                    {% endif %}
+                </h3>
+                <p class="light-300">
+                    Gender: {{person.gender}}<br>
+                    Location: {{person.state}}<br>
+                    Specialty: {{person.specialty}}<br>
+                </p>
+            </div>
+            <!-- default img -->
+            <div class="contact-img col-lg-5 align-items-end col-md-4">
+                <img src="{% static 'img/banner-img-01.svg' %}">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end of prescriber info block -->
+{% endblock %}
+
+{% block stats %}
+    <!-- add a new drug for the selected prescriber -->
+    <section class="bg-white py-5">
+        <div class="container my-4">
+            <!-- displays text and dynamicly passes name -->
+            <h1 class="creative-heading h2 pb-3">Add a drug offered by {{person.fname}}</h1>
+            <div class="creative-content row py-3">
+                <div class="col-md-5">
+                    <!-- form for submiting the POST to add the drug -->
+                    <form class="contact-form row" method="POST" action="{% url 'addDrug' id=person.npi %}" role="form">
+                    {% csrf_token %}
+                    <!-- new drug name section -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="">
+                            <select name="drugname" id="drugname" class="form-control form-control-lg light-300">
+                                <option value="hide">-- Drug --</option>
+                                {% for drug in drugs%}
+                                <option value="{{drug.drugname}}">{{drug.drugname}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <!-- end of drug name section -->
+
+                    <!-- input quantity for selected drug -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="form-floating mb-4">
+                            <input type="number" class="form-control form-control-lg light-300" id="qty" name="qty" placeholder="Quantity">
+                            <label for="qty">Total Quantity</label>
+                        </div>
+                    </div>
+                    <!-- end of quantity input section -->
+
+                    <!-- button to submit and save the info to the database -->
+                    <button type="submit" class="btn rounded-pill btn-secondary text-light px-4 light-300">Save and Return</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end of add new drug to the prescriber -->
+{% endblock %}

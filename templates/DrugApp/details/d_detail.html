@@ -1,0 +1,113 @@
+{% extends 'DrugApp/detail.html' %}
+{% load static %}
+{% block title %}
+<title>Drug Details</title>
+{% endblock %}
+
+{% block banner %}
+   <!-- Basic display -->
+   <section class="bg-light">
+    <div class="container py-4">
+        <div class="row align-items-center justify-content-between">
+            <div class="contact-header col-lg-4">
+                
+                <!-- displays the drug name -->
+                <h1 class="h2 pb-3 text-primary">{{drug.drugname}}</h1>
+                
+                <!-- displays if it is or is not an Opioid-->
+                <h3 class="h4 regular-400">
+                    {% if drug.isopioid %}
+                        Is Opioid
+                    {% else %}
+                        Is not an Opioid
+                    {% endif %}
+                </h3>
+            </div>
+            <!-- img display, currently just the default img -->
+            <div class="contact-img col-lg-5 align-items-end col-md-4">
+                <img src="{% static 'img/banner-img-02.svg' %}">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end of drug intro -->
+{% endblock %}
+
+{% block stats %}
+<!-- displays information about the top 10 prescribers of the drug and how much they prescribe -->
+    <section class="container py-5">
+        <h1 class="h2 semi-bold-600 text-center pt-5">Prescribers</h1>
+
+        <div class="row d-flex align-items-center pb-5">
+            
+            {% if rec %}
+            <!-- loops through persons and finds the top 10 -->
+            <div class="col-lg-6">
+                <h1 class="h2 semi-bold-600 text-center pt-5">Recommended Prescribers</h1>
+                {% for person in rec %}
+                <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
+                    <a href="{% url 'detailPerson' id=person.npi %}" style="color: rgb(98, 102, 234);">
+                        <div class="row p-2">
+                            <div class="pricing-list-icon col-3 text-center m-auto text-secondary ml-5 py-2">
+                                <i class="material-icons" style="font-size:48px;">person</i>
+                            </div>
+                            <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
+                                <ul class="list-unstyled text-center light-300">
+                                    <li class="h5 semi-bold-600 mb-0 mt-3">{{person.fname}} {{person.lname}}</li>
+                                </ul>
+                            </div>
+                            <div class="pricing-list-footer col-4 text-center m-auto align-items-center">
+                                <span class="btn rounded-pill px-4 btn-primary light-300">{{person.state}}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <!-- img -->
+            <div class="col-lg-6 offset-lg-0 col-md-8 offset-md-2">
+                {% if msg %}
+                <p>{{msg}}</p>
+                <img class="rounded float-right" src="{% static 'img/work.svg' %}">
+                {% else %}
+                <img class="rounded float-right" src="{% static 'img/work.svg' %}">
+                <form action="{% url 'detailDrug' id=drug.drugid %}" method='post'>
+                    {% csrf_token %}
+                    <input type="hidden" value='post' id='post' name='post'>
+                    <button type='submit' class="btn rounded-pill btn-secondary text-light px-4 light-300">
+                        Show Recommended Prescribers</button>
+                </form>
+                {% endif %}
+            </div>
+            
+            
+            {% endif %}
+
+            <!-- loops through persons and finds the top 10 -->
+            <div class="col-lg-6">
+                <h1 class="h2 semi-bold-600 text-center pt-5">Top Ten Prescribers</h1>
+                {% for person in persons %}
+                <div class="pricing-list shadow-sm rounded-top rounded-3 py-sm-0 py-5">
+                    <a href="{% url 'detailPerson' id=person.prescriberid.npi %}" style="color: rgb(98, 102, 234);">
+                        <div class="row p-2">
+                            <div class="pricing-list-icon col-3 text-center m-auto text-secondary ml-5 py-2">
+                                <i class="material-icons" style="font-size:48px;">person</i>
+                            </div>
+                            <div class="pricing-list-body col-md-5 align-items-center pl-3 pt-2">
+                                <ul class="list-unstyled text-center light-300">
+                                    <li class="h5 semi-bold-600 mb-0 mt-3">{{person.prescriberid.fname}} {{person.prescriberid.lname}}</li>
+                                </ul>
+                            </div>
+                            <div class="pricing-list-footer col-4 text-center m-auto align-items-center">
+                                <span class="btn rounded-pill px-4 btn-primary light-300">{{person.qty}}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+<!-- end of dislpay top 10 prescriber information-->
+{% endblock %}

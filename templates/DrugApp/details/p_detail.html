@@ -1,0 +1,95 @@
+{% extends 'DrugApp/detail.html' %}
+{% load static %}
+{% block title %}
+<title>Prescriber Details</title>
+{% endblock %}
+
+{% block banner %}
+   <!-- Basic information about the prescriber -->
+   <section class="bg-light">
+    <div class="container py-4">
+        <div class="row align-items-center justify-content-between">
+            <div class="contact-header col-lg-4">
+                <h1 class="h2 pb-3 text-primary">{{person.fname}} {{person.lname}}</h1>
+                <h3 class="h4 regular-400">
+                    {% if creds %}
+                        <p>
+                        {% for cred in creds %}
+                            {{cred}}
+                        {% endfor %}
+                        </p>
+                    {% else %}
+                    No Credentials
+                    {% endif %}
+                    <a href={% url 'addCred' id=person.npi %} class="btn rounded-pill btn-secondary text-light px-4 light-300">Add Credential</a>
+                </h3>
+                <p class="light-300">
+                    Gender: {{person.gender}}<br>
+                    Location: {{person.state}}<br>
+                    Specialty: {{person.specialty}}<br>
+                    Total: {{person.totalprescriptions}}<br>
+                    {% if prediciton %}
+                        Prediction: {{prediction}}<br>
+                    {% endif %}
+                </p>
+
+                <!-- These buttons allow the user to edit or delete this prescriber -->
+                <a href={% url 'editPrescriber' id=person.npi %} class="btn rounded-pill btn-secondary text-light px-4 light-300">Edit</a>
+                <a href={% url 'deletePrescriber' id=person.npi %} class="btn rounded-pill btn-secondary text-light px-4 light-300">Delete</a>
+
+            </div>
+            <!-- default img -->
+            <div class="contact-img col-lg-5 align-items-end col-md-4">
+                <img src="{% static 'img/banner-img-01.svg' %}">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end of basic prescriber information -->
+{% endblock %}
+
+{% block stats %}
+    <!-- brief description of the section, then displays the drugs this prescriber has prescribed and qty -->
+    <section class="bg-white py-5">
+        <div class="container my-4">
+            <h1 class="creative-heading h2 pb-3">Drugs</h1>
+            <div class="creative-content row py-3">
+                <div class="col-md-5">
+                    <p class="text-muted col-lg-8 light-300">
+                        List of drugs offered by {{person.fname}}
+                        <br><br>
+                        **All bars represent the percent of {{person.fname}}'s prescriptions of that drug compared to the total prescriptions given by {{person.fname}}
+                    </p>
+                </div>
+
+                <!-- loops through data and grabs each drug name -->
+                <div class="creative-progress col-md-7">
+                    {% for drug in drugs%}
+                    <div class="row mt-4 mt-sm-2">
+                        <div class="col-6">
+                            <h4 class="h5">{{drug.drugname}}</h4>
+                        </div>
+                        <div class="col-6 text-right" style='padding-bottom:5px;'>
+                            <!-- link to view drug info -->
+                            <a href="{% url 'detailDrug' id=drug.drugid %}" class="btn btn-sm rounded-pill btn-secondary text-light px-4 light-300">View Drug info</a>
+                            <!-- link to edit amount of -->
+                            <a href="{% url 'editDrug' drugid=drug.drugid personid=person.npi %}" class="btn btn-sm rounded-pill btn-secondary text-light px-4 light-300">Edit</a>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: {{drug.percent}}%" aria-valuenow="{{drug.percent}}" aria-valuemin="0" aria-valuemax="{{drug.sum}}"></div>
+                    </div>
+                    
+                    <!-- displays the quantity that this prescriber has given out for each drug-->
+                    {{person.fname}}'s quantity: {{drug.qty}} ({{drug.percent}}%) | Average quantity: {{drug.avg}} 
+                    {% endfor %}
+                    <div>
+                        <a href="{% url 'addDrug' id=person.npi %}" class="btn rounded-pill btn-secondary text-light px-4 light-300">Add Drug for Prescriber</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- end of drug display for this prescriber -->
+{% endblock %}

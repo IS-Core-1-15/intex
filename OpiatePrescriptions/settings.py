@@ -1,3 +1,5 @@
+# Group 1-15
+# Kalvin Wettstein, Spencer Jackson, Stephen Williams, Zachary Heaton
 """
 Django settings for OpiatePrescriptions project.
 
@@ -12,6 +14,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
+from getpass import getpass
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,8 +80,12 @@ WSGI_APPLICATION = 'OpiatePrescriptions.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'opioid',  # Make sure your db is named this
+        'USER': 'postgres',
+        # this will ask you to enter your local DB password when you start the server or run migrations
+        'PASSWORD': getpass(),
+        'HOST': 'localhost'
     }
 }
 
@@ -121,8 +128,8 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS=[
-    os.path.join(BASE_DIR, 'OpiatePrescriptions/static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'DrugApp/static')
 ]
 
 # Default primary key field type
