@@ -129,9 +129,11 @@ def personDetailPageView(request, id):
     # get the person and all their drugs
     try:
         person = PdPrescriber.objects.get(npi=id)
+        creds = person.credentials.all()
+        print(creds)
         drugs = person.drugs.all()
-    except:
-        return redirect('error', type=404)
+    except Exception as e:
+        print(e)
 
     # try hitting the prediction endpoint
     try:

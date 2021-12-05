@@ -36,6 +36,17 @@ class PdDrugs(models.Model):
         return self.drugname
 
 
+class PdCredential(models.Model):
+    id = models.IntegerField(primary_key=True)
+    credentialcode = models.CharField(max_length=10, unique=True)
+
+    class Meta:
+        db_table = 'pd_credential'
+
+    def __str__(self):
+        return self.credentialcode
+
+
 class PdPrescriber(models.Model):
     npi = models.IntegerField(primary_key=True)
     fname = models.CharField(max_length=11)
@@ -47,14 +58,12 @@ class PdPrescriber(models.Model):
         to_field='stateabbrev',
         db_column='state'
     )
-    credentials1 = models.CharField(max_length=10, blank=True, null=True)
-    credentials2 = models.CharField(max_length=10, blank=True, null=True)
-    credentials3 = models.CharField(max_length=10, blank=True, null=True)
-    credentials4 = models.CharField(max_length=10, blank=True, null=True)
+    credentials = models.ManyToManyField(PdCredential, through='PdPrescriberCredential')
     specialty = models.CharField(max_length=62)
     isopioidprescriber = models.CharField(max_length=5, choices=[('TRUE', 'TRUE'), ('FALSE', 'FALSE')])
     totalprescriptions = models.IntegerField()
     drugs = models.ManyToManyField(PdDrugs, through='PdTriple')
+
     class Meta:
         # managed = False
         db_table = 'pd_prescriber'
@@ -115,3 +124,25 @@ class PdTriple(models.Model):
 
     def __str__(self):
         return f'{self.prescriberid}: {self.drugname}'
+
+class PdPrescriberCredential(models.Model):
+    id = models.IntegerField(primary_key=True)
+    prescriberid = models.ForeignKey(
+        'PdPrescriber', 
+        on_delete=models.CASCADE,
+        to_field='npi',
+        db_column='prescriberid'
+        )
+    credential = models.ForeignKey(
+        'PdCredential',
+        on_delete=models.CASCADE,
+        to_field='credentialcode',
+        db_column='credentialcode'
+    )
+
+    class Meta:
+        # managed = False
+        db_table = 'pd_prescriber_credential'
+    
+    def __str__(self):
+        return f'{self.prescriberid} {self.credential}'
