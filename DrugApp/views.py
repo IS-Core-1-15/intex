@@ -130,7 +130,6 @@ def personDetailPageView(request, id):
     try:
         person = PdPrescriber.objects.get(npi=id)
         creds = person.credentials.all()
-        print(creds)
         drugs = person.drugs.all()
     except Exception as e:
         print(e)
@@ -174,6 +173,9 @@ def personDetailPageView(request, id):
         'person': person,
         'drugs': drugs,
     }
+
+    if len(creds) > 0:
+        context['creds'] = creds
 
     # if the prediction endpoint was on add to context
     if prediction:
