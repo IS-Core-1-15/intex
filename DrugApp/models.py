@@ -73,8 +73,8 @@ class PdPrescriber(models.Model):
         state = PdStatedata.objects.get(stateabbrev=form['state'])
         person = self(
             npi = form['npi'],
-            fname = form['fname'],
-            lname = form['lname'],
+            fname = form['fname'].title(),
+            lname = form['lname'].title(),
             gender = form['gender'],
             state = state,
             credentials1 = form['credentials1'],

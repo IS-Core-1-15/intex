@@ -1,5 +1,4 @@
 from django.db.models import Avg, Sum
-from django.db.models.aggregates import Max
 import random
 from django.shortcuts import redirect, render
 from .models import *
