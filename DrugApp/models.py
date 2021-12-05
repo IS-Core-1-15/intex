@@ -137,7 +137,7 @@ class PdPrescriberCredential(models.Model):
         'PdCredential',
         on_delete=models.CASCADE,
         to_field='credentialcode',
-        db_column='credentialcode'
+        db_column='credential'
     )
 
     class Meta:
