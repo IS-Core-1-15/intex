@@ -485,10 +485,6 @@ def editPrescriberPageView(request, id):
         try:
             person.fname = request.POST["fname"]
             person.lname = request.POST["lname"]
-            person.credentials1 = request.POST["credentials1"]
-            person.credentials2 = request.POST["credentials2"]
-            person.credentials3 = request.POST["credentials3"]
-            person.credentials4 = request.POST["credentials4"]
             person.specialty = request.POST["specialty"]
             person.totalprescriptions = person.totalprescriptions
             person.gender = request.POST["gender"]
@@ -653,6 +649,61 @@ def advsearchPageView(request):
         
         return render(request, 'DrugApp/advsearch.html', context)
 
+def addCredPageView(request, id):
+    """
+    Name : addCredPageView
+    Description : Add a credential to a prescriber in pd_prescriber_credential
+        GET : Get a list of all creds to populate the dropdown
+        POST : handle the form data, create a new relationship and 
+            return the updated prescriber detail page
+    Paramaters : 
+        id : the prescriber npi
+    """
+
+    # get the person and all their current drugs
+    try:
+        person = PdPrescriber.objects.get(npi=id)
+        creds = PdPrescriberCredential.objects.filter(prescriberid=id)
+
+        # exclude all drugs that the prescriber already prescribes
+        excludes = []
+        for t in creds:
+            excludes.append(t.credential)
+    except:
+        # if the above failed try the next section with all drugs
+        excludes = []
+
+    # GET request
+    if request.method == 'GET':
+        # get all creds except those already prescribed by prescriber
+        try:
+            creds = PdCredential.objects.all().exclude(credentialcode__in=excludes)
+        except:
+            return redirect('error', type=500)
+
+        context = {
+            'person': person,
+            'all_creds': creds,
+            'creds': person.credentials.all()
+        }
+
+        return render(request, 'DrugApp/prescriber/addCred.html', context)
+    
+    # POST request
+    elif request.method == 'POST':
+        # make a random id for new relationship
+        relid = random.randint(0, 999)
+
+        # create new triple
+        try:
+            rel = PdPrescriberCredential.create(relid, person, request.POST)
+            rel.save()
+        except:
+            return redirect('error', type=500)
+
+        return redirect('detailPerson', id=id)
+    else:
+        return redirect('error', type=404)
 
 def e(request, type):
     """

@@ -77,10 +77,6 @@ class PdPrescriber(models.Model):
             lname = form['lname'].title(),
             gender = form['gender'],
             state = state,
-            credentials1 = form['credentials1'],
-            credentials2 = form['credentials2'],
-            credentials3 = form['credentials3'],
-            credentials4 = form['credentials4'],
             specialty = form['specialty'],
             isopioidprescriber = form['isopioidprescriber'],
             totalprescriptions = 0
@@ -143,6 +139,17 @@ class PdPrescriberCredential(models.Model):
     class Meta:
         # managed = False
         db_table = 'pd_prescriber_credential'
+
+    @classmethod
+    def create(self, id, person, form):
+        c = PdCredential.objects.get(credentialcode=form['cred'])
+        new = self(
+            id = id,
+            prescriberid = person,
+            credential = c
+        )
+        return new
+
     
     def __str__(self):
         return f'{self.prescriberid} {self.credential}'

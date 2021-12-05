@@ -21,6 +21,7 @@
                     {% else %}
                     No Credentials
                     {% endif %}
+                    <a href={% url 'addCred' id=person.npi %} class="btn rounded-pill btn-secondary text-light px-4 light-300">Add Credential</a>
                 </h3>
                 <p class="light-300">
                     Gender: {{person.gender}}<br>
