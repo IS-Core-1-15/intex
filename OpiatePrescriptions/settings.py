@@ -105,7 +105,7 @@ else:
             'NAME': 'opioid',  # Make sure your db is named this
             'USER': 'postgres',
             # this will ask you to enter your local DB password when you start the server or run migrations
-            'PASSWORD': getpass(),
+            'PASSWORD': "pass", #getpass(),
             'HOST': 'localhost'
         }
     }
