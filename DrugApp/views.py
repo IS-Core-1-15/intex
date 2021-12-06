@@ -515,12 +515,14 @@ def analyticsPageView(request):
         q3 = query3()
 
         # q4: What state has the most opioid related deaths?
-        states = PdStatedata.objects.all().order_by('-deaths')
-        max = states[0].deaths
+        states = PdStatedata.objects.all().order_by('deaths')
+        for i in range(0, len(states)):
+            if states[i].deaths is not None:
+                max = states[i].deaths
+                i = len(states)
         q4 = []
         for i in range(0, len(states)):
-            print(type(states[i].deaths))
-            if states[i] is not None:
+            if states[i].deaths is not None:
                 if (states[i].deaths < max):
                     i = len(states)
                 elif states[i].deaths == max:
