@@ -41,10 +41,10 @@ def searchPageView(request):
                 'msg': 'Please enter a value'
             }
             return render(request, 'DrugApp/search.html', context)
-        
+
         # if search is for a prescriber
         if request.POST['choice'] == 'Prescriber':
-            #query first OR last name
+            # query first OR last name
             try:
                 # if no space in seach key
                 if " " not in key:
@@ -56,7 +56,7 @@ def searchPageView(request):
                     key = key.split(' ')
                     data = PdPrescriber.objects.filter(
                         fname__contains=key[0]) | PdPrescriber.objects.filter(lname__contains=key[1])
-                
+
                 context = {
                     'prescriber': True,
                 }
@@ -65,7 +65,7 @@ def searchPageView(request):
 
         # if search is for a drug
         elif request.POST['choice'] == 'Drug':
-            #drug data is all upper case
+            # drug data is all upper case
             try:
                 data = PdDrugs.objects.filter(
                     drugname__contains=key.upper())
@@ -79,7 +79,7 @@ def searchPageView(request):
         else:
             return redirect('error', type=404, e='No Method')
 
-        #set output message if the results returned anything
+        # set output message if the results returned anything
         if len(data) > 0:
             msg = f'We found {len(data)} results'
         else:
@@ -93,7 +93,7 @@ def searchPageView(request):
     elif request.method == 'GET':
         return render(request, 'DrugApp/search.html')
     # Error
-    else: 
+    else:
         return redirect('error', type=404, e='No Method')
 
 
@@ -136,11 +136,11 @@ def personDetailPageView(request, id):
     # try hitting the prediction endpoint
     try:
         prediction = predictPrescript(
-            person.fname, 
-            person.specialty, 
+            person.fname,
+            person.specialty,
             person.totalprescriptions,
             person.state.state,
-            )
+        )
     # if it reaches the timeout (2 sec) then the endpoint if off, continue
     except Exception as e:
         prediction = False
@@ -148,10 +148,12 @@ def personDetailPageView(request, id):
     # for each drug of the prescriber
     for drug in drugs:
         try:
-            drugQty = PdTriple.objects.get(prescriberid=id, drugname=drug.drugname)
+            drugQty = PdTriple.objects.get(
+                prescriberid=id, drugname=drug.drugname)
 
             # sum the total prescribed by prescriber
-            mymax = PdTriple.objects.filter(prescriberid=id).aggregate(Sum('qty'))
+            mymax = PdTriple.objects.filter(
+                prescriberid=id).aggregate(Sum('qty'))
             drug.sum = mymax['qty__sum']
 
             # get the individual qty
@@ -197,23 +199,24 @@ def drugDetailPageView(request, id):
     try:
         drug = PdDrugs.objects.get(drugid=id)
         # top ten is just the first ten prescribers who have the highest qty for the drug
-        ten = PdTriple.objects.filter(drugname=drug.drugname).order_by('-qty')[:10]
+        ten = PdTriple.objects.filter(
+            drugname=drug.drugname).order_by('-qty')[:10]
     except Exception as e:
         return redirect('error', type=500, e=e)
 
     context = {
-    'drug': drug,
-    'persons': ten,
+        'drug': drug,
+        'persons': ten,
     }
-    
+
     # if post request hit endpoint
     if request.method == 'POST':
         try:
             rec = recommendPrescriber(
-                drug.drugname, 
-                drug.drugid, 
-                drug.isopioid, 
-                ten[0].prescriberid.npi, 
+                drug.drugname,
+                drug.drugid,
+                drug.isopioid,
+                ten[0].prescriberid.npi,
                 ten[0].qty,
                 ten[0].prescriberid.totalprescriptions,
                 ten[0].prescriberid.specialty,
@@ -270,7 +273,7 @@ def deletePrescriberPageView(request, id):
         id : prescriber npi
     """
 
-    #delete prescriber
+    # delete prescriber
     try:
         person = PdPrescriber.objects.get(npi=id)
         person.delete()
@@ -319,7 +322,7 @@ def addDrugPageView(request, id):
         }
 
         return render(request, 'DrugApp/drug/addDrug.html', context)
-    
+
     # POST request
     elif request.method == 'POST':
         # make a random id for new triple
@@ -329,7 +332,8 @@ def addDrugPageView(request, id):
         try:
             triple = PdTriple.create(tripleID, person, request.POST)
             triple.save()
-            person.totalprescriptions = person.totalprescriptions + int(request.POST['qty'])
+            person.totalprescriptions = person.totalprescriptions + \
+                int(request.POST['qty'])
             person.save()
         except Exception as e:
             return redirect('error', type=500, e=e)
@@ -372,7 +376,7 @@ def editDrugPageView(request, drugid, personid):
         }
 
         return render(request, 'DrugApp/drug/editDrug.html', context)
-    
+
     # POST request
     elif request.method == "POST":
         try:
@@ -414,11 +418,11 @@ def deleteDrugPageView(request, drugid, personid):
         # get the relationship info
         triple = PdTriple.objects.get(
             drugname=drug.drugname, prescriberid=personid)
-        
+
         # get person info
         person = triple.prescriberid
 
-        #update totalprescriptions
+        # update totalprescriptions
         person.totalprescriptions = person.totalprescriptions - triple.qty
 
         # save and delete
@@ -478,7 +482,7 @@ def editPrescriberPageView(request, id):
         }
 
         return render(request, 'DrugApp/prescriber/editPrescriber.html', context)
-    
+
     # POST request
     elif request.method == "POST":
         # set all the fields
@@ -516,10 +520,12 @@ def analyticsPageView(request):
         max = states[0].deaths
         q4 = []
         for i in range(0, len(states)):
-            if states[i].deaths < max:
-                i = len(states)
-            elif states[i].deaths == max:
-                q4.append(states[i])
+            print(type(states[i].deaths))
+            if states[i] is not None:
+                if (states[i].deaths < max):
+                    i = len(states)
+                elif states[i].deaths == max:
+                    q4.append(states[i])
 
         context = {
             'q1': q1,
@@ -563,7 +569,7 @@ def advsearchPageView(request):
     elif request.method == 'POST':
         # get the forms data
         form = request.POST
-        
+
         # handle prescriber search
         if form['choice'] == 'Prescriber':
             # get all the prescribers to start
@@ -571,7 +577,7 @@ def advsearchPageView(request):
                 result = PdPrescriber.objects.all()
             except Exception as e:
                 return redirect('error', type=500, e=e)
-            
+
             # if they typed a name
             if form['key']:
                 try:
@@ -597,7 +603,7 @@ def advsearchPageView(request):
                 if form['cred'] != '':
                     # a bunch of ORs strung together
                     result = result.filter(credential=form['cred'])
-                
+
                 # gender
                 if form['gender'] != '':
                     result = result.filter(gender=form['gender'])
@@ -607,7 +613,7 @@ def advsearchPageView(request):
                     result = result.filter(state=form['state'])
             except Exception as e:
                 return redirect('error', type=500, e=e)
-            
+
             context = {
                 'prescriber': True
             }
@@ -619,7 +625,7 @@ def advsearchPageView(request):
                 result = PdDrugs.objects.all()
             except Exception as e:
                 return redirect('error', type=500, e=e)
-            
+
             try:
                 # if drug name
                 if form['key']:
@@ -635,13 +641,14 @@ def advsearchPageView(request):
             context = {
                 'drug': True,
             }
-        
+
         # set the rest of the context
         context['data'] = result
         context['msg'] = f'We found {len(result)} results'
         context['states'] = states
-        
+
         return render(request, 'DrugApp/advsearch.html', context)
+
 
 def addCredPageView(request, id):
     """
@@ -682,7 +689,7 @@ def addCredPageView(request, id):
         }
 
         return render(request, 'DrugApp/prescriber/addCred.html', context)
-    
+
     # POST request
     elif request.method == 'POST':
         # make a random id for new relationship
@@ -698,6 +705,7 @@ def addCredPageView(request, id):
         return redirect('detailPerson', id=id)
     else:
         return redirect('error', type=404, e=e)
+
 
 def e(request, type, e):
     """
@@ -722,7 +730,7 @@ def e(request, type, e):
     context = {
         'error_code': type,
         'title': title,
-        'msg': msg ,
+        'msg': msg,
     }
 
     return render(request, 'DrugApp/404.html', context)
