@@ -13,7 +13,7 @@ Steps to get set up:
 5. Create a virtual env if you want.
 6. Run the following (on windows replace psycopg2-binary with psycopg)
 ```
-pip install django psycopg2-binary pillow requests dj-database-url django-heroku gunicorn whitenoise
+pip install django psycopg2-binary pillow requests dj-database-url django-heroku gunicorn whitenoise python-dotenv
 ```
 7. Run this to create a login
 ```
