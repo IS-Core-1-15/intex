@@ -32,7 +32,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGOKEY') #'django-insecure-5ywg_c3y_jtkbhvh@$c0mb8!f8p7v6ds69jxwi5gphr^0#ha21'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if os.environ.get('ENV') == 'PRD':
+if os.environ.get('RUNTYPE') == 'PRD':
     DEBUG = True
 else:
     DEBUG = True
@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'OpiatePrescriptions.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-if os.environ.get('ENV') == 'PRD':
+if os.environ.get('RUNTYPE') == 'PRD':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -109,8 +109,8 @@ else:
             'HOST': 'localhost'
         }
     }
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)        
+# db_from_env = dj_database_url.config(conn_max_age=600)
+# DATABASES['default'].update(db_from_env)        
 
 
 # Password validation
