@@ -1,1 +1,1 @@
-web: gunicorn intex-group1-15.wsgi 
+web: gunicorn DrugApp.wsgi
