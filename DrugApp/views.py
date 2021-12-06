@@ -9,6 +9,7 @@ from .api.intexRecommenderAPI import recommendPrescriber
 
 # Create your views here.
 
+
 def indexPageView(request):
     """
     Name : indexPageView
