@@ -15,6 +15,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 from getpass import getpass
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,17 +79,28 @@ WSGI_APPLICATION = 'OpiatePrescriptions.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'opioid',  # Make sure your db is named this
-        'USER': 'postgres',
-        # this will ask you to enter your local DB password when you start the server or run migrations
-        'PASSWORD': getpass(),
-        'HOST': 'localhost'
+if os.getenv('ENV') == 'PRD':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'opioid',  # Make sure your db is named this
+            'USER': os.getenv('AZUREUSER'),
+            # this will ask you to enter your local DB password when you start the server or run migrations
+            'PASSWORD': str(os.getenv('AZUREDBPASSWORD')),
+            'HOST': os.getenv('AZUREHOST') 
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'opioid',  # Make sure your db is named this
+            'USER': 'postgres',
+            # this will ask you to enter your local DB password when you start the server or run migrations
+            'PASSWORD': getpass(),
+            'HOST': 'localhost' 
+        }
+    }
 
 
 # Password validation
