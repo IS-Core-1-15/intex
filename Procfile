@@ -1,1 +1,1 @@
-web: gunicorn DrugApp.wsgi
+web: gunicorn OpiatePrescriptions.wsgi
