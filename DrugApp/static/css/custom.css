@@ -10,7 +10,11 @@ a {
 }
 
 .mylink:hover {
-    color: white, !important;
+    color: white;
+}
+
+.mylinks:hover {
+  color: white;
 }
 
 /* Popup container */
