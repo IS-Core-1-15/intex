@@ -244,7 +244,10 @@ def addPrescriberPageView(request):
     if request.method == 'GET':
 
         # get all the states
-        states = PdStatedata.objects.all()
+        try:
+            states = PdStatedata.objects.all()
+        except Exception as e:
+            return redirect('error', type=500, e=e)
 
         context = {
             'states': states

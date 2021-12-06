@@ -32,8 +32,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGOKEY') #'django-insecure-5ywg_c3y_jtkbhvh@$c0mb8!f8p7v6ds69jxwi5gphr^0#ha21'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if os.environ.get('ENV') == 'PRD':
-    DEBUG = False
+if os.environ.get('RUNTYPE') == 'PRD':
+    DEBUG = True
 else:
     DEBUG = True
 
@@ -87,14 +87,14 @@ WSGI_APPLICATION = 'OpiatePrescriptions.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-if os.environ.get('ENV') == 'PRD':
+if os.environ.get('RUNTYPE') == 'PRD':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'opioid',  # Make sure your db is named this
             'USER': os.environ.get('AZUREUSER'),
             # this will ask you to enter your local DB password when you start the server or run migrations
-            'PASSWORD': str(os.environ.get('AZUREDBPASSWORD')),
+            'PASSWORD': os.environ.get('AZUREDBPASSWORD'),
             'HOST': os.environ.get('AZUREHOST')
         }
     }
