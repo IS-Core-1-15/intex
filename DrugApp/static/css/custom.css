@@ -13,6 +13,10 @@ a {
     color: white;
 }
 
+.mylinks:hover {
+  color: white;
+}
+
 /* Popup container */
 .popup {
     position: relative;
