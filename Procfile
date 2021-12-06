@@ -1,0 +1,1 @@
+web: gunicorn intex-group1-15.wsgi 
