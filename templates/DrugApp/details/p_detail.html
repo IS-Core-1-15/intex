@@ -28,8 +28,8 @@
                     Location: {{person.state}}<br>
                     Specialty: {{person.specialty}}<br>
                     {% comment %} Total: {{person.totalprescriptions}}<br> {% endcomment %}
-                    {% if prediciton %}
-                        Prediction: {{prediction}}<br>
+                    {% if prediction %}
+                        Prediction: {{prediction|title}}<br>
                     {% endif %}
                 </p>
 

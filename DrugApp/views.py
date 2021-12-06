@@ -9,7 +9,6 @@ from .api.intexRecommenderAPI import recommendPrescriber
 
 # Create your views here.
 
-
 def indexPageView(request):
     """
     Name : indexPageView
@@ -179,7 +178,7 @@ def personDetailPageView(request, id):
         context['creds'] = creds
 
     # if the prediction endpoint was on add to context
-    if prediction:
+    if prediction == 'TRUE':
         context['prediction'] = prediction
 
     return render(request, 'DrugApp/details/p_detail.html', context)
