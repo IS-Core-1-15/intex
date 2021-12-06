@@ -94,7 +94,7 @@ if os.environ.get('RUNTYPE') == 'PRD':
             'NAME': 'opioid',  # Make sure your db is named this
             'USER': os.environ.get('AZUREUSER'),
             # this will ask you to enter your local DB password when you start the server or run migrations
-            'PASSWORD': str(os.environ.get('AZUREDBPASSWORD')),
+            'PASSWORD': os.environ.get('AZUREDBPASSWORD'),
             'HOST': os.environ.get('AZUREHOST')
         }
     }
