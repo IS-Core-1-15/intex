@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get('DJANGOKEY') #'django-insecure-5ywg_c3y_jtkbhvh@$c0m
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.environ.get('ENV') == 'PRD':
-    DEBUG = True
+    DEBUG = False
 else:
     DEBUG = True
 
