@@ -52,8 +52,9 @@
                     <!-- new drug name section -->
                     <div class="col-lg-6 mb-4">
                         <div class="">
-                            <select name="drugname" id="drugname" class="form-control form-control-lg light-300">
-                                <option value="hide">-- Drug --</option>
+                            <label for'drugname'>Drug Name</label>
+                            <select name="drugname" id="drugname" class="form-control form-control-lg light-300" required>
+                                <option value="">None</option>
                                 {% for drug in drugs%}
                                 <option value="{{drug.drugname}}">{{drug.drugname}}
                                 </option>
@@ -66,7 +67,7 @@
                     <!-- input quantity for selected drug -->
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating mb-4">
-                            <input type="number" class="form-control form-control-lg light-300" id="qty" name="qty" placeholder="Quantity">
+                            <input type="number" class="form-control form-control-lg light-300" id="qty" name="qty" placeholder="Quantity" required>
                             <label for="qty">Total Quantity</label>
                         </div>
                     </div>

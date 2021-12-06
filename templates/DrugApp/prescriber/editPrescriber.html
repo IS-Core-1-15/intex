@@ -40,13 +40,13 @@
             {% csrf_token %}
                 <!-- dynamically autofilled with existing info -->
                 <!-- user is not allowed to change the NPI for the prescriber-->
-                <input type="hidden" class="form-control form-control-lg light-300" id="npi" name="npi" placeholder="NPI" value={{person.npi}}>
+                <input type="hidden" class="form-control form-control-lg light-300" id="npi" name="npi" placeholder="NPI" value={{person.npi}} required>
 
                 <!-- new first name -->
                 <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating">
-                        <input type="text" class="form-control form-control-lg light-300" id="fname" name="fname" placeholder="First Name" value={{person.fname}}>
+                        <input type="text" class="form-control form-control-lg light-300" id="fname" name="fname" placeholder="First Name" value={{person.fname}} required>
                         <label for="fname">First Name</label>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                 <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating">
-                        <input type="text" class="form-control form-control-lg light-300" id="lname" name="lname" placeholder="Last Name" value={{person.lname}}>
+                        <input type="text" class="form-control form-control-lg light-300" id="lname" name="lname" placeholder="Last Name" value={{person.lname}} required>
                         <label for="lname">Last Name</label>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                 <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="form-floating mb-4">
-                        <input type="text" class="form-control form-control-lg light-300" id="specialty" name="specialty" placeholder="Specialty" value={{person.specialty}}>
+                        <input type="text" class="form-control form-control-lg light-300" id="specialty" name="specialty" placeholder="Specialty" value={{person.specialty}} required>
                         <label for="specialty">Specialty</label>
                     </div>
                 </div>
@@ -73,7 +73,8 @@
                 <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="">
-                        <select name="gender" id="gender" class="form-control form-control-lg light-300">
+                        <label for'gender'>Gender</label>
+                        <select name="gender" id="gender" class="form-control form-control-lg light-300" required>
                             <option value={{person.gender}}>{{person.displaygender}}</option>
                             <option value="M">Male</option>
                             <option value="F">Female</option>
@@ -85,7 +86,8 @@
                 <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="">
-                        <select name="state" id="state" class="form-control form-control-lg light-300">
+                        <label for'state'>State</label>
+                        <select name="state" id="state" class="form-control form-control-lg light-300" required>
                             <option value={{person.state.stateabbrev}}>{{person.state}}</option>
                             {% for state in states%}
                             <option value="{{state.stateabbrev}}">{{state.state}}</option>
@@ -98,7 +100,8 @@
                 <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="">
-                        <select name="isopioidprescriber" id="isopioidprescriber" class="form-control form-control-lg light-300">
+                        <label for'isopioidprescriber'>Is Opioid Prescriber</label>
+                        <select name="isopioidprescriber" id="isopioidprescriber" class="form-control form-control-lg light-300" required>
                             <option value={{person.isopioidprescriber}}>{{person.isopioidprescriber}}</option>
                             <option value="TRUE">TRUE</option>
                             <option value="FALSE">FALSE</option>

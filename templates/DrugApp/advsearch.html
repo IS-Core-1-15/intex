@@ -60,16 +60,23 @@ input {
                             </div>
                         </div>
                         <div class="col-lg-6 mb-4">
-                            <div class="form-floating mb-4">
-                                <input type="text" class="form-control form-control-lg light-300" id="credentials" name="credentials" placeholder="Credential (e.g. 'MD')">
-                                <label for="credentials">Credential (e.g. MD)</label>
+                            <div class="">
+                                <label for'cred'>Credential</label>
+                                <select name="cred" id="cred" class="form-control form-control-lg light-300" required>
+                                    <option value="">None</option>
+                                    {% for cred in all_creds%}
+                                    <option value="{{cred.credentialcode}}">{{cred.credentialcode}}
+                                    </option>
+                                    {% endfor %}
+                                </select>
                             </div>
                         </div><!-- End Input Subject -->
                 
                         <div class="col-lg-6 mb-4">
                             <div class="">
+                                <label for'gender'>gender</label>
                                 <select name="gender" id="gender" class="form-control form-control-lg light-300">
-                                    <option value="hide">-- Gender --</option>
+                                    <option value="">None</option>
                                     <option value="M">Male</option>
                                     <option value="F">Female</option>
                                 </select>
@@ -78,8 +85,9 @@ input {
                 
                         <div class="col-lg-6 mb-4">
                             <div class="">
+                                <label for'state'>State</label>
                                 <select name="state" id="state" class="form-control form-control-lg light-300">
-                                    <option value="hide">-- State --</option>
+                                    <option value="">None</option>
                                     {% for state in states%}
                                     <option value="{{state.stateabbrev}}">{{state.state}}</option>
                                     {% endfor %}
@@ -151,16 +159,23 @@ input {
                 </div>
             </div>
             <div class="col-lg-6 mb-4">
-                <div class="form-floating mb-4">
-                    <input type="text" class="form-control form-control-lg light-300" id="credentials" name="credentials" placeholder="Credential (e.g. 'MD')">
-                    <label for="credentials">Credential (e.g. MD)</label>
+                <div class="">
+                    <label for'cred'>Credential</label>
+                    <select name="cred" id="cred" class="form-control form-control-lg light-300" required>
+                        <option value="">None</option>
+                        {% for cred in all_creds%}
+                        <option value="{{cred.credentialcode}}">{{cred.credentialcode}}
+                        </option>
+                        {% endfor %}
+                    </select>
                 </div>
             </div><!-- End Input Subject -->
 
             <div class="col-lg-6 mb-4">
                 <div class="">
+                    <label for'gender'>gender</label>
                     <select name="gender" id="gender" class="form-control form-control-lg light-300">
-                        <option value="hide">-- Gender --</option>
+                        <option value="">None</option>
                         <option value="M">Male</option>
                         <option value="F">Female</option>
                     </select>
@@ -169,8 +184,9 @@ input {
 
             <div class="col-lg-6 mb-4">
                 <div class="">
+                    <label for'state'>State</label>
                     <select name="state" id="state" class="form-control form-control-lg light-300">
-                        <option value="hide">-- State --</option>
+                        <option value="">None</option>
                         {% for state in states%}
                         <option value="{{state.stateabbrev}}">{{state.state}}</option>
                         {% endfor %}
@@ -193,8 +209,9 @@ input {
 
         <div class="col-lg-6 mb-4">
             <div class="">
+                <label for'isopioidprescriber'>Is Opioid</label>
                 <select name="isopioid" id="isopioid" class="form-control form-control-lg light-300">
-                    <option value="hide">-- Is Opioid --</option>
+                    <option value="">None</option>
                     <option value="TRUE">True</option>
                     <option value="FALSE">False</option>
                 </select>

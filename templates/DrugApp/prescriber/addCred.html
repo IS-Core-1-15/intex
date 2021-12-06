@@ -52,8 +52,9 @@
                     <!-- new cred name section -->
                     <div class="col-lg-6 mb-4">
                         <div class="">
-                            <select name="cred" id="cred" class="form-control form-control-lg light-300">
-                                <option value="hide">-- cred --</option>
+                            <label for'cred'>Credential</label>
+                            <select name="cred" id="cred" class="form-control form-control-lg light-300" required>
+                                <option value="">None</option>
                                 {% for cred in all_creds%}
                                 <option value="{{cred.credentialcode}}">{{cred.credentialcode}}
                                 </option>
