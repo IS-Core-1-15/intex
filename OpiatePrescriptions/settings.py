@@ -87,7 +87,7 @@ if os.getenv('ENV') == 'PRD':
             'USER': os.getenv('AZUREUSER'),
             # this will ask you to enter your local DB password when you start the server or run migrations
             'PASSWORD': str(os.getenv('AZUREDBPASSWORD')),
-            'HOST': os.getenv('AZUREHOST') 
+            'HOST': os.getenv('AZUREHOST')
         }
     }
 else:
@@ -98,7 +98,7 @@ else:
             'USER': 'postgres',
             # this will ask you to enter your local DB password when you start the server or run migrations
             'PASSWORD': getpass(),
-            'HOST': 'localhost' 
+            'HOST': 'localhost'
         }
     }
 
