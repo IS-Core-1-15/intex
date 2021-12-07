@@ -253,7 +253,7 @@ def addPrescriberPageView(request):
 
         # get all the states
         try:
-            states = PdStatedata.objects.all()
+            states = PdStatedata.objects.all().order_by('state')
         except Exception as e:
             return redirect('error', type=500, e=e)
 
@@ -322,7 +322,7 @@ def addDrugPageView(request, id):
     if request.method == 'GET':
         # get all drugs except those already prescribed by prescriber
         try:
-            drugs = PdDrugs.objects.all().exclude(drugname__in=excludes)
+            drugs = PdDrugs.objects.all().exclude(drugname__in=excludes).order_by('drugname')
         except Exception as e:
             return redirect('error', type=500, e=e)
 
@@ -482,7 +482,7 @@ def editPrescriberPageView(request, id):
 
         # get all the states to populate the dropdown
         try:
-            states = PdStatedata.objects.all()
+            states = PdStatedata.objects.all().order_by('state')
         except Exception as e:
             return redirect('error', type=500, e=e)
 
