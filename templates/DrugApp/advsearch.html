@@ -61,37 +61,37 @@ input {
                         </div>
                         <div class="col-lg-6 mb-4">
                             <div class="">
-                                <label for'cred'>Credential</label>
-                                <select name="cred" id="cred" class="form-control form-control-lg light-300" required>
+                                <select name="cred" id="cred" class="form-control form-control-lg light-300">
                                     <option value="">None</option>
                                     {% for cred in all_creds%}
                                     <option value="{{cred.credentialcode}}">{{cred.credentialcode}}
                                     </option>
                                     {% endfor %}
                                 </select>
+                                <label for'cred'>Credential</label>
                             </div>
                         </div><!-- End Input Subject -->
                 
                         <div class="col-lg-6 mb-4">
                             <div class="">
-                                <label for'gender'>gender</label>
                                 <select name="gender" id="gender" class="form-control form-control-lg light-300">
                                     <option value="">None</option>
                                     <option value="M">Male</option>
                                     <option value="F">Female</option>
                                 </select>
+                                <label for'gender'>Gender</label>
                             </div>
                         </div>
                 
                         <div class="col-lg-6 mb-4">
                             <div class="">
-                                <label for'state'>State</label>
                                 <select name="state" id="state" class="form-control form-control-lg light-300">
                                     <option value="">None</option>
                                     {% for state in states%}
                                     <option value="{{state.stateabbrev}}">{{state.state}}</option>
                                     {% endfor %}
                                 </select>
+                                <label for'state'>State</label>
                             </div>
                         </div>
                     </form>
@@ -162,37 +162,37 @@ input {
             </div>
             <div class="col-lg-6 mb-4">
                 <div class="">
-                    <label for'cred'>Credential</label>
-                    <select name="cred" id="cred" class="form-control form-control-lg light-300" required>
+                    <select name="cred" id="cred" class="form-control form-control-lg light-300">
                         <option value="">None</option>
                         {% for cred in all_creds%}
                         <option value="{{cred.credentialcode}}">{{cred.credentialcode}}
                         </option>
                         {% endfor %}
                     </select>
+                    <label for'cred'>Credential</label>
                 </div>
             </div><!-- End Input Subject -->
 
             <div class="col-lg-6 mb-4">
                 <div class="">
-                    <label for'gender'>gender</label>
                     <select name="gender" id="gender" class="form-control form-control-lg light-300">
                         <option value="">None</option>
                         <option value="M">Male</option>
                         <option value="F">Female</option>
                     </select>
+                    <label for'gender'>gender</label>
                 </div>
             </div>
 
             <div class="col-lg-6 mb-4">
                 <div class="">
-                    <label for'state'>State</label>
                     <select name="state" id="state" class="form-control form-control-lg light-300">
                         <option value="">None</option>
                         {% for state in states%}
                         <option value="{{state.stateabbrev}}">{{state.state}}</option>
                         {% endfor %}
                     </select>
+                    <label for'state'>State</label>
                 </div>
             </div>
         </div>
@@ -206,19 +206,19 @@ input {
         {% csrf_token %}
         <div class="input-group py-3">
             <input type="hidden" id="choice" name="choice" value='Drug'>
-            <input name="key" type="text" class="form-control form-control-lg rounded-pill rounded-end" id="key" placeholder="Search a name...">
+            <input name="key" type="text" class="form-control form-control-lg rounded-pill rounded-end" id="key" placeholder="Search a drug name...">
             <button class="btn btn-secondary text-white btn-lg rounded-pill rounded-start px-lg-4" 
             style="background-color: #9696a6; background-border: #9696a6;" type="submit" onclick='drugSubmit()'>Search</button>
         </div> 
 
         <div class="col-lg-6 mb-4">
             <div class="">
-                <label for'isopioidprescriber'>Is Opioid</label>
                 <select name="isopioid" id="isopioid" class="form-control form-control-lg light-300">
                     <option value="">None</option>
                     <option value="TRUE">True</option>
                     <option value="FALSE">False</option>
                 </select>
+                <label for'isopioidprescriber'>Is Opioid</label>
             </div>
         </div>
 

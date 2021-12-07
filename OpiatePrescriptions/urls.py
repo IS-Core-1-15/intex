@@ -21,3 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('DrugApp.urls')),
 ]
+
+handler404 = 'DrugApp.views.handler404'
