@@ -95,6 +95,8 @@ input {
                             </div>
                         </div>
                     </form>
+                    <!-- Add prescriber button -->
+                    <a href="{% url 'addPrescriber' %}" class="btn rounded-pill btn-outline-light px-4 me-4 light-300">Add a Prescriber</a>
                     <h4 id='msg' name='msg'>{{msg}}<h4>
                 </div>
                 
@@ -195,6 +197,8 @@ input {
             </div>
         </div>
     </form>
+    <!-- Add prescriber button -->
+    <a href="{% url 'addPrescriber' %}" class="btn rounded-pill btn-outline-light px-4 me-4 light-300">Add a Prescriber</a>
     <h4 id='msg' name='msg'>{{msg}}<h4>
 </div>
 <div id='drugDiv' style='display:none;'>
@@ -219,6 +223,8 @@ input {
         </div>
 
     </form>
+    <!-- Add prescriber button -->
+    <a href="{% url 'addPrescriber' %}" class="btn rounded-pill btn-outline-light px-4 me-4 light-300">Add a Prescriber</a>
     <h4 id='msg' name='msg'>{{msg}}<h4>
 </div>
 <script type="text/javascript">
