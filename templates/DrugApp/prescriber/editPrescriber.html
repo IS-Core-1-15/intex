@@ -73,12 +73,12 @@
                 <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="">
-                        <label for'gender'>Gender</label>
                         <select name="gender" id="gender" class="form-control form-control-lg light-300" required>
                             <option value={{person.gender}}>{{person.displaygender}}</option>
                             <option value="M">Male</option>
                             <option value="F">Female</option>
                         </select>
+                        <label for'gender'>Gender</label>
                     </div>
                 </div>
 
@@ -86,13 +86,13 @@
                 <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="">
-                        <label for'state'>State</label>
                         <select name="state" id="state" class="form-control form-control-lg light-300" required>
                             <option value={{person.state.stateabbrev}}>{{person.state}}</option>
                             {% for state in states%}
                             <option value="{{state.stateabbrev}}">{{state.state}}</option>
                             {% endfor %}
                         </select>
+                        <label for'state'>State</label>
                     </div>
                 </div>
 
@@ -100,12 +100,12 @@
                 <!-- dynamically autofilled with existing info -->
                 <div class="col-lg-6 mb-4">
                     <div class="">
-                        <label for'isopioidprescriber'>Is Opioid Prescriber</label>
                         <select name="isopioidprescriber" id="isopioidprescriber" class="form-control form-control-lg light-300" required>
                             <option value={{person.isopioidprescriber}}>{{person.isopioidprescriber}}</option>
                             <option value="TRUE">TRUE</option>
                             <option value="FALSE">FALSE</option>
                         </select>
+                        <label for'isopioidprescriber'>Is Opioid Prescriber</label>
                     </div>
                 </div>
                 <!-- submit button for POST changes to the database -->

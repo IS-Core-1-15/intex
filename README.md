@@ -2,6 +2,7 @@
 Repo for Django web app for index
 
 Authors: Kalvin Wettstein, Zachary Heaton, Stephen Williams, Spencer Jackson.
+Group: 1-15
 
 Steps to get set up:
 
