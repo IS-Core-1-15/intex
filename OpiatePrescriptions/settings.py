@@ -34,7 +34,7 @@ SECRET_KEY = os.environ.get('DJANGOKEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.environ.get('RUNTYPE') == 'PRD':
-    DEBUG = True
+    DEBUG = False
 else:
     DEBUG = True
 
