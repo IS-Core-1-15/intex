@@ -23,3 +23,4 @@ urlpatterns = [
 ]
 
 handler404 = 'DrugApp.views.handler404'
+handler500 = 'DrugApp.views.handler500'
