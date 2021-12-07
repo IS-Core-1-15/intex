@@ -609,7 +609,7 @@ def advsearchPageView(request):
             try:
                 # if specialty
                 if form['specialty']:
-                    result = result.filter(specialty=form['specialty'])
+                    result = result.filter(specialty=form['specialty'].title())
 
                 # if credentials
                 if form['cred'] != '':
