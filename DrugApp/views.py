@@ -211,6 +211,11 @@ def drugDetailPageView(request, id):
     except Exception as e:
         return redirect('error', type=500, e=e)
 
+    if drug.isopioid == 'True':
+        drug.msg = 'Opioid'
+    else:
+        drug.msg = 'Not Opioid'
+
     context = {
         'drug': drug,
         'persons': ten,

@@ -16,11 +16,7 @@
                 
                 <!-- displays if it is or is not an Opioid-->
                 <h3 class="h4 regular-400">
-                    {% if drug.isopioid %}
-                        Opioid
-                    {% else %}
-                        Not an Opioid
-                    {% endif %}
+                    {{drug.msg}}
                 </h3>
             </div>
             <!-- img display, currently just the default img -->
