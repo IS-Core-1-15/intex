@@ -48,7 +48,7 @@ class PdCredential(models.Model):
 
 
 class PdPrescriber(models.Model):
-    npi = models.IntegerField(primary_key=True)
+    npi = models.BigIntegerField(primary_key=True)
     fname = models.CharField(max_length=11)
     lname = models.CharField(max_length=11)
     gender = models.CharField(max_length=1, choices=[('M', 'Male'), ('F', 'Female')])

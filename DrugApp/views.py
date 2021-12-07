@@ -9,6 +9,7 @@ from .api.intexRecommenderAPI import recommendPrescriber
 
 # Create your views here.
 
+
 def indexPageView(request):
     """
     Name : indexPageView
@@ -555,7 +556,7 @@ def advsearchPageView(request):
     # Get all state data
     try:
         states = PdStatedata.objects.all()
-        creds = PdStatedata.objects.all()
+        creds = PdCredential.objects.all()
     except Exception as e:
         return redirect('error', type=500, e=e)
 
@@ -606,7 +607,7 @@ def advsearchPageView(request):
                 # if credentials
                 if form['cred'] != '':
                     # a bunch of ORs strung together
-                    result = result.filter(credential=form['cred'])
+                    result = result.filter(credentials=form['cred'])
 
                 # gender
                 if form['gender'] != '':
@@ -619,7 +620,7 @@ def advsearchPageView(request):
                 return redirect('error', type=500, e=e)
 
             context = {
-                'prescriber': True
+                'prescriber': True,
             }
 
         # handle drug search
@@ -650,6 +651,7 @@ def advsearchPageView(request):
         context['data'] = result
         context['msg'] = f'We found {len(result)} results'
         context['states'] = states
+        context['all_creds'] = creds
 
         return render(request, 'DrugApp/advsearch.html', context)
 
