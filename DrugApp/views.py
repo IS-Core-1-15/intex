@@ -49,13 +49,13 @@ def searchPageView(request):
                 # if no space in seach key
                 if " " not in key:
                     data = PdPrescriber.objects.filter(
-                        fname__contains=key) | PdPrescriber.objects.filter(lname__contains=key)
+                        fname__contains=key).order_by('lname', 'fname') | PdPrescriber.objects.filter(lname__contains=key).order_by('lname', 'fname')
 
                 # if space in search key
                 elif " " in key:
                     key = key.split(' ')
                     data = PdPrescriber.objects.filter(
-                        fname__contains=key[0]) | PdPrescriber.objects.filter(lname__contains=key[1])
+                        fname__contains=key[0]).order_by('lname', 'fname') | PdPrescriber.objects.filter(lname__contains=key[1]).order_by('lname', 'fname')
 
                 context = {
                     'prescriber': True,
@@ -68,7 +68,7 @@ def searchPageView(request):
             # drug data is all upper case
             try:
                 data = PdDrugs.objects.filter(
-                    drugname__contains=key.upper())
+                    drugname__contains=key.upper()).order_by('drugname')
                 context = {
                     'drug': True,
                 }
@@ -586,7 +586,7 @@ def advsearchPageView(request):
         if form['choice'] == 'Prescriber':
             # get all the prescribers to start
             try:
-                result = PdPrescriber.objects.all().order_by('lname')
+                result = PdPrescriber.objects.all().order_by('lname', 'fname')
             except Exception as e:
                 return redirect('error', type=500, e=e)
 
@@ -609,7 +609,7 @@ def advsearchPageView(request):
             try:
                 # if specialty
                 if form['specialty']:
-                    result = result.filter(specialty=form['specialty'])
+                    result = result.filter(specialty=form['specialty'].title())
 
                 # if credentials
                 if form['cred'] != '':
@@ -777,9 +777,32 @@ def errorPageView(request, type):
     return render(request, 'DrugApp/error.html', context)
 
 def handler404(request, exception, template_name="404.html"):
+    """
+    Name : handler404
+    Description : return the 404 error page
+    Paramaters: 
+        exception : the type of error
+    """
+
     context = {
         'error_code': 404,
         'title': 'Page not found',
         'msg': 'Uh-oh, it seems the page you\'re looking for doesn\'t exist',
+    }
+    return render(request, '404.html', context)
+
+
+def handler500(request):
+    """
+    Name : handler500
+    Description : return the 500 error page
+    Paramaters: 
+        exception : the type of error
+    """
+
+    context = {
+        'error_code': 500,
+        'title': 'Internal server error',
+        'msg': 'So sorry, but we were not able to process your request',
     }
     return render(request, '404.html', context)
