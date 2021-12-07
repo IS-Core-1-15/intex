@@ -183,9 +183,9 @@ def personDetailPageView(request, id):
     # if the prediction endpoint was on add to context
     print(prediction)
     if prediction == 'FALSE':
-        context['prediction'] = 'Will not prescriber opioids'
+        context['prediction'] = 'Will not prescribe opioids'
     elif prediction == 'TRUE':
-        context['prediction'] = 'Will prescriber opioids'
+        context['prediction'] = 'Will prescribe opioids'
     else:
         context['prediction'] = 'This function is not working right now'
 
@@ -562,8 +562,8 @@ def advsearchPageView(request):
 
     # Get all state data
     try:
-        states = PdStatedata.objects.all()
-        creds = PdCredential.objects.all()
+        states = PdStatedata.objects.all().order_by('stateabbrev')
+        creds = PdCredential.objects.all().order_by('credentialcode')
     except Exception as e:
         return redirect('error', type=500, e=e)
 
@@ -586,7 +586,7 @@ def advsearchPageView(request):
         if form['choice'] == 'Prescriber':
             # get all the prescribers to start
             try:
-                result = PdPrescriber.objects.all()
+                result = PdPrescriber.objects.all().order_by('lname')
             except Exception as e:
                 return redirect('error', type=500, e=e)
 
@@ -634,7 +634,7 @@ def advsearchPageView(request):
         elif form['choice'] == 'Drug':
             # get all drug info to start
             try:
-                result = PdDrugs.objects.all()
+                result = PdDrugs.objects.all().order_by('drugname')
             except Exception as e:
                 return redirect('error', type=500, e=e)
 
@@ -691,7 +691,7 @@ def addCredPageView(request, id):
     if request.method == 'GET':
         # get all creds except those already prescribed by prescriber
         try:
-            creds = PdCredential.objects.all().exclude(credentialcode__in=excludes)
+            creds = PdCredential.objects.all().exclude(credentialcode__in=excludes).order_by('credentialcode')
         except Exception as e:
             return redirect('error', type=500, e=e)
 
@@ -774,4 +774,12 @@ def errorPageView(request, type):
         'msg': msg,
     }
 
-    return render(request, 'DrugApp/404.html', context)
+    return render(request, 'DrugApp/error.html', context)
+
+def handler404(request, exception, template_name="404.html"):
+    context = {
+        'error_code': 404,
+        'title': 'Page not found',
+        'msg': 'Uh-oh, it seems the page you\'re looking for doesn\'t exist',
+    }
+    return render(request, '404.html', context)
