@@ -83,7 +83,7 @@ def searchPageView(request):
         if len(data) > 0:
             msg = f'We found {len(data)} results'
         else:
-            msg = f'Sorry we could not find anything with the value'
+            msg = f'Sorry we could not find anything with that value'
 
         context['data'] = data
         context['msg'] = msg
