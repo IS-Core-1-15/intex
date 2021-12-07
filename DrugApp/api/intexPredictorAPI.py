@@ -21,7 +21,7 @@ def predictPrescript(sFirstName, sSpecialty, iPrescriptions, sState):
     'Content-Type': 'application/json',
     'Authorization': 'Bearer IEPgIaIfhIk4R2fvIhsn6uAcqzGZNC6O'
     }
-    response = requests.request("POST", url, headers=headers, data=payload, timeout=1)
+    response = requests.request("POST", url, headers=headers, data=payload, timeout=2)
 
     data = json.loads(response.text)
 

@@ -141,9 +141,11 @@ def personDetailPageView(request, id):
             person.totalprescriptions,
             person.state.state,
         )
+        print(prediction)
     # if it reaches the timeout (2 sec) then the endpoint if off, continue
     except Exception as e:
-        prediction = False
+        prediction = 'x'
+        pass
 
     # for each drug of the prescriber
     for drug in drugs:
@@ -179,8 +181,13 @@ def personDetailPageView(request, id):
         context['creds'] = creds
 
     # if the prediction endpoint was on add to context
-    if prediction == 'TRUE':
-        context['prediction'] = prediction
+    print(prediction)
+    if prediction == 'FALSE':
+        context['prediction'] = 'Will not prescriber opioids'
+    elif prediction == 'TRUE':
+        context['prediction'] = 'Will prescriber opioids'
+    else:
+        context['prediction'] = 'This function is not working right now'
 
     return render(request, 'DrugApp/details/p_detail.html', context)
 
@@ -713,12 +720,40 @@ def addCredPageView(request, id):
         return redirect('error', type=404, e=e)
 
 
+def deleteCredPageView(request, id, cred):
+    """
+    Name : deleteCredPageView
+    Description : Allows you to delete a credential for a prescriber
+    Paramaters: 
+        id : the prescriber npi
+        cred : the credential code
+    """
+
+
+    # get the person and all their current drugs
+    try:
+        cred = PdPrescriberCredential.objects.get(prescriberid=id, credential=cred)
+  
+    except Exception as e:
+        # if the above failed try the next section with all drugs
+        return redirect('error', type=500, e=e)
+
+    # get all creds except those already prescribed by prescriber
+    try:
+        cred.delete()
+    except Exception as e:
+        return redirect('error', type=500, e=e)
+
+    return redirect('detailPerson', id=id)
+    
+
 def e(request, type, e):
     """
     Name : e
     Description : return the error page
     Paramaters: 
         type : the type of error (currently 500 or 404)
+        e : the error that was raised
     """
 
     # Print the error

@@ -15,7 +15,9 @@
                     {% if creds %}
                         <p>
                         {% for cred in creds %}
-                            {{cred}}
+                            <a href={% url 'deleteCred' id=person.npi cred=cred %} 
+                            class="btn rounded-pill btn-secondary text-light px-4 light-300" 
+                            onclick="return confirm('Are you sure you want to delete this item?')">{{cred}}</a>
                         {% endfor %}
                         </p>
                     {% else %}
@@ -44,6 +46,7 @@
         <div class="container my-4">
             <!-- displays text and dynamicly passes name -->
             <h1 class="creative-heading h2 pb-3">Add a credential for {{person.fname}}</h1>
+            <p class="">Hint, you can delete a credential by clicking on the credntial above</p>
             <div class="creative-content row py-3">
                 <div class="col-md-5">
                     <!-- form for submiting the POST to add the cred -->

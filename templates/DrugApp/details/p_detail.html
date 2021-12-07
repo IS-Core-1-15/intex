@@ -21,7 +21,7 @@
                     {% else %}
                     No Credentials
                     {% endif %}
-                    <a href={% url 'addCred' id=person.npi %} class="btn rounded-pill btn-secondary text-light px-4 light-300">Add Credential</a>
+                    <a href={% url 'addCred' id=person.npi %} class="btn rounded-pill btn-secondary text-light px-4 light-300">Edit Credentials</a>
                 </h3>
                 <p class="light-300">
                     Gender: {{person.gender}}<br>
@@ -58,7 +58,8 @@
                     <p class="text-muted col-lg-8 light-300">
                         List of drugs offered by {{person.fname}}
                         <br><br>
-                        **All bars represent the percent of {{person.fname}}'s prescriptions of that drug compared to the total prescriptions given by {{person.fname}}
+                        **Bars represent the percent of {{person.fname}}'s prescriptions of that drug compared to the total prescriptions given by {{person.fname}}
+                        <br>**Avgerage is the average quantity for that drug across all prescribers
                     </p>
                 </div>
 
