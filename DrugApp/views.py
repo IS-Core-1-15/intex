@@ -747,7 +747,7 @@ def deleteCredPageView(request, id, cred):
     return redirect('detailPerson', id=id)
     
 
-def e(request, type, e):
+def errorPageView(request, type):
     """
     Name : e
     Description : return the error page
@@ -757,7 +757,7 @@ def e(request, type, e):
     """
 
     # Print the error
-    print(e)
+    # print(e)
 
     # set words for page based on type
     if type == 404:
