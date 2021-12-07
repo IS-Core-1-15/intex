@@ -36,7 +36,7 @@ SECRET_KEY = os.environ.get('DJANGOKEY')
 if os.environ.get('RUNTYPE') == 'PRD':
     DEBUG = False
 else:
-    DEBUG = False
+    DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost',
                  '127.0.0.1', 'intex-group1-15.herokuapp.com']
