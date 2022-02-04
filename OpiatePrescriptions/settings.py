@@ -29,15 +29,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # 'django-insecure-5ywg_c3y_jtkbhvh@$c0mb8!f8p7v6ds69jxwi5gphr^0#ha21'
-SECRET_KEY = os.environ['DJANGOKEY']
+SECRET_KEY = os.environ.get('DJANGOKEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if os.environ['RUNTYPE'] == 'PRD':
+if os.environ.get('RUNTYPE') == 'PRD':
     DEBUG = False
 else:
     DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost',
+                 '127.0.0.1', 'intex-group1-15.herokuapp.com', '136.36.52.68']
 
 
 # Application definition
@@ -93,8 +94,8 @@ DATABASES = {
         'NAME': 'postgres',  # Make sure your db is named this
         'USER': 'postgres',
         # this will ask you to enter your local DB password when you start the server or run migrations
-        'PASSWORD': os.environ['DB_PASSWORD'],
-        'HOST': os.environ['DB_HOST']
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST')
     }
 }
 
