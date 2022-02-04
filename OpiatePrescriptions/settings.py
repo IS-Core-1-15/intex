@@ -16,7 +16,6 @@ import os
 from pathlib import Path
 import django_heroku
 import dj_database_url
-import django_heroku
 from getpass import getpass
 from dotenv import load_dotenv
 load_dotenv()
@@ -92,15 +91,13 @@ WSGI_APPLICATION = 'OpiatePrescriptions.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'opioid',  # Make sure your db is named this
+        'NAME': 'postgres',  # Make sure your db is named this
         'USER': 'postgres',
         # this will ask you to enter your local DB password when you start the server or run migrations
-        'PASSWORD': getpass(),
-        'HOST': 'localhost'
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST')
     }
 }
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env) 
 
 
 # Password validation
