@@ -89,30 +89,18 @@ WSGI_APPLICATION = 'OpiatePrescriptions.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-if os.environ.get('RUNTYPE') == 'PRD':
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'opioid',  # Make sure your db is named this
-            'USER': os.environ.get('AZUREUSER'),
-            # this will ask you to enter your local DB password when you start the server or run migrations
-            'PASSWORD': os.environ.get('AZUREDBPASSWORD'),
-            'HOST': os.environ.get('AZUREHOST')
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'opioid',  # Make sure your db is named this
+        'USER': 'postgres',
+        # this will ask you to enter your local DB password when you start the server or run migrations
+        'PASSWORD': getpass(),
+        'HOST': 'localhost'
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'opioid',  # Make sure your db is named this
-            'USER': 'postgres',
-            # this will ask you to enter your local DB password when you start the server or run migrations
-            'PASSWORD': getpass(),
-            'HOST': 'localhost'
-        }
-    }
-# db_from_env = dj_database_url.config(conn_max_age=600)
-# DATABASES['default'].update(db_from_env)
+}
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env) 
 
 
 # Password validation
