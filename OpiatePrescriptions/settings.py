@@ -16,7 +16,6 @@ import os
 from pathlib import Path
 import django_heroku
 import dj_database_url
-import django_heroku
 from getpass import getpass
 from dotenv import load_dotenv
 load_dotenv()
@@ -30,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # 'django-insecure-5ywg_c3y_jtkbhvh@$c0mb8!f8p7v6ds69jxwi5gphr^0#ha21'
-SECRET_KEY = os.environ.get('DJANGOKEY')
+SECRET_KEY = os.getenv('DJANGOKEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.environ.get('RUNTYPE') == 'PRD':
@@ -39,7 +38,7 @@ else:
     DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost',
-                 '127.0.0.1', 'intex-group1-15.herokuapp.com']
+                 '127.0.0.1', 'intex-group1-15.herokuapp.com', '136.36.52.68']
 
 
 # Application definition
@@ -89,30 +88,16 @@ WSGI_APPLICATION = 'OpiatePrescriptions.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-if os.environ.get('RUNTYPE') == 'PRD':
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'opioid',  # Make sure your db is named this
-            'USER': os.environ.get('AZUREUSER'),
-            # this will ask you to enter your local DB password when you start the server or run migrations
-            'PASSWORD': os.environ.get('AZUREDBPASSWORD'),
-            'HOST': os.environ.get('AZUREHOST')
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',  # Make sure your db is named this
+        'USER': 'postgres',
+        # this will ask you to enter your local DB password when you start the server or run migrations
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST')
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'opioid',  # Make sure your db is named this
-            'USER': 'postgres',
-            # this will ask you to enter your local DB password when you start the server or run migrations
-            'PASSWORD': getpass(),
-            'HOST': 'localhost'
-        }
-    }
-# db_from_env = dj_database_url.config(conn_max_age=600)
-# DATABASES['default'].update(db_from_env)
+}
 
 
 # Password validation
