@@ -29,10 +29,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # 'django-insecure-5ywg_c3y_jtkbhvh@$c0mb8!f8p7v6ds69jxwi5gphr^0#ha21'
-SECRET_KEY = os.environ.get('DJANGOKEY')
+SECRET_KEY = os.environ['DJANGOKEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if os.environ.get('RUNTYPE') == 'PRD':
+if os.environ['RUNTYPE'] == 'PRD':
     DEBUG = False
 else:
     DEBUG = True
@@ -93,8 +93,8 @@ DATABASES = {
         'NAME': 'postgres',  # Make sure your db is named this
         'USER': 'postgres',
         # this will ask you to enter your local DB password when you start the server or run migrations
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST')
+        'PASSWORD': os.environ['DB_PASSWORD'],
+        'HOST': os.environ['DB_HOST']
     }
 }
 
